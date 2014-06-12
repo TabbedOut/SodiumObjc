@@ -3,14 +3,26 @@
 //  libsodium-objc
 //
 //  Created by Philip Jameson on 6/10/14.
-//  Copyright (c) 2014 Tabbedout. All rights reserved.
+//  Copyright (c) 2014 TabbedOut. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import "sodium.h"
 
-#define WRAP_NSERROR(ptr, newError) { if(ptr != NULL){ *ptr = newError; } }
+OBJC_EXPORT NSString *const NACLErrorDomain;
+
+typedef NS_ENUM(NSUInteger, NACLErrorCode) {
+    NACLErrorInvalidSecretKeyLengthCode = 1,
+    NACLErrorInvalidPublicKeyLengthCode,
+    NACLErrorInvalidNonceLengthCode,
+    NACLErrorInvalidMessageLengthCode,
+    NACLErrorAllocationErrorCode,
+    NACLErrorFailureCode,
+    NACLErrorInvalidNonceCode,
+};
 
 @interface NACL : NSObject
+
++ (void)initializeNACL;
 
 @end

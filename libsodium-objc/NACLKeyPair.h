@@ -1,0 +1,54 @@
+//
+//  NACLKeyPair.h
+//  libsodium-objc
+//
+//  Created by Damian Carrillo on 6/11/14.
+//  Copyright (c) 2014 TabbedOut. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@interface NACLKeyPair : NSObject <NSCopying, NSCoding>
+@property (strong, nonatomic, readonly) NSData *publicKey;
+@property (strong, nonatomic, readonly) NSData *secretKey;
+
+/**
+ *  Creates a key pair.
+ *  
+ *  @return A key pair, whose public key and secret key are initialized with 
+ *          appropriate values.
+ */
++ (instancetype)keyPair;
+
+/**
+ *  Creates a key pair using the given seed.
+ *  
+ *  @param seed The seed data that is used to generate the keys. The seed you 
+ *              supply may be `nil`, and if it is, this creation method devolves
+ *              into `+ keyPair`.
+ *  @return A created key pair object, whose public key and secret key are
+ *          initialized with appropriate values.
+ */
++ (instancetype)keyPairWithSeed:(NSData *)seed;
+
+/**s
+ *  Initializes this key pair given the given seed.
+ *
+ *  This is the designated initializer.
+ *  
+ *  @param seed The seed data that is used to generate the 
+ *  @return An initialized key pair.
+ */
+- (instancetype)initWithSeed:(NSData *)seed;
+
+/**
+ *  Indicates whether or not the receiver is equal to the given key pair. 
+ *  Equality is determined by `publicKeyData` and `secretKeyData` being 
+ *  equal for both the receiver and the given key pair.
+ *  
+ *  @param keyPair The key pair to test for equalitys.
+ *  @return Whether or not the receiver is equal to the given key pair.
+ */
+- (BOOL)isEqualToKeyPair:(NACLKeyPair *)keyPair;
+
+@end

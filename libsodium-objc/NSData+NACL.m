@@ -8,7 +8,6 @@
 
 #import "NSData+NACL.h"
 #import "NACL.h"
-#import "NACLKeyPair.h"
 #import "NACLNonce.h"
 
 @implementation NSData (NACL)

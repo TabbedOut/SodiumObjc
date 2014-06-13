@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 TabbedOut. All rights reserved.
 //
 
-#import "NACLKeyPair.h"
 #import "NACLPublicKey.h"
 #import "NACLPrivateKey.h"
 

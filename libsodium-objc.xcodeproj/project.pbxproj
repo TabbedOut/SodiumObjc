@@ -31,7 +31,6 @@
 		97601049194A408400363BCC /* NSDataNACLTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 97601048194A408400363BCC /* NSDataNACLTests.m */; };
 		9760104C194A4AEC00363BCC /* NSString+NACL.m in Sources */ = {isa = PBXBuildFile; fileRef = 9760104B194A4AEC00363BCC /* NSString+NACL.m */; };
 		9760104E194A4CBF00363BCC /* NSStringNACLTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9760104D194A4CBF00363BCC /* NSStringNACLTests.m */; };
-		97FAADC61948AACB002EF23C /* NACLKeyPair.m in Sources */ = {isa = PBXBuildFile; fileRef = 97FAADC51948AACB002EF23C /* NACLKeyPair.m */; };
 		A77888511947B78D007F0D7E /* libsodium.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A77888501947B78D007F0D7E /* libsodium.a */; };
 		A7BF29CE1947630800BB35C5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BF29CD1947630800BB35C5 /* Foundation.framework */; };
 		A7BF29DC1947630800BB35C5 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BF29DB1947630800BB35C5 /* XCTest.framework */; };
@@ -99,8 +98,6 @@
 		9760104A194A4AEC00363BCC /* NSString+NACL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+NACL.h"; sourceTree = "<group>"; };
 		9760104B194A4AEC00363BCC /* NSString+NACL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+NACL.m"; sourceTree = "<group>"; };
 		9760104D194A4CBF00363BCC /* NSStringNACLTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringNACLTests.m; sourceTree = "<group>"; };
-		97FAADC41948AACB002EF23C /* NACLKeyPair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NACLKeyPair.h; sourceTree = "<group>"; };
-		97FAADC51948AACB002EF23C /* NACLKeyPair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NACLKeyPair.m; sourceTree = "<group>"; };
 		A77888501947B78D007F0D7E /* libsodium.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libsodium.a; sourceTree = "<group>"; };
 		A7BF29CA1947630800BB35C5 /* liblibsodium-objc.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "liblibsodium-objc.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7BF29CD1947630800BB35C5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -189,8 +186,6 @@
 		9759C706194AB0FB0047F5B0 /* private */ = {
 			isa = PBXGroup;
 			children = (
-				97FAADC41948AACB002EF23C /* NACLKeyPair.h */,
-				97FAADC51948AACB002EF23C /* NACLKeyPair.m */,
 				970FF042194B987700DA441F /* NACLKey.h */,
 				970FF043194B987700DA441F /* NACLKey.m */,
 				970FF045194B994000DA441F /* NACLKeySubclass.h */,
@@ -335,7 +330,6 @@
 				970FF04B194BA00700DA441F /* NACLPrivateKey.m in Sources */,
 				9759C704194AAD600047F5B0 /* NACLAsymmetricKeyPair.m in Sources */,
 				970FF044194B987700DA441F /* NACLKey.m in Sources */,
-				97FAADC61948AACB002EF23C /* NACLKeyPair.m in Sources */,
 				A7BF2A07194770E300BB35C5 /* NACL.m in Sources */,
 				970FF048194B9F9C00DA441F /* NACLPublicKey.m in Sources */,
 				9759C6FF194A726A0047F5B0 /* NACLSigningKeyPair.m in Sources */,

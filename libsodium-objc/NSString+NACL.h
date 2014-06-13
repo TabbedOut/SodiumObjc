@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "NACLCryptoKeyPair.h"
+#import "NACLAsymmetricKeyPair.h"
 #import "NACLNonce.h"
 #import "NACLSymmetricSecretKey.h"
 #import "NACLSigningKeyPair.h"
@@ -29,8 +29,8 @@
  *  
  *  @return An encrypted data object.
  */
-- (NSData *)encryptedDataUsingPublicKey:(NSData *)publicKey 
-                              secretKey:(NSData *)secretKey 
+- (NSData *)encryptedDataUsingPublicKey:(NACLPublicKey *)publicKey 
+                             privateKey:(NACLPrivateKey *)privateKey 
                                   nonce:(NACLNonce *)nonce;
 
 /**
@@ -45,8 +45,8 @@
  *  
  *  @return An encrypted data object.
  */
-- (NSData *)encryptedDataUsingPublicKey:(NSData *)publicKey
-                              secretKey:(NSData *)secretKey 
+- (NSData *)encryptedDataUsingPublicKey:(NACLPublicKey *)publicKey
+                             privateKey:(NACLPrivateKey *)privateKey 
                                   nonce:(NACLNonce *)nonce 
                                   error:(NSError **)outError;
 

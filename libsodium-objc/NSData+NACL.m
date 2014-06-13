@@ -15,21 +15,21 @@
 
 #pragma mark Public-Key Cryptography
 
-- (NSData *)encryptedDataUsingPublicKey:(NSData *)publicKey 
-                              secretKey:(NSData *)secretKey 
+- (NSData *)encryptedDataUsingPublicKey:(NACLPublicKey *)publicKey 
+                             privateKey:(NACLPrivateKey *)privateKey 
                                   nonce:(NACLNonce *)nonce
 {
-    return [self encryptedDataUsingPublicKey:publicKey secretKey:secretKey nonce:nonce error:nil];
+    return [self encryptedDataUsingPublicKey:publicKey privateKey:privateKey nonce:nonce error:nil];
 }
 
 
-- (NSData *)encryptedDataUsingPublicKey:(NSData *)publicKey 
-                              secretKey:(NSData *)secretKey 
+- (NSData *)encryptedDataUsingPublicKey:(NACLPublicKey *)publicKey 
+                             privateKey:(NACLPrivateKey *)privateKey 
                                   nonce:(NACLNonce *)nonce
                                   error:(NSError *__autoreleasing *)outError
 {
     NSParameterAssert(publicKey);
-    NSParameterAssert(secretKey);
+    NSParameterAssert(privateKey);
     NSParameterAssert(nonce);
  
 	[NACL initializeNACL];
@@ -56,8 +56,8 @@
                             paddedMessage.bytes, 
                             paddedMessage.length, 
                             nonce.data.bytes, 
-                            publicKey.bytes, 
-                            secretKey.bytes);
+                            publicKey.data.bytes, 
+                            privateKey.data.bytes);
     
 	if (result != 0) {
         if (outError) {
@@ -75,20 +75,20 @@
     return encryptedData;
 }
 
-- (NSData *)decryptedDataUsingPublicKey:(NSData *)publicKey 
-                              secretKey:(NSData *)secretKey 
+- (NSData *)decryptedDataUsingPublicKey:(NACLPublicKey *)publicKey 
+                             privateKey:(NACLPrivateKey *)privateKey 
                                   nonce:(NACLNonce *)nonce 
 {
-    return [self decryptedDataUsingPublicKey:publicKey secretKey:secretKey nonce:nonce error:nil];
+    return [self decryptedDataUsingPublicKey:publicKey privateKey:privateKey nonce:nonce error:nil];
 }
 
-- (NSData *)decryptedDataUsingPublicKey:(NSData *)publicKey 
-                              secretKey:(NSData *)secretKey 
+- (NSData *)decryptedDataUsingPublicKey:(NACLPublicKey *)publicKey 
+                             privateKey:(NACLPrivateKey *)privateKey 
                                   nonce:(NACLNonce *)nonce
                                   error:(NSError *__autoreleasing *)outError
 {
     NSParameterAssert(publicKey);
-    NSParameterAssert(secretKey);
+    NSParameterAssert(privateKey);
     NSParameterAssert(nonce);
     
 	[NACL initializeNACL];
@@ -105,8 +105,8 @@
                                  paddedEncryptedData.bytes,
                                  paddedEncryptedData.length,
                                  nonce.data.bytes,
-                                 publicKey.bytes,
-                                 secretKey.bytes);
+                                 publicKey.data.bytes,
+                                 privateKey.data.bytes);
     
 	if (result != 0) {
         if (outError) {
@@ -124,12 +124,12 @@
 	return decryptedData;
 }
 
-- (NSString *)decryptedTextUsingPublicKey:(NSData *)publicKey 
-                                secretKey:(NSData *)secretKey 
+- (NSString *)decryptedTextUsingPublicKey:(NACLPublicKey *)publicKey 
+                               privateKey:(NACLPrivateKey *)privateKey 
                                     nonce:(NACLNonce *)nonce
 {
     NSString *decryptedText = nil;
-    NSData *decryptedData = [self decryptedDataUsingPublicKey:publicKey secretKey:secretKey nonce:nonce];
+    NSData *decryptedData = [self decryptedDataUsingPublicKey:publicKey privateKey:privateKey nonce:nonce];
     
     if (decryptedData.length > 0) {
         decryptedText = [[NSString alloc] initWithData:decryptedData encoding:NSUTF8StringEncoding];
@@ -138,13 +138,13 @@
     return decryptedText;
 }
 
-- (NSString *)decryptedTextUsingPublicKey:(NSData *)publicKey 
-                                secretKey:(NSData *)secretKey 
+- (NSString *)decryptedTextUsingPublicKey:(NACLPublicKey *)publicKey 
+                               privateKey:(NACLPrivateKey *)privateKey 
                                     nonce:(NACLNonce *)nonce 
                                     error:(NSError *__autoreleasing *)outError
 {
     NSString *decryptedText = nil;
-    NSData *decryptedData = [self decryptedDataUsingPublicKey:publicKey secretKey:secretKey nonce:nonce error:outError];
+    NSData *decryptedData = [self decryptedDataUsingPublicKey:publicKey privateKey:privateKey nonce:nonce error:outError];
     
     if (decryptedData.length > 0) {
         decryptedText = [[NSString alloc] initWithData:decryptedData encoding:NSUTF8StringEncoding];

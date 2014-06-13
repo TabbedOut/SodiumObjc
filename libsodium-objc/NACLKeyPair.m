@@ -16,7 +16,8 @@
 
 @implementation NACLKeyPair
 
-+ (void)initialize {
++ (void)initialize 
+{
 	[NACL initializeNACL];
 	[super initialize];
 }

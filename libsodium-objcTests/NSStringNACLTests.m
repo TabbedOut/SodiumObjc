@@ -16,8 +16,8 @@
 @implementation NSStringNACLTests
 {
     NSString *plainText;
-    NACLCryptoKeyPair *sendersKeyPair;
-    NACLCryptoKeyPair *receiversKeyPair;
+    NACLAsymmetricKeyPair *sendersKeyPair;
+    NACLAsymmetricKeyPair *receiversKeyPair;
     NACLSigningKeyPair *signingKeyPair;
     NACLSymmetricSecretKey *secretKey;
     NACLNonce *nonce;
@@ -28,8 +28,8 @@
     [super setUp];
     
     plainText = @"I am about to get encrypted.";
-    sendersKeyPair = [NACLCryptoKeyPair keyPair];
-    receiversKeyPair = [NACLCryptoKeyPair keyPair];
+    sendersKeyPair = [NACLAsymmetricKeyPair keyPair];
+    receiversKeyPair = [NACLAsymmetricKeyPair keyPair];
     signingKeyPair = [NACLSigningKeyPair keyPair];
     secretKey = [NACLSymmetricSecretKey key];
     nonce = [NACLNonce nonce];
@@ -47,7 +47,9 @@
 
 - (void)testEncryptedDataWithPublicKeySecretKeyNonce
 {
-    NSData *encryptedData = [plainText encryptedDataUsingPublicKey:sendersKeyPair.publicKey secretKey:receiversKeyPair.secretKey nonce:nonce];
+    NSData *encryptedData = [plainText encryptedDataUsingPublicKey:sendersKeyPair.publicKey 
+                                                        privateKey:receiversKeyPair.privateKey 
+                                                             nonce:nonce];
     
     XCTAssert(encryptedData.length > 0, @"");
 }
@@ -55,7 +57,9 @@
 - (void)testEncryptedDataWithPublicKeySecretKeyNonceError
 {
     NSError *error = nil;
-    NSData *encryptedData = [plainText encryptedDataUsingPublicKey:sendersKeyPair.publicKey secretKey:receiversKeyPair.secretKey nonce:nonce error:&error];
+    NSData *encryptedData = [plainText encryptedDataUsingPublicKey:sendersKeyPair.publicKey 
+                                                        privateKey:receiversKeyPair.privateKey 
+                                                             nonce:nonce error:&error];
     
     XCTAssert(encryptedData.length > 0, @"");
 }

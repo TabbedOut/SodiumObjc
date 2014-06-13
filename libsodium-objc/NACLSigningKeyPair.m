@@ -6,8 +6,9 @@
 //  Copyright (c) 2014 TabbedOut. All rights reserved.
 //
 
-#import "NACLSigningKeyPair.h"
 #import "NACL.h"
+#import "NACLKeySubclass.h"
+#import "NACLSigningKeyPair.h"
 
 @interface NACLKeyPair (Private)
 @property (strong, nonatomic, readwrite) NSData *secretKey;

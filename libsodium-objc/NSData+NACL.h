@@ -126,7 +126,7 @@
  *  
  *  @return A signed data object.
  */
-- (NSData *)signedDataUsingSecretKey:(NSData *)secretKey;
+- (NSData *)signedDataUsingPrivateKey:(NACLSigningPrivateKey *)privateKey;
 
 /**
  *  Signs the receiver (which is an NSData object) using the secret key in the 
@@ -138,7 +138,7 @@
  *  
  *  @return A signed data object.
  */
-- (NSData *)signedDataUsingSecretKey:(NSData *)secretKey 
+- (NSData *)signedDataUsingPrivateKey:(NACLSigningPrivateKey *)privateKey 
                                error:(NSError **)outError;
 
 /**
@@ -150,7 +150,7 @@
  *  @return The original message if it can be verified with the signer's public
  *          key, or `nil` if it can not.
  */
-- (NSData *)verifiedDataUsingPublicKey:(NSData *)publicKey;
+- (NSData *)verifiedDataUsingPublicKey:(NACLSigningPublicKey *)publicKey;
 
 /**
  *  Verifies and returns the original message that has been signed by the sender
@@ -163,7 +163,7 @@
  *  @return The original message if it can be verified with the signer's public
  *          key, or `nil` if it can not.
  */
-- (NSData *)verifiedDataUsingPublicKey:(NSData *)publicKey
+- (NSData *)verifiedDataUsingPublicKey:(NACLSigningPublicKey *)publicKey
                                  error:(NSError **)outError;
 
 /**
@@ -175,7 +175,7 @@
  *  @return The original message if it can be verified with the signer's public
  *          key, or `nil` if it can not.
  */
-- (NSString *)verifiedTextUsingPublicKey:(NSData *)publicKey;
+- (NSString *)verifiedTextUsingPublicKey:(NACLSigningPublicKey *)publicKey;
 
 /**
  *  Verifies and returns the original message as plain text that has been signed
@@ -188,7 +188,7 @@
  *  @return The original message if it can be verified with the signer's public
  *          key, or `nil` if it can not.
  */
-- (NSString *)verifiedTextUsingPublicKey:(NSData *)publicKey 
+- (NSString *)verifiedTextUsingPublicKey:(NACLSigningPublicKey *)publicKey 
                                    error:(NSError **)outError;
 
 #pragma mark Secret-Key Cryptography

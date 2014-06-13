@@ -140,7 +140,7 @@
 {
     NSError *error = nil;
     
-    NSData *signedData = [message signedDataUsingSecretKey:signersKeyPair.secretKey error:&error];
+    NSData *signedData = [message signedDataUsingPrivateKey:signersKeyPair.privateKey error:&error];
     
     XCTAssertTrue(signedData.length > 0, @"");
 }
@@ -149,7 +149,7 @@
 {
     NSError *error = nil;
     
-    NSData *signedData = [message signedDataUsingSecretKey:signersKeyPair.secretKey error:&error];
+    NSData *signedData = [message signedDataUsingPrivateKey:signersKeyPair.privateKey error:&error];
     NSData *verifiedData = [signedData verifiedDataUsingPublicKey:signersKeyPair.publicKey error:&error];
 
     XCTAssertEqualObjects(verifiedData, message, @"");
@@ -159,7 +159,7 @@
 {
     NSError *error = nil;
     
-    NSData *signedData = [message signedDataUsingSecretKey:signersKeyPair.secretKey error:&error];
+    NSData *signedData = [message signedDataUsingPrivateKey:signersKeyPair.privateKey error:&error];
     NSString *verifiedText = [signedData verifiedTextUsingPublicKey:signersKeyPair.publicKey error:&error];
     
     XCTAssertEqualObjects(verifiedText, plainText, @"");

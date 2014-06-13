@@ -10,34 +10,134 @@
 #import "NACLKeySubclass.h"
 #import "NACLSigningKeyPair.h"
 
-@interface NACLKeyPair (Private)
-@property (strong, nonatomic, readwrite) NSData *secretKey;
-@property (strong, nonatomic, readwrite) NSData *publicKey;
-
-- (void)generateKeyPairWithSeed:(NSData *)seed;
+@interface NACLSigningKeyPair ()
+@property (strong, nonatomic, readwrite) NACLSigningPublicKey *publicKey;
+@property (strong, nonatomic, readwrite) NACLSigningPrivateKey *privateKey;
 
 @end
 
 @implementation NACLSigningKeyPair
 
-- (void)generateKeyPairWithSeed:(NSData *)seed
++ (void)initialize 
 {
-    unsigned char secretKey[crypto_sign_SECRETKEYBYTES];
-	unsigned char publicKey[crypto_sign_PUBLICKEYBYTES];
+	[NACL initializeNACL];
+	[super initialize];
+}
+
++ (instancetype)keyPair
+{
+    NACLSigningKeyPair *__autoreleasing keyPair = [[self alloc] init];
+    return keyPair;
+}
+
++ (instancetype)keyPairWithSeed:(NSData *)seed
+{
+    NACLSigningKeyPair *__autoreleasing keyPair = [[self alloc] initWithSeed:seed];
+    return keyPair;
+}
+
+- (instancetype)init
+{
+    return [self initWithSeed:nil];
+}
+
+- (instancetype)initWithSeed:(NSData *)seed
+{
+    self = [super init];
     
-    if ([seed length] > 0) {
-        crypto_sign_seed_keypair(publicKey, secretKey, seed.bytes);
-    } else {
-        crypto_sign_keypair(publicKey, secretKey);
+    if (self) {
+        unsigned char secretKey[crypto_sign_SECRETKEYBYTES];
+        unsigned char publicKey[crypto_sign_PUBLICKEYBYTES];
+        
+        if ([seed length] > 0) {
+            crypto_sign_seed_keypair(publicKey, secretKey, seed.bytes);
+        } else {
+            crypto_sign_keypair(publicKey, secretKey);
+        }
+        
+        if (secretKey) {
+            NSData *keyData = [NSData dataWithBytes:secretKey length:crypto_sign_SECRETKEYBYTES];
+            _privateKey = [NACLSigningPrivateKey keyWithData:keyData];
+        }
+        
+        if (publicKey) {
+            NSData *keyData = [NSData dataWithBytes:publicKey length:crypto_sign_PUBLICKEYBYTES];
+            _publicKey = [NACLSigningPublicKey keyWithData:keyData];
+        }
     }
     
-    if (secretKey) {
-        super.secretKey = [[NSData alloc] initWithBytes:secretKey length:crypto_sign_SECRETKEYBYTES];
+    return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super init];
+    
+    if (self) {
+        _privateKey = [[coder decodeObject] copy];
+        _publicKey = [[coder decodeObject] copy];
     }
     
-    if (publicKey) {
-        super.publicKey = [[NSData alloc] initWithBytes:publicKey length:crypto_sign_PUBLICKEYBYTES];
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder
+{
+    [coder encodeObject:_privateKey];
+    [coder encodeObject:_publicKey];
+}
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    NACLSigningKeyPair *copy = [[self class] alloc];
+    
+    copy.publicKey = [_publicKey copy];
+    copy.privateKey = [_privateKey copy];
+    
+    return copy;
+}
+
+- (BOOL)isEqual:(id)object
+{
+    if (object == nil) {
+        return NO;
     }
+    
+    if (![object isKindOfClass:[self class]]) {
+        return NO;
+    }
+    
+    return [self isEqualToSigningKeyPair:object];
+}
+
+- (BOOL)isEqualToSigningKeyPair:(NACLSigningKeyPair *)keyPair
+{
+    if (self == keyPair) {
+        return YES;
+    }
+    
+    BOOL equal = YES;
+    
+    equal &= [_publicKey isEqualToKey:keyPair.publicKey];
+    equal &= [_privateKey isEqualToKey:keyPair.privateKey];
+    
+    return equal;
+}
+
+- (NSUInteger)hash
+{
+    NSUInteger hash = 1;
+    
+    hash = 31 * hash + [_publicKey hash];
+    hash = 31 * hash + [_privateKey hash];
+    
+    return hash;
+}
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"%@ {publicKey: %@, privateKey: %@}", 
+            NSStringFromClass([self class]), _publicKey, _privateKey];
 }
 
 @end

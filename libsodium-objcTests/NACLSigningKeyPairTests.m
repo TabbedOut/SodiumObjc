@@ -18,8 +18,10 @@
 - (void)assertSigningKeyPairIsValid:(NACLSigningKeyPair *)keyPair
 {
     XCTAssertNotNil(keyPair, @"");
-    XCTAssertNotEqual([keyPair.publicKey length], 0, @"");
-    XCTAssertNotEqual([keyPair.secretKey length], 0, @"");    
+    XCTAssertNotNil(keyPair.publicKey, @"");
+    XCTAssertNotNil(keyPair.privateKey, @"");
+    XCTAssertNotEqual([keyPair.publicKey.data length], 0, @"");
+    XCTAssertNotEqual([keyPair.privateKey.data length], 0, @"");    
 }
 
 - (void)testInit_expectSuccess
@@ -44,7 +46,7 @@
     
     XCTAssertNotEqual(keyPairA, keyPairB, @"");
     XCTAssertNotEqualObjects(keyPairA.publicKey, keyPairB.publicKey, @"");
-    XCTAssertNotEqualObjects(keyPairA.secretKey, keyPairB.secretKey, @"");    
+    XCTAssertNotEqualObjects(keyPairA.privateKey, keyPairB.privateKey, @"");    
 }
 
 - (void)testCreationMethod_expectSuccess
@@ -69,7 +71,7 @@
     
     XCTAssertNotEqual(keyPairA, keyPairB, @"");
     XCTAssertEqualObjects(keyPairA.publicKey, keyPairB.publicKey, @"");
-    XCTAssertEqualObjects(keyPairA.secretKey, keyPairB.secretKey, @"");
+    XCTAssertEqualObjects(keyPairA.privateKey, keyPairB.privateKey, @"");
 }
 
 - (void)testIsEqual_whenEqual
@@ -103,16 +105,16 @@
     NACLSigningKeyPair *keyPairA = [NACLSigningKeyPair keyPair];
     NACLSigningKeyPair *keyPairB = [keyPairA copy];
     
-    XCTAssertTrue([keyPairA isEqualToKeyPair:keyPairB], @"");
-    XCTAssertTrue([keyPairB isEqualToKeyPair:keyPairA], @"");
+    XCTAssertTrue([keyPairA isEqualToSigningKeyPair:keyPairB], @"");
+    XCTAssertTrue([keyPairB isEqualToSigningKeyPair:keyPairA], @"");
 }
 
 - (void)testIsEqualToKeyPair_withSelf
 {
     NACLSigningKeyPair *keyPairA = [NACLSigningKeyPair keyPair];
     
-    XCTAssertTrue([keyPairA isEqualToKeyPair:keyPairA], @"");
-    XCTAssertTrue([keyPairA isEqualToKeyPair:keyPairA], @"");
+    XCTAssertTrue([keyPairA isEqualToSigningKeyPair:keyPairA], @"");
+    XCTAssertTrue([keyPairA isEqualToSigningKeyPair:keyPairA], @"");
 }
 
 - (void)testIsEqualToKeyPair_whenNotEqual
@@ -120,8 +122,8 @@
     NACLSigningKeyPair *keyPairA = [NACLSigningKeyPair keyPair];
     NACLSigningKeyPair *keyPairB = [NACLSigningKeyPair keyPair];
     
-    XCTAssertFalse([keyPairA isEqualToKeyPair:keyPairB], @"");
-    XCTAssertFalse([keyPairB isEqualToKeyPair:keyPairA], @"");
+    XCTAssertFalse([keyPairA isEqualToSigningKeyPair:keyPairB], @"");
+    XCTAssertFalse([keyPairB isEqualToSigningKeyPair:keyPairA], @"");
 }
 
 - (void)testHash_withEqualKeypairs
@@ -147,7 +149,7 @@
     NSData *encodedKeyPair = [NSKeyedArchiver archivedDataWithRootObject:keyPair];
     NACLSigningKeyPair *decodedKeyPair = [NSKeyedUnarchiver unarchiveObjectWithData:encodedKeyPair];
     
-    XCTAssertTrue([keyPair isEqualToKeyPair:decodedKeyPair], @"");
+    XCTAssertTrue([keyPair isEqualToSigningKeyPair:decodedKeyPair], @"");
 }
 
 

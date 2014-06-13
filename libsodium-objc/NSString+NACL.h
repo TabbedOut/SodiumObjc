@@ -60,7 +60,7 @@
  *  
  *  @return A signed data object.
  */
-- (NSData *)signedDataUsingSecretKey:(NSData *)secretKey;
+- (NSData *)signedDataUsingPrivateKey:(NACLSigningPrivateKey *)privateKey;
 
 /**
  *  Signs the receiver (which is an NSData object) using the secret key in the 
@@ -72,7 +72,7 @@
  *  
  *  @return A signed data object.
  */
-- (NSData *)signedDataUsingSecretKey:(NSData *)secretKey 
+- (NSData *)signedDataUsingPrivateKey:(NACLSigningPrivateKey *)privateKey 
                                error:(NSError **)outError;
 
 #pragma mark Secret-Key Cryptography

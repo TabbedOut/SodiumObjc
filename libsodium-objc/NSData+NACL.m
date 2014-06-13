@@ -155,21 +155,25 @@
 
 #pragma mark Signatures
 
-- (NSData *)signedDataUsingSecretKey:(NSData *)secretKey
+- (NSData *)signedDataUsingPrivateKey:(NACLSigningPrivateKey *)privateKey
 {
-    return [self signedDataUsingSecretKey:secretKey error:nil];
+    return [self signedDataUsingPrivateKey:privateKey error:nil];
 }
 
-- (NSData *)signedDataUsingSecretKey:(NSData *)secretKey error:(NSError *__autoreleasing *)outError
+- (NSData *)signedDataUsingPrivateKey:(NACLSigningPrivateKey *)privateKey error:(NSError *__autoreleasing *)outError
 {
-    NSParameterAssert(secretKey);
+    NSParameterAssert(privateKey);
 
     NSData *signedData = nil;
     
     unsigned char signedMessage[self.length + crypto_sign_BYTES];
     unsigned long long signedMessageLength = 0;
     
-    int result = crypto_sign(signedMessage, &signedMessageLength, self.bytes, self.length, secretKey.bytes);
+    int result = crypto_sign(signedMessage, 
+                             &signedMessageLength, 
+                             self.bytes, 
+                             self.length, 
+                             privateKey.data.bytes);
     
     if (result != 0) {
         if (outError) {
@@ -184,12 +188,12 @@
     return signedData;
 }
 
-- (NSData *)verifiedDataUsingPublicKey:(NSData *)publicKey
+- (NSData *)verifiedDataUsingPublicKey:(NACLSigningPublicKey *)publicKey
 {
     return [self verifiedDataUsingPublicKey:publicKey error:nil];
 }
 
-- (NSData *)verifiedDataUsingPublicKey:(NSData *)publicKey error:(NSError *__autoreleasing *)outError
+- (NSData *)verifiedDataUsingPublicKey:(NACLSigningPublicKey *)publicKey error:(NSError *__autoreleasing *)outError
 {
     NSParameterAssert(publicKey);
     
@@ -198,7 +202,11 @@
     unsigned char message[self.length];
     unsigned long long messageLength;
     
-    int result = crypto_sign_open(message, &messageLength, self.bytes, self.length, publicKey.bytes);
+    int result = crypto_sign_open(message, 
+                                  &messageLength, 
+                                  self.bytes, 
+                                  self.length, 
+                                  publicKey.data.bytes);
     
     if (result != 0) {
         if (outError) {
@@ -213,12 +221,12 @@
     return messageData;
 }
 
-- (NSString *)verifiedTextUsingPublicKey:(NSData *)publicKey
+- (NSString *)verifiedTextUsingPublicKey:(NACLSigningPublicKey *)publicKey
 {
     return [self verifiedTextUsingPublicKey:publicKey error:nil];
 }
 
-- (NSString *)verifiedTextUsingPublicKey:(NSData *)publicKey 
+- (NSString *)verifiedTextUsingPublicKey:(NACLSigningPublicKey *)publicKey 
                                    error:(NSError **)outError
 {
     NSData *verifiedData = [self verifiedDataUsingPublicKey:publicKey error:outError];

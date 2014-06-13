@@ -67,7 +67,7 @@
 - (void)testSignedDataUsingSecretKeyNonce
 {
     NSError *error = nil;
-    NSData *signedData = [plainText signedDataUsingSecretKey:signingKeyPair.secretKey error:&error];
+    NSData *signedData = [plainText signedDataUsingPrivateKey:signingKeyPair.privateKey error:&error];
 
     XCTAssertTrue(signedData.length > 0, @"");
 }

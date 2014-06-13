@@ -36,16 +36,15 @@
 
 #pragma mark Signatures
 
-- (NSData *)signedDataUsingSecretKey:(NSData *)secretKey
+- (NSData *)signedDataUsingPrivateKey:(NACLSigningPrivateKey *)privateKey
 {
-    return [self signedDataUsingSecretKey:secretKey];
+    return [self signedDataUsingPrivateKey:privateKey];
 }
 
-- (NSData *)signedDataUsingSecretKey:(NSData *)secretKey 
-                               error:(NSError **)outError
+- (NSData *)signedDataUsingPrivateKey:(NACLSigningPrivateKey *)privateKey error:(NSError **)outError
 {
     NSData *messageData = [self dataUsingEncoding:NSUTF8StringEncoding];
-    NSData *signedData = [messageData signedDataUsingSecretKey:secretKey error:outError];
+    NSData *signedData = [messageData signedDataUsingPrivateKey:privateKey error:outError];
     return signedData;
 }
 

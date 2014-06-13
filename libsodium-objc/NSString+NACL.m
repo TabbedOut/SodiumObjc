@@ -34,9 +34,24 @@
     return encryptedData;
 }
 
+#pragma mark Signatures
+
+- (NSData *)signedDataUsingSecretKey:(NSData *)secretKey
+{
+    return [self signedDataUsingSecretKey:secretKey];
+}
+
+- (NSData *)signedDataUsingSecretKey:(NSData *)secretKey 
+                               error:(NSError **)outError
+{
+    NSData *messageData = [self dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *signedData = [messageData signedDataUsingSecretKey:secretKey error:outError];
+    return signedData;
+}
+
 #pragma mark Secret-Key Cryptography
 
-- (NSData *)encryptedDataUsingSecretKey:(NACLSecretKey *)secretKey nonce:(NACLNonce *)nonce
+- (NSData *)encryptedDataUsingSecretKey:(NACLSymmetricSecretKey *)secretKey nonce:(NACLNonce *)nonce
 {
     NSData *messageData = [self dataUsingEncoding:NSUTF8StringEncoding];
     NSData *encryptedData = [messageData encryptedDataUsingSecretKey:secretKey nonce:nonce];
@@ -44,7 +59,7 @@
     return encryptedData;
 }
 
-- (NSData *)encryptedDataUsingSecretKey:(NACLSecretKey *)secretKey nonce:(NACLNonce *)nonce error:(NSError **)outError
+- (NSData *)encryptedDataUsingSecretKey:(NACLSymmetricSecretKey *)secretKey nonce:(NACLNonce *)nonce error:(NSError **)outError
 {
     NSData *messageData = [self dataUsingEncoding:NSUTF8StringEncoding];
     NSData *encryptedData = [messageData encryptedDataUsingSecretKey:secretKey nonce:nonce error:outError];

@@ -7,14 +7,14 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "NACLSecretKey.h"
+#import "NACLSymmetricSecretKey.h"
 
 @interface NACLSecretKeyTests : XCTestCase
 @end
 
 @implementation NACLSecretKeyTests
 
-- (void)assertSecretKeyIsValid:(NACLSecretKey *)secretKey
+- (void)assertSecretKeyIsValid:(NACLSymmetricSecretKey *)secretKey
 {
     XCTAssertNotNil(secretKey, @"");
     XCTAssertNotNil(secretKey.data, @"");
@@ -23,7 +23,7 @@
 
 - (void)testInit
 {
-    NACLSecretKey *secretKey = [[NACLSecretKey alloc] init];
+    NACLSymmetricSecretKey *secretKey = [[NACLSymmetricSecretKey alloc] init];
     
     [self assertSecretKeyIsValid:secretKey];
 }
@@ -33,14 +33,14 @@
     NSMutableData *data = [NSMutableData dataWithLength:NACLSecretKeyByteCount];
     [[NSInputStream inputStreamWithFileAtPath:@"/dev/urandom"] read:(uint8_t *) [data mutableBytes] maxLength:NACLSecretKeyByteCount];
     
-    NACLSecretKey *secretKey = [[NACLSecretKey alloc] initWithData:data];
+    NACLSymmetricSecretKey *secretKey = [[NACLSymmetricSecretKey alloc] initWithData:data];
     
     [self assertSecretKeyIsValid:secretKey];
 }
 
 - (void)testSecretKey
 {
-    NACLSecretKey *secretKey = [NACLSecretKey secretKey];
+    NACLSymmetricSecretKey *secretKey = [NACLSymmetricSecretKey key];
     
     [self assertSecretKeyIsValid:secretKey];
 }
@@ -50,15 +50,15 @@
     NSMutableData *data = [NSMutableData dataWithLength:NACLSecretKeyByteCount];
     [[NSInputStream inputStreamWithFileAtPath:@"/dev/urandom"] read:(uint8_t *) [data mutableBytes] maxLength:NACLSecretKeyByteCount];
     
-    NACLSecretKey *secretKey = [NACLSecretKey secretKeyWithData:data];
+    NACLSymmetricSecretKey *secretKey = [NACLSymmetricSecretKey keyWithData:data];
     
     [self assertSecretKeyIsValid:secretKey];
 }
 
 - (void)testCopy
 {
-    NACLSecretKey *secretKey = [NACLSecretKey secretKey];
-    NACLSecretKey *copy = [secretKey copy];
+    NACLSymmetricSecretKey *secretKey = [NACLSymmetricSecretKey key];
+    NACLSymmetricSecretKey *copy = [secretKey copy];
     
     XCTAssertNotNil(copy, @"");
     XCTAssertNotEqual(secretKey, copy, @"");
@@ -67,8 +67,8 @@
 
 - (void)testIsEqual_whenSame
 {
-    NACLSecretKey *secretKey = [NACLSecretKey secretKey];
-    NACLSecretKey *same = secretKey;
+    NACLSymmetricSecretKey *secretKey = [NACLSymmetricSecretKey key];
+    NACLSymmetricSecretKey *same = secretKey;
     
     XCTAssertTrue([secretKey isEqual:same], @"");
     XCTAssertTrue([same isEqual:secretKey], @"");
@@ -76,8 +76,8 @@
 
 - (void)testIsEqual_whenEqual
 {
-    NACLSecretKey *secretKey = [NACLSecretKey secretKey];
-    NACLSecretKey *copy = [secretKey copy];
+    NACLSymmetricSecretKey *secretKey = [NACLSymmetricSecretKey key];
+    NACLSymmetricSecretKey *copy = [secretKey copy];
     
     XCTAssertTrue([secretKey isEqual:copy], @"");
     XCTAssertTrue([copy isEqual:secretKey], @"");
@@ -85,8 +85,8 @@
 
 - (void)testIsEqual_whenNotEqual
 {
-    NACLSecretKey *secretKeyA = [NACLSecretKey secretKey];
-    NACLSecretKey *secretKeyB = [NACLSecretKey secretKey];
+    NACLSymmetricSecretKey *secretKeyA = [NACLSymmetricSecretKey key];
+    NACLSymmetricSecretKey *secretKeyB = [NACLSymmetricSecretKey key];
     
     XCTAssertFalse([secretKeyA isEqual:secretKeyB], @"");
     XCTAssertFalse([secretKeyB isEqual:secretKeyA], @"");
@@ -94,56 +94,56 @@
 
 - (void)testIsEqual_withNil
 {
-    NACLSecretKey *secretKeyA = [NACLSecretKey secretKey];
+    NACLSymmetricSecretKey *secretKeyA = [NACLSymmetricSecretKey key];
     
     XCTAssertFalse([secretKeyA isEqual:nil], @"");    
 }
 
 - (void)testIsEqualToSecretKey_whenSame
 {
-    NACLSecretKey *secretKey = [NACLSecretKey secretKey];
-    NACLSecretKey *same = secretKey;
+    NACLSymmetricSecretKey *secretKey = [NACLSymmetricSecretKey key];
+    NACLSymmetricSecretKey *same = secretKey;
     
-    XCTAssertTrue([secretKey isEqualToSecretKey:same], @"");
-    XCTAssertTrue([same isEqualToSecretKey:secretKey], @"");
+    XCTAssertTrue([secretKey isEqualToKey:same], @"");
+    XCTAssertTrue([same isEqualToKey:secretKey], @"");
 }
 
 - (void)testIsEqualToSecretKey_whenEqual
 {
-    NACLSecretKey *secretKey = [NACLSecretKey secretKey];
-    NACLSecretKey *copy = [secretKey copy];
+    NACLSymmetricSecretKey *secretKey = [NACLSymmetricSecretKey key];
+    NACLSymmetricSecretKey *copy = [secretKey copy];
     
-    XCTAssertTrue([secretKey isEqualToSecretKey:copy], @"");
-    XCTAssertTrue([copy isEqualToSecretKey:secretKey], @"");
+    XCTAssertTrue([secretKey isEqualToKey:copy], @"");
+    XCTAssertTrue([copy isEqualToKey:secretKey], @"");
 }
 
 - (void)testIsEqualToSecretKey_whenNotEqual
 {
-    NACLSecretKey *secretKeyA = [NACLSecretKey secretKey];
-    NACLSecretKey *secretKeyB = [NACLSecretKey secretKey];
+    NACLSymmetricSecretKey *secretKeyA = [NACLSymmetricSecretKey key];
+    NACLSymmetricSecretKey *secretKeyB = [NACLSymmetricSecretKey key];
     
-    XCTAssertFalse([secretKeyA isEqualToSecretKey:secretKeyB], @"");
-    XCTAssertFalse([secretKeyB isEqualToSecretKey:secretKeyA], @"");
+    XCTAssertFalse([secretKeyA isEqualToKey:secretKeyB], @"");
+    XCTAssertFalse([secretKeyB isEqualToKey:secretKeyA], @"");
 }
 
 - (void)testIsEqualToSecretKey_withNil
 {
-    NACLSecretKey *secretKeyA = [NACLSecretKey secretKey];
+    NACLSymmetricSecretKey *secretKeyA = [NACLSymmetricSecretKey key];
     
-    XCTAssertFalse([secretKeyA isEqualToSecretKey:nil], @"");
+    XCTAssertFalse([secretKeyA isEqualToKey:nil], @"");
 }
 
 - (void)testHash
 {
-    NACLSecretKey *secretKeyA = [NACLSecretKey secretKey];
-    NACLSecretKey *copy = [secretKeyA copy];
+    NACLSymmetricSecretKey *secretKeyA = [NACLSymmetricSecretKey key];
+    NACLSymmetricSecretKey *copy = [secretKeyA copy];
     
     XCTAssertEqual(secretKeyA.hash, copy.hash, @"");
 }
 
 - (void)testArchival
 {
-    NACLSecretKey *secretKey = [NACLSecretKey secretKey];    
+    NACLSymmetricSecretKey *secretKey = [NACLSymmetricSecretKey key];    
     NSData *encodedSecretKey = [NSKeyedArchiver archivedDataWithRootObject:secretKey];
     
     XCTAssertTrue(encodedSecretKey.length > 0, @"");
@@ -151,11 +151,11 @@
 
 - (void)testUnarchival
 {
-    NACLSecretKey *secretKey = [NACLSecretKey secretKey];
+    NACLSymmetricSecretKey *secretKey = [NACLSymmetricSecretKey key];
     NSData *encodedSecretKey = [NSKeyedArchiver archivedDataWithRootObject:secretKey];
-    NACLSecretKey *decodedSecretKey = [NSKeyedUnarchiver unarchiveObjectWithData:encodedSecretKey];
+    NACLSymmetricSecretKey *decodedSecretKey = [NSKeyedUnarchiver unarchiveObjectWithData:encodedSecretKey];
     
-    XCTAssertTrue([secretKey isEqualToSecretKey:decodedSecretKey], @"");
+    XCTAssertTrue([secretKey isEqualToKey:decodedSecretKey], @"");
 }
 
 @end

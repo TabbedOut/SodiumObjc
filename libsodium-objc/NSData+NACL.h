@@ -9,9 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "NACLCryptoKeyPair.h"
 #import "NACLNonce.h"
-#import "NACLSecretKey.h"
+#import "NACLSymmetricSecretKey.h"
 #import "NACLSigningKeyPair.h"
 
+/**
+ *  NACL augmentations to NSData.
+ */
 @interface NSData (NACL)
 
 #pragma mark Public-Key Cryptography
@@ -117,6 +120,16 @@
 
 /**
  *  Signs the receiver (which is an NSData object) using the secret key in the 
+ *  signer's supplied `keyPair`.
+ *  
+ *  @param keyPair  The signer's key pair.
+ *  
+ *  @return A signed data object.
+ */
+- (NSData *)signedDataUsingSecretKey:(NSData *)secretKey;
+
+/**
+ *  Signs the receiver (which is an NSData object) using the secret key in the 
  *  signer's supplied `keyPair`, and passes back an error to the call site if 
  *  one occurs.
  *  
@@ -127,6 +140,17 @@
  */
 - (NSData *)signedDataUsingSecretKey:(NSData *)secretKey 
                                error:(NSError **)outError;
+
+/**
+ *  Verifies and returns the original message that has been signed by the sender
+ *  using the sender's public key.
+ *  
+ *  @param publicKey The signer's public key.
+ *  
+ *  @return The original message if it can be verified with the signer's public
+ *          key, or `nil` if it can not.
+ */
+- (NSData *)verifiedDataUsingPublicKey:(NSData *)publicKey;
 
 /**
  *  Verifies and returns the original message that has been signed by the sender
@@ -141,6 +165,17 @@
  */
 - (NSData *)verifiedDataUsingPublicKey:(NSData *)publicKey
                                  error:(NSError **)outError;
+
+/**
+ *  Verifies and returns the original message as plain text that has been signed
+ *  by the sender using the sender's public key.
+ *  
+ *  @param publicKey The signer's public key.
+ *  
+ *  @return The original message if it can be verified with the signer's public
+ *          key, or `nil` if it can not.
+ */
+- (NSString *)verifiedTextUsingPublicKey:(NSData *)publicKey;
 
 /**
  *  Verifies and returns the original message as plain text that has been signed
@@ -167,7 +202,7 @@
  *  
  *  @return An encrypted data object.
  */
-- (NSData *)encryptedDataUsingSecretKey:(NACLSecretKey *)secretKey
+- (NSData *)encryptedDataUsingSecretKey:(NACLSymmetricSecretKey *)secretKey
                                   nonce:(NACLNonce *)nonce;
 
 /**
@@ -181,7 +216,7 @@
  *  
  *  @return An encrypted data object.
  */
-- (NSData *)encryptedDataUsingSecretKey:(NACLSecretKey *)secretKey
+- (NSData *)encryptedDataUsingSecretKey:(NACLSymmetricSecretKey *)secretKey
                                   nonce:(NACLNonce *)nonce
                                   error:(NSError **)outError;
 
@@ -194,7 +229,7 @@
  *  
  *  @return A decrypted data object.
  */
-- (NSData *)decryptedDataUsingSecretKey:(NACLSecretKey *)secretKey 
+- (NSData *)decryptedDataUsingSecretKey:(NACLSymmetricSecretKey *)secretKey 
                                   nonce:(NACLNonce *)nonce;
 
 /**
@@ -208,7 +243,7 @@
  *  
  *  @return A decrypted data object.
  */
-- (NSData *)decryptedDataUsingSecretKey:(NACLSecretKey *)secretKey 
+- (NSData *)decryptedDataUsingSecretKey:(NACLSymmetricSecretKey *)secretKey 
                                   nonce:(NACLNonce *)nonce
                                   error:(NSError **)outError;
 
@@ -221,7 +256,7 @@
  *  
  *  @return A decrypted data object.
  */
-- (NSString *)decryptedTextUsingSecretKey:(NACLSecretKey *)secretKey 
+- (NSString *)decryptedTextUsingSecretKey:(NACLSymmetricSecretKey *)secretKey 
                                     nonce:(NACLNonce *)nonce;
 
 /**
@@ -235,7 +270,7 @@
  *  
  *  @return A decrypted data object.
  */
-- (NSString *)decryptedTextUsingSecretKey:(NACLSecretKey *)secretKey 
+- (NSString *)decryptedTextUsingSecretKey:(NACLSymmetricSecretKey *)secretKey 
                                     nonce:(NACLNonce *)nonce
                                     error:(NSError **)outError;
 

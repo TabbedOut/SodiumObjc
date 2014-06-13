@@ -155,6 +155,11 @@
 
 #pragma mark Signatures
 
+- (NSData *)signedDataUsingSecretKey:(NSData *)secretKey
+{
+    return [self signedDataUsingSecretKey:secretKey error:nil];
+}
+
 - (NSData *)signedDataUsingSecretKey:(NSData *)secretKey error:(NSError *__autoreleasing *)outError
 {
     NSParameterAssert(secretKey);
@@ -177,6 +182,11 @@
     }
     
     return signedData;
+}
+
+- (NSData *)verifiedDataUsingPublicKey:(NSData *)publicKey
+{
+    return [self verifiedDataUsingPublicKey:publicKey error:nil];
 }
 
 - (NSData *)verifiedDataUsingPublicKey:(NSData *)publicKey error:(NSError *__autoreleasing *)outError
@@ -203,6 +213,11 @@
     return messageData;
 }
 
+- (NSString *)verifiedTextUsingPublicKey:(NSData *)publicKey
+{
+    return [self verifiedTextUsingPublicKey:publicKey error:nil];
+}
+
 - (NSString *)verifiedTextUsingPublicKey:(NSData *)publicKey 
                                    error:(NSError **)outError
 {
@@ -214,12 +229,12 @@
 
 #pragma mark Secret-Key Cryptography
 
-- (NSData *)encryptedDataUsingSecretKey:(NACLSecretKey *)secretKey nonce:(NACLNonce *)nonce
+- (NSData *)encryptedDataUsingSecretKey:(NACLSymmetricSecretKey *)secretKey nonce:(NACLNonce *)nonce
 {
     return [self encryptedDataUsingSecretKey:secretKey nonce:nonce error:nil];
 }
 
-- (NSData *)encryptedDataUsingSecretKey:(NACLSecretKey *)secretKey 
+- (NSData *)encryptedDataUsingSecretKey:(NACLSymmetricSecretKey *)secretKey 
                                  nonce:(NACLNonce *)nonce 
                                  error:(NSError *__autoreleasing *)outError
 {
@@ -267,12 +282,12 @@
     return encryptedData;
 }
 
-- (NSData *)decryptedDataUsingSecretKey:(NACLSecretKey *)secretKey nonce:(NACLNonce *)nonce
+- (NSData *)decryptedDataUsingSecretKey:(NACLSymmetricSecretKey *)secretKey nonce:(NACLNonce *)nonce
 {
     return [self decryptedDataUsingSecretKey:secretKey nonce:nonce error:nil];
 }
 
-- (NSData *)decryptedDataUsingSecretKey:(NACLSecretKey *)secretKey 
+- (NSData *)decryptedDataUsingSecretKey:(NACLSymmetricSecretKey *)secretKey 
                                  nonce:(NACLNonce *)nonce 
                                  error:(NSError *__autoreleasing *)outError
 {
@@ -311,7 +326,7 @@
 	return decryptedData;
 }
 
-- (NSString *)decryptedTextUsingSecretKey:(NACLSecretKey *)secretKey nonce:(NACLNonce *)nonce
+- (NSString *)decryptedTextUsingSecretKey:(NACLSymmetricSecretKey *)secretKey nonce:(NACLNonce *)nonce
 {
     NSString *decryptedText = nil;
     NSData *decryptedData = [self decryptedDataUsingSecretKey:secretKey nonce:nonce];
@@ -323,7 +338,7 @@
     return decryptedText;
 }
 
-- (NSString *)decryptedTextUsingSecretKey:(NACLSecretKey *)secretKey 
+- (NSString *)decryptedTextUsingSecretKey:(NACLSymmetricSecretKey *)secretKey 
                                    nonce:(NACLNonce *)nonce 
                                    error:(NSError *__autoreleasing *)outError
 {

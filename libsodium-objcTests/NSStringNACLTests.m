@@ -18,7 +18,8 @@
     NSString *plainText;
     NACLCryptoKeyPair *sendersKeyPair;
     NACLCryptoKeyPair *receiversKeyPair;
-    NACLSecretKey *secretKey;
+    NACLSigningKeyPair *signingKeyPair;
+    NACLSymmetricSecretKey *secretKey;
     NACLNonce *nonce;
 }
 
@@ -26,10 +27,11 @@
 {
     [super setUp];
     
-    plainText = @"I am about to get encrypted!";
+    plainText = @"I am about to get encrypted.";
     sendersKeyPair = [NACLCryptoKeyPair keyPair];
     receiversKeyPair = [NACLCryptoKeyPair keyPair];
-    secretKey = [NACLSecretKey secretKey];
+    signingKeyPair = [NACLSigningKeyPair keyPair];
+    secretKey = [NACLSymmetricSecretKey key];
     nonce = [NACLNonce nonce];
 }
 
@@ -56,6 +58,14 @@
     NSData *encryptedData = [plainText encryptedDataUsingPublicKey:sendersKeyPair.publicKey secretKey:receiversKeyPair.secretKey nonce:nonce error:&error];
     
     XCTAssert(encryptedData.length > 0, @"");
+}
+
+- (void)testSignedDataUsingSecretKeyNonce
+{
+    NSError *error = nil;
+    NSData *signedData = [plainText signedDataUsingSecretKey:signingKeyPair.secretKey error:&error];
+
+    XCTAssertTrue(signedData.length > 0, @"");
 }
 
 - (void)testEncryptedDataWithSecretKeyNonce

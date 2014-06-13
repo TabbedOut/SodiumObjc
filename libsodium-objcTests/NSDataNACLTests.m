@@ -20,7 +20,7 @@
     NACLCryptoKeyPair *sendersKeyPair;
     NACLCryptoKeyPair *receiversKeyPair;
     NACLSigningKeyPair *signersKeyPair;
-    NACLSecretKey *secretKey;
+    NACLSymmetricSecretKey *secretKey;
     NACLNonce *nonce;
 }
 
@@ -33,7 +33,7 @@
     sendersKeyPair = [NACLCryptoKeyPair keyPair];
     receiversKeyPair = [NACLCryptoKeyPair keyPair];
     signersKeyPair = [NACLSigningKeyPair keyPair];
-    secretKey = [NACLSecretKey secretKey];
+    secretKey = [NACLSymmetricSecretKey key];
     nonce = [NACLNonce nonce];
 }
 

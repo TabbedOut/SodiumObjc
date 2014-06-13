@@ -8,6 +8,9 @@
 
 #import "NACLKeyPair.h"
 
+/**
+ *  A key pair that is to be used in signing operations.
+ */
 @interface NACLSigningKeyPair : NACLKeyPair
 
 @end

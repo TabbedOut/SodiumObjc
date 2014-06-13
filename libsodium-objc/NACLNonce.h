@@ -10,6 +10,9 @@
 
 OBJC_EXPORT const size_t NACLNonceByteCount;
 
+/**
+ *  A nonce type.
+ */
 @interface NACLNonce : NSObject <NSCopying, NSCoding>
 @property (strong, nonatomic, readonly) NSData *data;
 

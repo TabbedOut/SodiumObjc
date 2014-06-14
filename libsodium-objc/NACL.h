@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "sodium.h"
+#import <sodium.h>
 
 OBJC_EXPORT NSString *const NACLErrorDomain;
 

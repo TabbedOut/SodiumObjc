@@ -14,7 +14,7 @@
 
 @implementation NACLSymmetricPrivateKeyTests
 
-- (void)assertPrivateKeyIsValid:(NACLSymmetricPrivateKey *)privateKey
+- (void)assertKeyIsValid:(NACLSymmetricPrivateKey *)privateKey
 {
     XCTAssertNotNil(privateKey, @"");
     XCTAssertNotNil(privateKey.data, @"");
@@ -25,7 +25,7 @@
 {
     NACLSymmetricPrivateKey *privateKey = [[NACLSymmetricPrivateKey alloc] init];
     
-    [self assertPrivateKeyIsValid:privateKey];
+    [self assertKeyIsValid:privateKey];
 }
 
 - (void)testInitWithData_withValidData
@@ -36,14 +36,14 @@
     
     NACLSymmetricPrivateKey *privateKey = [[NACLSymmetricPrivateKey alloc] initWithData:data];
     
-    [self assertPrivateKeyIsValid:privateKey];
+    [self assertKeyIsValid:privateKey];
 }
 
 - (void)testPrivateKey
 {
     NACLSymmetricPrivateKey *privateKey = [NACLSymmetricPrivateKey key];
     
-    [self assertPrivateKeyIsValid:privateKey];
+    [self assertKeyIsValid:privateKey];
 }
 
 - (void)testPrivateKeyWithData
@@ -54,7 +54,7 @@
     
     NACLSymmetricPrivateKey *privateKey = [NACLSymmetricPrivateKey keyWithData:data];
     
-    [self assertPrivateKeyIsValid:privateKey];
+    [self assertKeyIsValid:privateKey];
 }
 
 - (void)testCopy
@@ -146,18 +146,18 @@
 - (void)testArchival
 {
     NACLSymmetricPrivateKey *privateKey = [NACLSymmetricPrivateKey key];    
-    NSData *encodedprivateKey = [NSKeyedArchiver archivedDataWithRootObject:privateKey];
+    NSData *encodedPrivateKey = [NSKeyedArchiver archivedDataWithRootObject:privateKey];
     
-    XCTAssertTrue(encodedprivateKey.length > 0, @"");
+    XCTAssertTrue(encodedPrivateKey.length > 0, @"");
 }
 
 - (void)testUnarchival
 {
     NACLSymmetricPrivateKey *privateKey = [NACLSymmetricPrivateKey key];
     NSData *encodedprivateKey = [NSKeyedArchiver archivedDataWithRootObject:privateKey];
-    NACLSymmetricPrivateKey *decodedprivateKey = [NSKeyedUnarchiver unarchiveObjectWithData:encodedprivateKey];
+    NACLSymmetricPrivateKey *decodedPrivateKey = [NSKeyedUnarchiver unarchiveObjectWithData:encodedprivateKey];
     
-    XCTAssertTrue([privateKey isEqualToKey:decodedprivateKey], @"");
+    XCTAssertTrue([privateKey isEqualToKey:decodedPrivateKey], @"");
 }
 
 @end

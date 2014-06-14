@@ -10,8 +10,8 @@
 #import "NACL.h"
 
 @interface NACLAsymmetricKeyPair ()
-@property (strong, nonatomic, readwrite) NACLAssymetricPublicKey *publicKey;
-@property (strong, nonatomic, readwrite) NACLAssymetricPrivateKey *privateKey;
+@property (strong, nonatomic, readwrite) NACLAsymetricPublicKey *publicKey;
+@property (strong, nonatomic, readwrite) NACLAsymetricPrivateKey *privateKey;
 @end
 
 @implementation NACLAsymmetricKeyPair
@@ -55,12 +55,12 @@
         
         if (secretKey) {
             NSData *keyData = [NSData dataWithBytes:secretKey length:crypto_box_SECRETKEYBYTES];
-            _privateKey = [[NACLAssymetricPrivateKey alloc] initWithData:keyData];
+            _privateKey = [[NACLAsymetricPrivateKey alloc] initWithData:keyData];
         }
         
         if (publicKey) {
             NSData *keyData = [NSData dataWithBytes:publicKey length:crypto_box_PUBLICKEYBYTES];
-            _publicKey = [[NACLAssymetricPublicKey alloc] initWithData:keyData];
+            _publicKey = [[NACLAsymetricPublicKey alloc] initWithData:keyData];
         }
     }
     

@@ -1,5 +1,5 @@
 //
-//  NACLAssymetricPrivateKey.h
+//  NACLAsymetricPrivateKey.h
 //  libsodium-objc
 //
 //  Created by Damian Carrillo on 6/13/14.
@@ -8,6 +8,6 @@
 
 #import "NACLKey.h"
 
-@interface NACLAssymetricPrivateKey : NACLKey
+@interface NACLAsymetricPrivateKey : NACLKey
 
 @end

@@ -29,8 +29,8 @@
  *  
  *  @return An encrypted data object.
  */
-- (NSData *)encryptedDataUsingPublicKey:(NACLAssymetricPublicKey *)publicKey 
-                             privateKey:(NACLAssymetricPrivateKey *)privateKey 
+- (NSData *)encryptedDataUsingPublicKey:(NACLAsymetricPublicKey *)publicKey 
+                             privateKey:(NACLAsymetricPrivateKey *)privateKey 
                                   nonce:(NACLNonce *)nonce;
 
 /**
@@ -45,8 +45,8 @@
  *  
  *  @return An encrypted data object.
  */
-- (NSData *)encryptedDataUsingPublicKey:(NACLAssymetricPublicKey *)publicKey 
-                             privateKey:(NACLAssymetricPrivateKey *)privateKey 
+- (NSData *)encryptedDataUsingPublicKey:(NACLAsymetricPublicKey *)publicKey 
+                             privateKey:(NACLAsymetricPrivateKey *)privateKey 
                                   nonce:(NACLNonce *)nonce
                                   error:(NSError **)outError;
 
@@ -61,8 +61,8 @@
  *  
  *  @return A decrypted data object.
  */
-- (NSData *)decryptedDataUsingPublicKey:(NACLAssymetricPublicKey *)publicKey 
-                             privateKey:(NACLAssymetricPrivateKey *)privateKey
+- (NSData *)decryptedDataUsingPublicKey:(NACLAsymetricPublicKey *)publicKey 
+                             privateKey:(NACLAsymetricPrivateKey *)privateKey
                                   nonce:(NACLNonce *)nonce;
 
 /**
@@ -78,8 +78,8 @@
  *  
  *  @return A decrypted data object.
  */
-- (NSData *)decryptedDataUsingPublicKey:(NACLAssymetricPublicKey *)publicKey
-                             privateKey:(NACLAssymetricPrivateKey *)privateKey
+- (NSData *)decryptedDataUsingPublicKey:(NACLAsymetricPublicKey *)publicKey
+                             privateKey:(NACLAsymetricPrivateKey *)privateKey
                                   nonce:(NACLNonce *)nonce
                                   error:(NSError **)outError;
 
@@ -94,8 +94,8 @@
  *  
  *  @return A decrypted plain text representation of the data.
  */
-- (NSString *)decryptedTextUsingPublicKey:(NACLAssymetricPublicKey *)publicKey
-                               privateKey:(NACLAssymetricPrivateKey *)privateKey
+- (NSString *)decryptedTextUsingPublicKey:(NACLAsymetricPublicKey *)publicKey
+                               privateKey:(NACLAsymetricPrivateKey *)privateKey
                                     nonce:(NACLNonce *)nonce;
 
 /**
@@ -111,8 +111,8 @@
  *  
  *  @return A decrypted data object.
  */
-- (NSString *)decryptedTextUsingPublicKey:(NACLAssymetricPublicKey *)publicKey
-                               privateKey:(NACLAssymetricPrivateKey *)privateKey
+- (NSString *)decryptedTextUsingPublicKey:(NACLAsymetricPublicKey *)publicKey
+                               privateKey:(NACLAsymetricPrivateKey *)privateKey
                                     nonce:(NACLNonce *)nonce
                                     error:(NSError **)outError;
 

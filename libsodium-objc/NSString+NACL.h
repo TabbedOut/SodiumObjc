@@ -29,8 +29,8 @@
  *  
  *  @return An encrypted data object.
  */
-- (NSData *)encryptedDataUsingPublicKey:(NACLAssymetricPublicKey *)publicKey 
-                             privateKey:(NACLAssymetricPrivateKey *)privateKey 
+- (NSData *)encryptedDataUsingPublicKey:(NACLAsymetricPublicKey *)publicKey 
+                             privateKey:(NACLAsymetricPrivateKey *)privateKey 
                                   nonce:(NACLNonce *)nonce;
 
 /**
@@ -45,8 +45,8 @@
  *  
  *  @return An encrypted data object.
  */
-- (NSData *)encryptedDataUsingPublicKey:(NACLAssymetricPublicKey *)publicKey
-                             privateKey:(NACLAssymetricPrivateKey *)privateKey 
+- (NSData *)encryptedDataUsingPublicKey:(NACLAsymetricPublicKey *)publicKey
+                             privateKey:(NACLAsymetricPrivateKey *)privateKey 
                                   nonce:(NACLNonce *)nonce 
                                   error:(NSError **)outError;
 

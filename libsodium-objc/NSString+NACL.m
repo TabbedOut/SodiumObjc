@@ -13,8 +13,8 @@
 
 #pragma mark Public-Key Cryptography
 
-- (NSData *)encryptedDataUsingPublicKey:(NACLAssymetricPublicKey *)publicKey 
-                             privateKey:(NACLAssymetricPrivateKey *)privateKey
+- (NSData *)encryptedDataUsingPublicKey:(NACLAsymetricPublicKey *)publicKey 
+                             privateKey:(NACLAsymetricPrivateKey *)privateKey
                                   nonce:(NACLNonce *)nonce
 {
     NSData *messageData = [self dataUsingEncoding:NSUTF8StringEncoding];
@@ -23,8 +23,8 @@
     return encryptedData;
 }
 
-- (NSData *)encryptedDataUsingPublicKey:(NACLAssymetricPublicKey *)publicKey 
-                             privateKey:(NACLAssymetricPrivateKey *)privateKey
+- (NSData *)encryptedDataUsingPublicKey:(NACLAsymetricPublicKey *)publicKey 
+                             privateKey:(NACLAsymetricPrivateKey *)privateKey
                                   nonce:(NACLNonce *)nonce 
                                   error:(NSError *__autoreleasing *)outError
 {

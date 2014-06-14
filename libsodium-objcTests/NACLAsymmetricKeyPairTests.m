@@ -1,5 +1,5 @@
 //
-//  NACLAssymetricKeyPairTests.m
+//  NACLAsymmetricKeyPairTests.m
 //  libsodium-objc
 //
 //  Created by Damian Carrillo on 6/11/14.
@@ -9,10 +9,10 @@
 #import <XCTest/XCTest.h>
 #import "NACLAsymmetricKeyPair.h"
 
-@interface NACLAssymetricKeyPairTests : XCTestCase
+@interface NACLAsymmetricKeyPairTests : XCTestCase
 @end
 
-@implementation NACLAssymetricKeyPairTests
+@implementation NACLAsymmetricKeyPairTests
 
 - (void)assertKeyPairIsValid:(NACLAsymmetricKeyPair *)keyPair
 {

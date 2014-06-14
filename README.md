@@ -12,20 +12,20 @@ methods via the `NSString+Nacl` and `NSData+NACL` categories.
 #### Encryption
 
     NSString *plainText = @"I am about to get encrypted.";
-    NACLCryptoKeyPair *sendersKeyPair = [NACLCryptoKeyPair keyPair];
-    NACLCryptoKeyPair *receiversKeyPair = [NACLCryptoKeyPair keyPair];
+    NACLAsymmetricKeyPair *sendersKeyPair = [NACLAsymmetricKeyPair keyPair];
+    NACLAsymmetricKeyPair *receiversKeyPair = [NACLAsymmetricKeyPair keyPair];
     NACLNonce *nonce = [NACLNonce nonce];
 
     NSData *encryptedData;
     encryptedData = [plainText encryptedDataUsingPublicKey:sendersKeyPair.publicKey
-                                                 secretKey:receiversKeyPair.secretKey
+                                                privateKey:receiversKeyPair.privateKey
                                                      nonce:nonce];
 
 
 #### Decryption
 
     plainText = [encryptedData decryptedTextUsingPublicKey:receiversKeyPair.publicKey
-                                                 secretKey:sendersKeyPair.secretKey
+                                                privateKey:sendersKeyPair.privateKey
                                                      nonce:nonce];
 ### Secret-Key Cryptography
 
@@ -35,15 +35,15 @@ methods via the `NSString+Nacl` and `NSData+NACL` categories, as well.
 #### Encryption
 
     NSString *plainText = @"I am about to get encrypted.";
-    NACLSecretKey *secretKey = [NACLSecretKey secretKey];
+    NACLSymmetricPrivateKey *privateKey = [NACLSymmetricPrivateKey privateKey];
     NACLNonce *nonce = [NACLNonce nonce];
 
     NSData *encryptedData;
-    encryptedData = [plainText encryptedDataUsingSecretKey:secretKey nonce:nonce];
+    encryptedData = [plainText encryptedDataUsingPrivateKey:privateKey nonce:nonce];
 
 #### Decryption
 
-    plainText = [encryptedData encryptedDataUsingSecretKey:secretKey nonce:nonce];
+    plainText = [encryptedData decryptedDataUsingPrivateKey:privateKey nonce:nonce];
 
 ### Signatures
 
@@ -57,9 +57,17 @@ Both `NSString` and `NSData` have been augmented with signing methods via the
     NACLNonce *nonce = [NACLNonce nonce];
 
     NSData *signedData;
-    signedData = [plainText signedDataUsingSecretKey:signingKeyPair.secretKey];
+    signedData = [plainText signedDataUsingPrivateKey:signingKeyPair.privateKey];
 
 #### Verifying
 
     NSString *verifiedText;
     verifiedText = [signedData verifiedTextUsingPublicKey:signingKeyPair.publicKeyPair];
+
+## Building
+
+- Download the latest [tarball release of NaCL](https://download.libsodium.org/libsodium/releases/LATEST.tar.gz)
+- Deflate to `$(SRCROOT)/lib/libsodium`
+- Run `./build_libsodium.sh path/to/deflated/nacl`
+- Copy headers from `path/to/deflated/src/include` to `$(SRCROOT)/lib/libsodium/includ`
+

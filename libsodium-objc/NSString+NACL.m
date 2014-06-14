@@ -13,8 +13,8 @@
 
 #pragma mark Public-Key Cryptography
 
-- (NSData *)encryptedDataUsingPublicKey:(NACLPublicKey *)publicKey 
-                             privateKey:(NACLPrivateKey *)privateKey
+- (NSData *)encryptedDataUsingPublicKey:(NACLAssymetricPublicKey *)publicKey 
+                             privateKey:(NACLAssymetricPrivateKey *)privateKey
                                   nonce:(NACLNonce *)nonce
 {
     NSData *messageData = [self dataUsingEncoding:NSUTF8StringEncoding];
@@ -23,8 +23,8 @@
     return encryptedData;
 }
 
-- (NSData *)encryptedDataUsingPublicKey:(NACLPublicKey *)publicKey 
-                             privateKey:(NACLPrivateKey *)privateKey
+- (NSData *)encryptedDataUsingPublicKey:(NACLAssymetricPublicKey *)publicKey 
+                             privateKey:(NACLAssymetricPrivateKey *)privateKey
                                   nonce:(NACLNonce *)nonce 
                                   error:(NSError *__autoreleasing *)outError
 {
@@ -50,18 +50,18 @@
 
 #pragma mark Secret-Key Cryptography
 
-- (NSData *)encryptedDataUsingSecretKey:(NACLSymmetricSecretKey *)secretKey nonce:(NACLNonce *)nonce
+- (NSData *)encryptedDataUsingSecretKey:(NACLSymmetricPrivateKey *)secretKey nonce:(NACLNonce *)nonce
 {
     NSData *messageData = [self dataUsingEncoding:NSUTF8StringEncoding];
-    NSData *encryptedData = [messageData encryptedDataUsingSecretKey:secretKey nonce:nonce];
+    NSData *encryptedData = [messageData encryptedDataUsingPrivateKey:secretKey nonce:nonce];
     
     return encryptedData;
 }
 
-- (NSData *)encryptedDataUsingSecretKey:(NACLSymmetricSecretKey *)secretKey nonce:(NACLNonce *)nonce error:(NSError **)outError
+- (NSData *)encryptedDataUsingSecretKey:(NACLSymmetricPrivateKey *)secretKey nonce:(NACLNonce *)nonce error:(NSError **)outError
 {
     NSData *messageData = [self dataUsingEncoding:NSUTF8StringEncoding];
-    NSData *encryptedData = [messageData encryptedDataUsingSecretKey:secretKey nonce:nonce error:outError];
+    NSData *encryptedData = [messageData encryptedDataUsingPrivateKey:secretKey nonce:nonce error:outError];
     
     return encryptedData;
 }

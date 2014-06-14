@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "NACLAsymmetricKeyPair.h"
 #import "NACLNonce.h"
-#import "NACLSymmetricSecretKey.h"
+#import "NACLSymmetricPrivateKey.h"
 #import "NACLSigningKeyPair.h"
 
 /**
@@ -29,8 +29,8 @@
  *  
  *  @return An encrypted data object.
  */
-- (NSData *)encryptedDataUsingPublicKey:(NACLPublicKey *)publicKey 
-                             privateKey:(NACLPrivateKey *)privateKey 
+- (NSData *)encryptedDataUsingPublicKey:(NACLAssymetricPublicKey *)publicKey 
+                             privateKey:(NACLAssymetricPrivateKey *)privateKey 
                                   nonce:(NACLNonce *)nonce;
 
 /**
@@ -45,8 +45,8 @@
  *  
  *  @return An encrypted data object.
  */
-- (NSData *)encryptedDataUsingPublicKey:(NACLPublicKey *)publicKey
-                             privateKey:(NACLPrivateKey *)privateKey 
+- (NSData *)encryptedDataUsingPublicKey:(NACLAssymetricPublicKey *)publicKey
+                             privateKey:(NACLAssymetricPrivateKey *)privateKey 
                                   nonce:(NACLNonce *)nonce 
                                   error:(NSError **)outError;
 
@@ -86,7 +86,7 @@
  *  
  *  @return An encrypted data object.
  */
-- (NSData *)encryptedDataUsingSecretKey:(NACLSymmetricSecretKey *)secretKey
+- (NSData *)encryptedDataUsingSecretKey:(NACLSymmetricPrivateKey *)secretKey
                                   nonce:(NACLNonce *)nonce;
 
 /**
@@ -100,7 +100,7 @@
  *  
  *  @return An encrypted data object.
  */
-- (NSData *)encryptedDataUsingSecretKey:(NACLSymmetricSecretKey *)secretKey 
+- (NSData *)encryptedDataUsingSecretKey:(NACLSymmetricPrivateKey *)secretKey 
                                   nonce:(NACLNonce *)nonce 
                                   error:(NSError **)outError;
 

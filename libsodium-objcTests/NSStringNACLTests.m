@@ -19,7 +19,7 @@
     NACLAsymmetricKeyPair *sendersKeyPair;
     NACLAsymmetricKeyPair *receiversKeyPair;
     NACLSigningKeyPair *signingKeyPair;
-    NACLSymmetricSecretKey *secretKey;
+    NACLSymmetricPrivateKey *secretKey;
     NACLNonce *nonce;
 }
 
@@ -31,7 +31,7 @@
     sendersKeyPair = [NACLAsymmetricKeyPair keyPair];
     receiversKeyPair = [NACLAsymmetricKeyPair keyPair];
     signingKeyPair = [NACLSigningKeyPair keyPair];
-    secretKey = [NACLSymmetricSecretKey key];
+    secretKey = [NACLSymmetricPrivateKey key];
     nonce = [NACLNonce nonce];
 }
 

@@ -1,5 +1,5 @@
 //
-//  NACLSymmetricSecretKey.h
+//  NACLSymmetricPrivateKey.h
 //  libsodium-objc
 //
 //  Created by Damian Carrillo on 6/12/14.
@@ -9,12 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "NACLKey.h"
 
-OBJC_EXPORT const size_t NACLSecretKeyByteCount;
+OBJC_EXPORT const size_t NACLSymmetricPrivateKeyByteCount;
 
 /**
  *  A secret key type that is to be used in secret key operations.
  */
-@interface NACLSymmetricSecretKey : NACLKey
+@interface NACLSymmetricPrivateKey : NACLKey
 
 /**
  *  Initializes the receiver with the supplied key data. The supplied key data

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "NACLAsymmetricKeyPair.h"
 #import "NACLNonce.h"
-#import "NACLSymmetricSecretKey.h"
+#import "NACLSymmetricPrivateKey.h"
 #import "NACLSigningKeyPair.h"
 
 /**
@@ -29,8 +29,8 @@
  *  
  *  @return An encrypted data object.
  */
-- (NSData *)encryptedDataUsingPublicKey:(NACLPublicKey *)publicKey 
-                             privateKey:(NACLPrivateKey *)privateKey 
+- (NSData *)encryptedDataUsingPublicKey:(NACLAssymetricPublicKey *)publicKey 
+                             privateKey:(NACLAssymetricPrivateKey *)privateKey 
                                   nonce:(NACLNonce *)nonce;
 
 /**
@@ -45,8 +45,8 @@
  *  
  *  @return An encrypted data object.
  */
-- (NSData *)encryptedDataUsingPublicKey:(NACLPublicKey *)publicKey 
-                             privateKey:(NACLPrivateKey *)privateKey 
+- (NSData *)encryptedDataUsingPublicKey:(NACLAssymetricPublicKey *)publicKey 
+                             privateKey:(NACLAssymetricPrivateKey *)privateKey 
                                   nonce:(NACLNonce *)nonce
                                   error:(NSError **)outError;
 
@@ -61,8 +61,8 @@
  *  
  *  @return A decrypted data object.
  */
-- (NSData *)decryptedDataUsingPublicKey:(NACLPublicKey *)publicKey 
-                             privateKey:(NACLPrivateKey *)privateKey
+- (NSData *)decryptedDataUsingPublicKey:(NACLAssymetricPublicKey *)publicKey 
+                             privateKey:(NACLAssymetricPrivateKey *)privateKey
                                   nonce:(NACLNonce *)nonce;
 
 /**
@@ -78,8 +78,8 @@
  *  
  *  @return A decrypted data object.
  */
-- (NSData *)decryptedDataUsingPublicKey:(NACLPublicKey *)publicKey
-                             privateKey:(NACLPrivateKey *)privateKey
+- (NSData *)decryptedDataUsingPublicKey:(NACLAssymetricPublicKey *)publicKey
+                             privateKey:(NACLAssymetricPrivateKey *)privateKey
                                   nonce:(NACLNonce *)nonce
                                   error:(NSError **)outError;
 
@@ -94,8 +94,8 @@
  *  
  *  @return A decrypted plain text representation of the data.
  */
-- (NSString *)decryptedTextUsingPublicKey:(NACLPublicKey *)publicKey
-                               privateKey:(NACLPrivateKey *)privateKey
+- (NSString *)decryptedTextUsingPublicKey:(NACLAssymetricPublicKey *)publicKey
+                               privateKey:(NACLAssymetricPrivateKey *)privateKey
                                     nonce:(NACLNonce *)nonce;
 
 /**
@@ -111,8 +111,8 @@
  *  
  *  @return A decrypted data object.
  */
-- (NSString *)decryptedTextUsingPublicKey:(NACLPublicKey *)publicKey
-                               privateKey:(NACLPrivateKey *)privateKey
+- (NSString *)decryptedTextUsingPublicKey:(NACLAssymetricPublicKey *)publicKey
+                               privateKey:(NACLAssymetricPrivateKey *)privateKey
                                     nonce:(NACLNonce *)nonce
                                     error:(NSError **)outError;
 
@@ -202,8 +202,8 @@
  *  
  *  @return An encrypted data object.
  */
-- (NSData *)encryptedDataUsingSecretKey:(NACLSymmetricSecretKey *)secretKey
-                                  nonce:(NACLNonce *)nonce;
+- (NSData *)encryptedDataUsingPrivateKey:(NACLSymmetricPrivateKey *)privateKey
+                                   nonce:(NACLNonce *)nonce;
 
 /**
  *  Encrypts and authenticates the receiver (an `NSData` object) using the 
@@ -216,9 +216,9 @@
  *  
  *  @return An encrypted data object.
  */
-- (NSData *)encryptedDataUsingSecretKey:(NACLSymmetricSecretKey *)secretKey
-                                  nonce:(NACLNonce *)nonce
-                                  error:(NSError **)outError;
+- (NSData *)encryptedDataUsingPrivateKey:(NACLSymmetricPrivateKey *)privateKey
+                                   nonce:(NACLNonce *)nonce
+                                   error:(NSError **)outError;
 
 /**
  *  Verifies and decrypts the reciever (which is assumed to be an encrypted 
@@ -229,8 +229,8 @@
  *  
  *  @return A decrypted data object.
  */
-- (NSData *)decryptedDataUsingSecretKey:(NACLSymmetricSecretKey *)secretKey 
-                                  nonce:(NACLNonce *)nonce;
+- (NSData *)decryptedDataUsingPrivateKey:(NACLSymmetricPrivateKey *)privateKey 
+                                   nonce:(NACLNonce *)nonce;
 
 /**
  *  Verifies and decrypts the reciever (which is assumed to be an encrypted 
@@ -243,9 +243,9 @@
  *  
  *  @return A decrypted data object.
  */
-- (NSData *)decryptedDataUsingSecretKey:(NACLSymmetricSecretKey *)secretKey 
-                                  nonce:(NACLNonce *)nonce
-                                  error:(NSError **)outError;
+- (NSData *)decryptedDataUsingPrivateKey:(NACLSymmetricPrivateKey *)privateKey 
+                                   nonce:(NACLNonce *)nonce
+                                   error:(NSError **)outError;
 
 /**
  *  Verifies and decrypts the reciever (which is assumed to be an encrypted 
@@ -256,8 +256,8 @@
  *  
  *  @return A decrypted data object.
  */
-- (NSString *)decryptedTextUsingSecretKey:(NACLSymmetricSecretKey *)secretKey 
-                                    nonce:(NACLNonce *)nonce;
+- (NSString *)decryptedTextUsingPrivateKey:(NACLSymmetricPrivateKey *)privateKey 
+                                     nonce:(NACLNonce *)nonce;
 
 /**
  *  Verifies and decrypts the reciever (which is assumed to be an encrypted 
@@ -270,8 +270,8 @@
  *  
  *  @return A decrypted data object.
  */
-- (NSString *)decryptedTextUsingSecretKey:(NACLSymmetricSecretKey *)secretKey 
-                                    nonce:(NACLNonce *)nonce
-                                    error:(NSError **)outError;
+- (NSString *)decryptedTextUsingPrivateKey:(NACLSymmetricPrivateKey *)privateKey 
+                                     nonce:(NACLNonce *)nonce
+                                     error:(NSError **)outError;
 
 @end

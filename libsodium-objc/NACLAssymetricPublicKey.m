@@ -1,15 +1,16 @@
 //
-//  NACLPrivateKey.m
+//  NACLAssymetricPublicKey.m
 //  libsodium-objc
 //
 //  Created by Damian Carrillo on 6/13/14.
 //  Copyright (c) 2014 TabbedOut. All rights reserved.
 //
 
-#import "NACLPrivateKey.h"
 #import "NACL.h"
+#import "NACLAssymetricPublicKey.h"
+#import "NACLKeySubclass.h"
 
-@implementation NACLPrivateKey
+@implementation NACLAssymetricPublicKey
 
 + (void)initialize 
 {

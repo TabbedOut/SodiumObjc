@@ -26,6 +26,8 @@
 		970FF063194BFFB000DA441F /* NSString+NACL.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9760104A194A4AEC00363BCC /* NSString+NACL.h */; };
 		970FF065194C002100DA441F /* NACLAsymmetricPrivateKeyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 970FF064194C002100DA441F /* NACLAsymmetricPrivateKeyTests.m */; };
 		970FF067194C046300DA441F /* NACLAsymmetricPublicKeyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 970FF066194C046300DA441F /* NACLAsymmetricPublicKeyTests.m */; };
+		970FF06A194F990300DA441F /* NACLKeyPair.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 970FF068194F990300DA441F /* NACLKeyPair.h */; };
+		970FF06B194F990300DA441F /* NACLKeyPair.m in Sources */ = {isa = PBXBuildFile; fileRef = 970FF069194F990300DA441F /* NACLKeyPair.m */; };
 		9723BD8A194A1D8200CD021F /* NACLSymmetricPrivateKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 9723BD89194A1D8200CD021F /* NACLSymmetricPrivateKey.m */; };
 		9723BD90194A373B00CD021F /* NACLSymmetricPrivateKeyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9723BD8F194A373B00CD021F /* NACLSymmetricPrivateKeyTests.m */; };
 		9743AA911949034900404D80 /* NACLAsymmetricKeyPairTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9743AA901949034900404D80 /* NACLAsymmetricKeyPairTests.m */; };
@@ -72,6 +74,7 @@
 				970FF060194BFFB000DA441F /* NACL.h in CopyFiles */,
 				970FF061194BFFB000DA441F /* NACLNonce.h in CopyFiles */,
 				970FF062194BFFB000DA441F /* NSData+NACL.h in CopyFiles */,
+				970FF06A194F990300DA441F /* NACLKeyPair.h in CopyFiles */,
 				970FF063194BFFB000DA441F /* NSString+NACL.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -92,6 +95,9 @@
 		970FF057194BFD5200DA441F /* libsodium.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsodium.a; path = lib/libsodium/libsodium.a; sourceTree = "<group>"; };
 		970FF064194C002100DA441F /* NACLAsymmetricPrivateKeyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NACLAsymmetricPrivateKeyTests.m; sourceTree = "<group>"; };
 		970FF066194C046300DA441F /* NACLAsymmetricPublicKeyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NACLAsymmetricPublicKeyTests.m; sourceTree = "<group>"; };
+		970FF068194F990300DA441F /* NACLKeyPair.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = NACLKeyPair.h; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; wrapsLines = 1; };
+		970FF069194F990300DA441F /* NACLKeyPair.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = NACLKeyPair.m; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; wrapsLines = 1; };
+		970FF06C194F99DF00DA441F /* NACLKeyPairSubclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NACLKeyPairSubclass.h; sourceTree = "<group>"; };
 		9723BD88194A1D8200CD021F /* NACLSymmetricPrivateKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NACLSymmetricPrivateKey.h; sourceTree = "<group>"; };
 		9723BD89194A1D8200CD021F /* NACLSymmetricPrivateKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NACLSymmetricPrivateKey.m; sourceTree = "<group>"; };
 		9723BD8F194A373B00CD021F /* NACLSymmetricPrivateKeyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NACLSymmetricPrivateKeyTests.m; sourceTree = "<group>"; };
@@ -199,6 +205,9 @@
 			children = (
 				970FF042194B987700DA441F /* NACLKey.h */,
 				970FF043194B987700DA441F /* NACLKey.m */,
+				970FF068194F990300DA441F /* NACLKeyPair.h */,
+				970FF069194F990300DA441F /* NACLKeyPair.m */,
+				970FF06C194F99DF00DA441F /* NACLKeyPairSubclass.h */,
 			);
 			name = private;
 			sourceTree = "<group>";
@@ -338,6 +347,7 @@
 			files = (
 				9743AA941949142700404D80 /* NACLNonce.m in Sources */,
 				9760104C194A4AEC00363BCC /* NSString+NACL.m in Sources */,
+				970FF06B194F990300DA441F /* NACLKeyPair.m in Sources */,
 				970FF051194BB14B00DA441F /* NACLSigningPublicKey.m in Sources */,
 				970FF04B194BA00700DA441F /* NACLAsymmetricPrivateKey.m in Sources */,
 				9759C704194AAD600047F5B0 /* NACLAsymmetricKeyPair.m in Sources */,

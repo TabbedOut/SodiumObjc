@@ -8,18 +8,15 @@
 
 #import "NACLAsymmetricPublicKey.h"
 #import "NACLAsymmetricPrivateKey.h"
+#import "NACLKeyPair.h"
 
 /**
  *  A key pair that is to be used for public key cryptography operations.
  */
-@interface NACLAsymmetricKeyPair : NSObject <NSCopying, NSCoding>
+@interface NACLAsymmetricKeyPair : NACLKeyPair
 @property (strong, nonatomic, readonly) NACLAsymmetricPublicKey *publicKey;
 @property (strong, nonatomic, readonly) NACLAsymmetricPrivateKey *privateKey;
 
-+ (instancetype)keyPair;
-+ (instancetype)keyPairWithSeed:(NSData *)seed;
-+ (NSUInteger)seedLength;
-- (instancetype)initWithSeed:(NSData *)seed;
 - (BOOL)isEqualToKeyPair:(NACLAsymmetricKeyPair *)keyPair;
 
 @end

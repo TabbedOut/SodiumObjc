@@ -8,11 +8,7 @@
 
 #import "NACLAsymmetricKeyPair.h"
 #import "NACL.h"
-
-@interface NACLAsymmetricKeyPair ()
-@property (strong, nonatomic, readwrite) NACLAsymmetricPublicKey *publicKey;
-@property (strong, nonatomic, readwrite) NACLAsymmetricPrivateKey *privateKey;
-@end
+#import "NACLKeyPairSubclass.h"
 
 @implementation NACLAsymmetricKeyPair
 
@@ -20,18 +16,6 @@
 {
 	[NACL initializeNACL];
 	[super initialize];
-}
-
-+ (instancetype)keyPair
-{
-    NACLAsymmetricKeyPair *__autoreleasing keyPair = [[self alloc] init];
-    return keyPair;
-}
-
-+ (instancetype)keyPairWithSeed:(NSData *)seed
-{
-    NACLAsymmetricKeyPair *__autoreleasing keyPair = [[self alloc] initWithSeed:seed];
-    return keyPair;
 }
 
 + (NSUInteger)seedLength
@@ -61,87 +45,21 @@
         
         if (secretKey) {
             NSData *keyData = [NSData dataWithBytes:secretKey length:crypto_box_SECRETKEYBYTES];
-            _privateKey = [[NACLAsymmetricPrivateKey alloc] initWithData:keyData];
+            self.privateKey = [[NACLAsymmetricPrivateKey alloc] initWithData:keyData];
         }
         
         if (publicKey) {
             NSData *keyData = [NSData dataWithBytes:publicKey length:crypto_box_PUBLICKEYBYTES];
-            _publicKey = [[NACLAsymmetricPublicKey alloc] initWithData:keyData];
+            self.publicKey = [[NACLAsymmetricPublicKey alloc] initWithData:keyData];
         }
     }
     
     return self;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)coder
-{
-    self = [super init];
-    
-    if (self) {
-        _privateKey = [[coder decodeObject] copy];
-        _publicKey = [[coder decodeObject] copy];
-    }
-    
-    return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)coder
-{
-    [coder encodeObject:_privateKey];
-    [coder encodeObject:_publicKey];
-}
-
-- (id)copyWithZone:(NSZone *)zone
-{
-    NACLAsymmetricKeyPair *copy = [[self class] alloc];
-    
-    copy.publicKey = [_publicKey copy];
-    copy.privateKey = [_privateKey copy];
-    
-    return copy;
-}
-
-- (BOOL)isEqual:(id)object
-{
-    if (object == nil) {
-        return NO;
-    }
-    
-    if (![object isKindOfClass:[self class]]) {
-        return NO;
-    }
-    
-    return [self isEqualToKeyPair:object];
-}
-
 - (BOOL)isEqualToKeyPair:(NACLAsymmetricKeyPair *)keyPair
 {
-    if (self == keyPair) {
-        return YES;
-    }
-    
-    BOOL equal = YES;
-    
-    equal &= [_publicKey isEqualToKey:keyPair.publicKey];
-    equal &= [_privateKey isEqualToKey:keyPair.privateKey];
-    
-    return equal;
-}
-
-- (NSUInteger)hash
-{
-    NSUInteger hash = 1;
-    
-    hash = 31 * hash + [_publicKey hash];
-    hash = 31 * hash + [_privateKey hash];
-    
-    return hash;
-}
-
-- (NSString *)description
-{
-    return [NSString stringWithFormat:@"%@ {publicKey: %@, privateKey: %@}", 
-            NSStringFromClass([self class]), _publicKey, _privateKey];
+    return [super isEqualToKeyPair:keyPair];
 }
 
 @end

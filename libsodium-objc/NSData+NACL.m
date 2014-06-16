@@ -285,6 +285,8 @@
         encryptedData = [NSData dataWithBytes:encryptedDataBuffer + crypto_secretbox_BOXZEROBYTES
                                     length:paddedMessage.length - crypto_secretbox_BOXZEROBYTES];
 	}
+    
+    free(encryptedDataBuffer);
 
     return encryptedData;
 }

@@ -32,7 +32,7 @@
     unsigned char *keyDataBuffer = calloc(keyLength, sizeof(unsigned char));
     randombytes_buf(keyDataBuffer, keyLength);
     
-    NSData *keyData = [[NSData alloc] initWithBytes:keyDataBuffer length:keyLength];
+    NSData *keyData = [[NSData alloc] initWithBytesNoCopy:keyDataBuffer length:keyLength freeWhenDone:YES];
     
     return keyData;
 }

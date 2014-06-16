@@ -35,6 +35,11 @@
     return keyPair;
 }
 
++ (NSUInteger)keyLength
+{
+    return crypto_sign_SEEDBYTES;
+}
+
 - (instancetype)init
 {
     return [self initWithSeed:nil];
@@ -49,6 +54,7 @@
         unsigned char publicKey[crypto_sign_PUBLICKEYBYTES];
         
         if ([seed length] > 0) {
+            NSParameterAssert(seed.length == crypto_sign_SEEDBYTES);
             crypto_sign_seed_keypair(publicKey, secretKey, seed.bytes);
         } else {
             crypto_sign_keypair(publicKey, secretKey);
@@ -106,10 +112,10 @@
         return NO;
     }
     
-    return [self isEqualToSigningKeyPair:object];
+    return [self isEqualToKeyPair:object];
 }
 
-- (BOOL)isEqualToSigningKeyPair:(NACLSigningKeyPair *)keyPair
+- (BOOL)isEqualToKeyPair:(NACLSigningKeyPair *)keyPair
 {
     if (self == keyPair) {
         return YES;

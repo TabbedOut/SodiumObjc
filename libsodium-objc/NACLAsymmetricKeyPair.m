@@ -34,6 +34,11 @@
     return keyPair;
 }
 
++ (NSUInteger)seedLength
+{
+    return crypto_box_SEEDBYTES;
+}
+
 - (instancetype)init
 {
     return [self initWithSeed:nil];
@@ -48,6 +53,7 @@
         unsigned char publicKey[crypto_box_PUBLICKEYBYTES];
         
         if ([seed length] > 0) {
+            NSParameterAssert(seed.length == crypto_box_SEEDBYTES);
             crypto_box_seed_keypair(publicKey, secretKey, seed.bytes);
         } else {
             crypto_box_keypair(publicKey, secretKey);
@@ -105,10 +111,10 @@
         return NO;
     }
     
-    return [self isEqualToAsymmetricKeyPair:object];
+    return [self isEqualToKeyPair:object];
 }
 
-- (BOOL)isEqualToAsymmetricKeyPair:(NACLAsymmetricKeyPair *)keyPair
+- (BOOL)isEqualToKeyPair:(NACLAsymmetricKeyPair *)keyPair
 {
     if (self == keyPair) {
         return YES;

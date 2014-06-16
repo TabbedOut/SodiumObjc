@@ -18,7 +18,8 @@
 
 + (instancetype)keyPair;
 + (instancetype)keyPairWithSeed:(NSData *)seed;
++ (NSUInteger)seedLength;
 - (instancetype)initWithSeed:(NSData *)seed;
-- (BOOL)isEqualToAsymmetricKeyPair:(NACLAsymmetricKeyPair *)keyPair;
+- (BOOL)isEqualToKeyPair:(NACLAsymmetricKeyPair *)keyPair;
 
 @end

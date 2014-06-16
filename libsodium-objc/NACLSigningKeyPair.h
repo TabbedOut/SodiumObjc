@@ -35,6 +35,14 @@
  */
 + (instancetype)keyPairWithSeed:(NSData *)seed;
 
+/**
+ *  Returns the number of bytes that the seed supplied to `keyPairWithSeed` or
+ *  `initWithSeed` should be.
+ *  
+ *  @return The number of bytes that the seed is.
+ */
++ (NSUInteger)keyLength;
+
 /**s
  *  Initializes this key pair given the given seed.
  *
@@ -53,6 +61,6 @@
  *  @param keyPair The key pair to test for equalitys.
  *  @return Whether or not the receiver is equal to the given key pair.
  */
-- (BOOL)isEqualToSigningKeyPair:(NACLSigningKeyPair *)keyPair;
+- (BOOL)isEqualToKeyPair:(NACLSigningKeyPair *)keyPair;
 
 @end

@@ -18,7 +18,7 @@
 {
     XCTAssertNotNil(privateKey, @"");
     XCTAssertNotNil(privateKey.data, @"");
-    XCTAssertEqual(privateKey.data.length, NACLSymmetricPrivateKeyByteCount, @"");
+    XCTAssertEqual(privateKey.data.length, [NACLSymmetricPrivateKey keyLength], @"");
 }
 
 - (void)testInit
@@ -30,9 +30,9 @@
 
 - (void)testInitWithData_withValidData
 {   
-    NSMutableData *data = [NSMutableData dataWithLength:NACLSymmetricPrivateKeyByteCount];
+    NSMutableData *data = [NSMutableData dataWithLength:[NACLSymmetricPrivateKey keyLength]];
     [[NSInputStream inputStreamWithFileAtPath:@"/dev/urandom"] read:(uint8_t *) [data mutableBytes] 
-                                                          maxLength:NACLSymmetricPrivateKeyByteCount];
+                                                          maxLength:[NACLSymmetricPrivateKey keyLength]];
     
     NACLSymmetricPrivateKey *privateKey = [[NACLSymmetricPrivateKey alloc] initWithData:data];
     
@@ -48,9 +48,9 @@
 
 - (void)testPrivateKeyWithData
 {
-    NSMutableData *data = [NSMutableData dataWithLength:NACLSymmetricPrivateKeyByteCount];
+    NSMutableData *data = [NSMutableData dataWithLength:[NACLSymmetricPrivateKey keyLength]];
     [[NSInputStream inputStreamWithFileAtPath:@"/dev/urandom"] read:(uint8_t *) [data mutableBytes] 
-                                                          maxLength:NACLSymmetricPrivateKeyByteCount];
+                                                          maxLength:[NACLSymmetricPrivateKey keyLength]];
     
     NACLSymmetricPrivateKey *privateKey = [NACLSymmetricPrivateKey keyWithData:data];
     

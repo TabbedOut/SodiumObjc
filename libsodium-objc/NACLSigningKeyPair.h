@@ -41,7 +41,7 @@
  *  
  *  @return The number of bytes that the seed is.
  */
-+ (NSUInteger)keyLength;
++ (NSUInteger)seedLength;
 
 /**s
  *  Initializes this key pair given the given seed.

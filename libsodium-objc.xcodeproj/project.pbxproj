@@ -168,10 +168,10 @@
 			children = (
 				9759C6FD194A726A0047F5B0 /* NACLSigningKeyPair.h */,
 				9759C6FE194A726A0047F5B0 /* NACLSigningKeyPair.m */,
-				970FF04F194BB14B00DA441F /* NACLSigningPublicKey.h */,
-				970FF050194BB14B00DA441F /* NACLSigningPublicKey.m */,
 				970FF052194BB15C00DA441F /* NACLSigningPrivateKey.h */,
 				970FF053194BB15C00DA441F /* NACLSigningPrivateKey.m */,
+				970FF04F194BB14B00DA441F /* NACLSigningPublicKey.h */,
+				970FF050194BB14B00DA441F /* NACLSigningPublicKey.m */,
 			);
 			name = Signatures;
 			sourceTree = "<group>";

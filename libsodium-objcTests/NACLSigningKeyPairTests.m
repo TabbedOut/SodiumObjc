@@ -33,7 +33,10 @@
 
 - (void)testInitWithSeed_expectSuccess
 {
-    NSData *seed = [@"i-am-a-seed" dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *seed = [@"i-am-a-seed. i-am-a-seed. i-am-a-seed." dataUsingEncoding:NSUTF8StringEncoding];
+    NSRange seedRange = {0, [NACLSigningKeyPair seedLength]};
+    seed = [seed subdataWithRange:seedRange];
+    
     NACLSigningKeyPair *keyPair = [[NACLSigningKeyPair alloc] initWithSeed:seed];
     
     [self assertSigningKeyPairIsValid:keyPair];
@@ -58,7 +61,10 @@
 
 - (void)testCreationMethodWithSeed_expectSuccess
 {
-    NSData *seed = [@"i-am-a-seed" dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *seed = [@"i-am-a-seed. i-am-a-seed. i-am-a-seed." dataUsingEncoding:NSUTF8StringEncoding];
+    NSRange seedRange = {0, [NACLSigningKeyPair seedLength]};
+    seed = [seed subdataWithRange:seedRange];
+    
     NACLSigningKeyPair *keyPair = [NACLSigningKeyPair keyPairWithSeed:seed];
     
     [self assertSigningKeyPairIsValid:keyPair];
@@ -105,16 +111,16 @@
     NACLSigningKeyPair *keyPairA = [NACLSigningKeyPair keyPair];
     NACLSigningKeyPair *keyPairB = [keyPairA copy];
     
-    XCTAssertTrue([keyPairA isEqualToSigningKeyPair:keyPairB], @"");
-    XCTAssertTrue([keyPairB isEqualToSigningKeyPair:keyPairA], @"");
+    XCTAssertTrue([keyPairA isEqualToKeyPair:keyPairB], @"");
+    XCTAssertTrue([keyPairB isEqualToKeyPair:keyPairA], @"");
 }
 
 - (void)testIsEqualToKeyPair_withSelf
 {
     NACLSigningKeyPair *keyPairA = [NACLSigningKeyPair keyPair];
     
-    XCTAssertTrue([keyPairA isEqualToSigningKeyPair:keyPairA], @"");
-    XCTAssertTrue([keyPairA isEqualToSigningKeyPair:keyPairA], @"");
+    XCTAssertTrue([keyPairA isEqualToKeyPair:keyPairA], @"");
+    XCTAssertTrue([keyPairA isEqualToKeyPair:keyPairA], @"");
 }
 
 - (void)testIsEqualToKeyPair_whenNotEqual
@@ -122,8 +128,8 @@
     NACLSigningKeyPair *keyPairA = [NACLSigningKeyPair keyPair];
     NACLSigningKeyPair *keyPairB = [NACLSigningKeyPair keyPair];
     
-    XCTAssertFalse([keyPairA isEqualToSigningKeyPair:keyPairB], @"");
-    XCTAssertFalse([keyPairB isEqualToSigningKeyPair:keyPairA], @"");
+    XCTAssertFalse([keyPairA isEqualToKeyPair:keyPairB], @"");
+    XCTAssertFalse([keyPairB isEqualToKeyPair:keyPairA], @"");
 }
 
 - (void)testHash_withEqualKeypairs
@@ -149,7 +155,7 @@
     NSData *encodedKeyPair = [NSKeyedArchiver archivedDataWithRootObject:keyPair];
     NACLSigningKeyPair *decodedKeyPair = [NSKeyedUnarchiver unarchiveObjectWithData:encodedKeyPair];
     
-    XCTAssertTrue([keyPair isEqualToSigningKeyPair:decodedKeyPair], @"");
+    XCTAssertTrue([keyPair isEqualToKeyPair:decodedKeyPair], @"");
 }
 
 

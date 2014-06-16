@@ -35,7 +35,7 @@
     return keyPair;
 }
 
-+ (NSUInteger)keyLength
++ (NSUInteger)seedLength
 {
     return crypto_sign_SEEDBYTES;
 }

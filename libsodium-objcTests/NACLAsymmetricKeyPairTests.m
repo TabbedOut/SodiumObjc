@@ -34,7 +34,10 @@
 
 - (void)testInitWithSeed_expectSuccess
 {
-    NSData *seed = [@"i-am-a-seed" dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *seed = [@"i-am-a-seed. i-am-a-seed. i-am-a-seed." dataUsingEncoding:NSUTF8StringEncoding];
+    NSRange seedRange = {0, [NACLAsymmetricKeyPair seedLength]};
+    seed = [seed subdataWithRange:seedRange];
+    
     NACLAsymmetricKeyPair *keyPair = [[NACLAsymmetricKeyPair alloc] initWithSeed:seed];
 
     [self assertKeyPairIsValid:keyPair];
@@ -59,7 +62,10 @@
 
 - (void)testCreationMethodWithSeed_expectSuccess
 {
-    NSData *seed = [@"i-am-a-seed" dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *seed = [@"i-am-a-seed. i-am-a-seed. i-am-a-seed." dataUsingEncoding:NSUTF8StringEncoding];
+    NSRange seedRange = {0, [NACLAsymmetricKeyPair seedLength]};
+    seed = [seed subdataWithRange:seedRange];
+    
     NACLAsymmetricKeyPair *keyPair = [NACLAsymmetricKeyPair keyPairWithSeed:seed];
 
     [self assertKeyPairIsValid:keyPair];
@@ -106,16 +112,16 @@
     NACLAsymmetricKeyPair *keyPairA = [NACLAsymmetricKeyPair keyPair];
     NACLAsymmetricKeyPair *keyPairB = [keyPairA copy];
     
-    XCTAssertTrue([keyPairA isEqualToAsymmetricKeyPair:keyPairB], @"");
-    XCTAssertTrue([keyPairB isEqualToAsymmetricKeyPair:keyPairA], @"");
+    XCTAssertTrue([keyPairA isEqualToKeyPair:keyPairB], @"");
+    XCTAssertTrue([keyPairB isEqualToKeyPair:keyPairA], @"");
 }
 
 - (void)testIsEqualToKeyPair_withSelf
 {
     NACLAsymmetricKeyPair *keyPairA = [NACLAsymmetricKeyPair keyPair];
     
-    XCTAssertTrue([keyPairA isEqualToAsymmetricKeyPair:keyPairA], @"");
-    XCTAssertTrue([keyPairA isEqualToAsymmetricKeyPair:keyPairA], @"");
+    XCTAssertTrue([keyPairA isEqualToKeyPair:keyPairA], @"");
+    XCTAssertTrue([keyPairA isEqualToKeyPair:keyPairA], @"");
 }
 
 - (void)testIsEqualToKeyPair_whenNotEqual
@@ -123,8 +129,8 @@
     NACLAsymmetricKeyPair *keyPairA = [NACLAsymmetricKeyPair keyPair];
     NACLAsymmetricKeyPair *keyPairB = [NACLAsymmetricKeyPair keyPair];
     
-    XCTAssertFalse([keyPairA isEqualToAsymmetricKeyPair:keyPairB], @"");
-    XCTAssertFalse([keyPairB isEqualToAsymmetricKeyPair:keyPairA], @"");
+    XCTAssertFalse([keyPairA isEqualToKeyPair:keyPairB], @"");
+    XCTAssertFalse([keyPairB isEqualToKeyPair:keyPairA], @"");
 }
 
 - (void)testHash_withEqualKeypairs
@@ -150,7 +156,7 @@
     NSData *encodedKeyPair = [NSKeyedArchiver archivedDataWithRootObject:keyPair];
     NACLAsymmetricKeyPair *decodedKeyPair = [NSKeyedUnarchiver unarchiveObjectWithData:encodedKeyPair];
     
-    XCTAssertTrue([keyPair isEqualToAsymmetricKeyPair:decodedKeyPair], @"");
+    XCTAssertTrue([keyPair isEqualToKeyPair:decodedKeyPair], @"");
 }
 
 @end

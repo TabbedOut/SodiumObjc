@@ -17,9 +17,14 @@
 	[super initialize];
 }
 
++ (NSUInteger)keyLength
+{
+    return crypto_sign_PUBLICKEYBYTES;
+}
+
 - (NSData *)generateDefaultKeyData
 {
-    // Rely on NACLAsymmetricKeyPair to create this with correct data
+    // Rely on NACLSigningKeyPair to create this with correct data
     
     return nil;
 }

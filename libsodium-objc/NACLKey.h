@@ -31,6 +31,13 @@
 + (instancetype)keyWithData:(NSData *)keyData;
 
 /**
+ *  Returns the length of the key.
+ *  
+ *  @return The key length.
+ */
++ (NSUInteger)keyLength;
+
+/**
  *  Initializes the receiver with the supplied key data.
  *  
  *  @param keyData The key data that this secret key should represent.

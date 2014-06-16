@@ -7,7 +7,6 @@
 //
 
 #import "NACL.h"
-#import "NACLKeySubclass.h"
 #import "NACLSigningKeyPair.h"
 
 @interface NACLSigningKeyPair ()

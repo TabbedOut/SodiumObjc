@@ -29,6 +29,11 @@
     return nil;
 }
 
++ (NSUInteger)keyLength
+{
+    return crypto_box_SECRETKEYBYTES;
+}
+
 - (instancetype)init
 {
     NSAssert(NO, @"Rely on NACLAsymmetricKeyPair to create a NACLAsymmetricKey with correct data");

@@ -8,15 +8,17 @@
 
 #import "NACLSymmetricPrivateKey.h"
 #import "NACL.h"
-#import "NACLKeySubclass.h"
-
-const size_t NACLSymmetricPrivateKeyByteCount = crypto_secretbox_KEYBYTES;
 
 @implementation NACLSymmetricPrivateKey
 
++ (NSUInteger)keyLength
+{
+    return crypto_secretbox_KEYBYTES;
+}
+
 - (instancetype)initWithData:(NSData *)keyData
 {
-    NSParameterAssert([keyData length] == NACLSymmetricPrivateKeyByteCount);
+    NSParameterAssert([keyData length] == [[self class] keyLength]);
     
     self = [super initWithData:keyData];
     
@@ -25,10 +27,12 @@ const size_t NACLSymmetricPrivateKeyByteCount = crypto_secretbox_KEYBYTES;
 
 - (NSData *)generateDefaultKeyData
 {
-    unsigned char *keyDataBuffer = calloc(NACLSymmetricPrivateKeyByteCount, sizeof(unsigned char));
-    randombytes_buf(keyDataBuffer, NACLSymmetricPrivateKeyByteCount);
+    NSUInteger keyLength = [[self class] keyLength];
     
-    NSData *keyData = [[NSData alloc] initWithBytes:keyDataBuffer length:NACLSymmetricPrivateKeyByteCount];
+    unsigned char *keyDataBuffer = calloc(keyLength, sizeof(unsigned char));
+    randombytes_buf(keyDataBuffer, keyLength);
+    
+    NSData *keyData = [[NSData alloc] initWithBytes:keyDataBuffer length:keyLength];
     
     return keyData;
 }

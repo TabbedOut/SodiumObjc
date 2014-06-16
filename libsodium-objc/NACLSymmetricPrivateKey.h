@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "NACLKey.h"
 
-OBJC_EXPORT const size_t NACLSymmetricPrivateKeyByteCount;
-
 /**
  *  A secret key type that is to be used in secret key operations.
  */

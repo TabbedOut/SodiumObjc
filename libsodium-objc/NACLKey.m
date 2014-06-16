@@ -26,6 +26,11 @@
     return key;
 }
 
++ (NSUInteger)keyLength
+{
+    return 0;
+}
+
 - (instancetype)init
 {
     return [self initWithData:[self generateDefaultKeyData]];

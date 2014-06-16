@@ -81,7 +81,6 @@
 /* Begin PBXFileReference section */
 		970FF042194B987700DA441F /* NACLKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NACLKey.h; sourceTree = "<group>"; };
 		970FF043194B987700DA441F /* NACLKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NACLKey.m; sourceTree = "<group>"; };
-		970FF045194B994000DA441F /* NACLKeySubclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NACLKeySubclass.h; sourceTree = "<group>"; };
 		970FF046194B9F9C00DA441F /* NACLAsymmetricPublicKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NACLAsymmetricPublicKey.h; sourceTree = "<group>"; };
 		970FF047194B9F9C00DA441F /* NACLAsymmetricPublicKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NACLAsymmetricPublicKey.m; sourceTree = "<group>"; };
 		970FF049194BA00700DA441F /* NACLAsymmetricPrivateKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NACLAsymmetricPrivateKey.h; sourceTree = "<group>"; };
@@ -200,7 +199,6 @@
 			children = (
 				970FF042194B987700DA441F /* NACLKey.h */,
 				970FF043194B987700DA441F /* NACLKey.m */,
-				970FF045194B994000DA441F /* NACLKeySubclass.h */,
 			);
 			name = private;
 			sourceTree = "<group>";

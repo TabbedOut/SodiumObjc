@@ -8,7 +8,6 @@
 
 #import "NACL.h"
 #import "NACLAsymmetricPublicKey.h"
-#import "NACLKeySubclass.h"
 
 @implementation NACLAsymmetricPublicKey
 
@@ -28,6 +27,11 @@
 {
     NSAssert(NO, @"Rely on NACLAsymmetricKeyPair to create a NACLAsymmetricKey with correct data");
     return nil;
+}
+
++ (NSUInteger)keyLength
+{
+    return crypto_box_PUBLICKEYBYTES;
 }
 
 - (instancetype)init

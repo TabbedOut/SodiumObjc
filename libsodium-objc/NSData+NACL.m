@@ -14,16 +14,16 @@
 
 #pragma mark Public-Key Cryptography
 
-- (NSData *)encryptedDataUsingPublicKey:(NACLAsymetricPublicKey *)publicKey 
-                             privateKey:(NACLAsymetricPrivateKey *)privateKey 
+- (NSData *)encryptedDataUsingPublicKey:(NACLAsymmetricPublicKey *)publicKey 
+                             privateKey:(NACLAsymmetricPrivateKey *)privateKey 
                                   nonce:(NACLNonce *)nonce
 {
     return [self encryptedDataUsingPublicKey:publicKey privateKey:privateKey nonce:nonce error:nil];
 }
 
 
-- (NSData *)encryptedDataUsingPublicKey:(NACLAsymetricPublicKey *)publicKey 
-                             privateKey:(NACLAsymetricPrivateKey *)privateKey 
+- (NSData *)encryptedDataUsingPublicKey:(NACLAsymmetricPublicKey *)publicKey 
+                             privateKey:(NACLAsymmetricPrivateKey *)privateKey 
                                   nonce:(NACLNonce *)nonce
                                   error:(NSError *__autoreleasing *)outError
 {
@@ -74,15 +74,15 @@
     return encryptedData;
 }
 
-- (NSData *)decryptedDataUsingPublicKey:(NACLAsymetricPublicKey *)publicKey 
-                             privateKey:(NACLAsymetricPrivateKey *)privateKey 
+- (NSData *)decryptedDataUsingPublicKey:(NACLAsymmetricPublicKey *)publicKey 
+                             privateKey:(NACLAsymmetricPrivateKey *)privateKey 
                                   nonce:(NACLNonce *)nonce 
 {
     return [self decryptedDataUsingPublicKey:publicKey privateKey:privateKey nonce:nonce error:nil];
 }
 
-- (NSData *)decryptedDataUsingPublicKey:(NACLAsymetricPublicKey *)publicKey 
-                             privateKey:(NACLAsymetricPrivateKey *)privateKey 
+- (NSData *)decryptedDataUsingPublicKey:(NACLAsymmetricPublicKey *)publicKey 
+                             privateKey:(NACLAsymmetricPrivateKey *)privateKey 
                                   nonce:(NACLNonce *)nonce
                                   error:(NSError *__autoreleasing *)outError
 {
@@ -123,8 +123,8 @@
 	return decryptedData;
 }
 
-- (NSString *)decryptedTextUsingPublicKey:(NACLAsymetricPublicKey *)publicKey 
-                               privateKey:(NACLAsymetricPrivateKey *)privateKey 
+- (NSString *)decryptedTextUsingPublicKey:(NACLAsymmetricPublicKey *)publicKey 
+                               privateKey:(NACLAsymmetricPrivateKey *)privateKey 
                                     nonce:(NACLNonce *)nonce
 {
     NSString *decryptedText = nil;
@@ -137,8 +137,8 @@
     return decryptedText;
 }
 
-- (NSString *)decryptedTextUsingPublicKey:(NACLAsymetricPublicKey *)publicKey 
-                               privateKey:(NACLAsymetricPrivateKey *)privateKey 
+- (NSString *)decryptedTextUsingPublicKey:(NACLAsymmetricPublicKey *)publicKey 
+                               privateKey:(NACLAsymmetricPrivateKey *)privateKey 
                                     nonce:(NACLNonce *)nonce 
                                     error:(NSError *__autoreleasing *)outError
 {

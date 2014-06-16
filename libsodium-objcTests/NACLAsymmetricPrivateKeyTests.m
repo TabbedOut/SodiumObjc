@@ -29,7 +29,7 @@
     [super tearDown];
 }
 
-- (void)assertKeyIsValid:(NACLAsymetricPrivateKey *)privateKey
+- (void)assertKeyIsValid:(NACLAsymmetricPrivateKey *)privateKey
 {
     XCTAssertNotNil(privateKey, @"");
     XCTAssertNotNil(privateKey.data, @"");
@@ -38,7 +38,7 @@
 
 - (void)testCopy
 {
-    NACLAsymetricPrivateKey *copy = [keyPair.privateKey copy];
+    NACLAsymmetricPrivateKey *copy = [keyPair.privateKey copy];
     
     XCTAssertNotNil(copy, @"");
     XCTAssertNotEqual(keyPair.privateKey, copy, @"");
@@ -47,8 +47,8 @@
 
 - (void)testIsEqual_whenSame
 {
-    NACLAsymetricPrivateKey *privateKey = keyPair.privateKey;
-    NACLAsymetricPrivateKey *same = privateKey;
+    NACLAsymmetricPrivateKey *privateKey = keyPair.privateKey;
+    NACLAsymmetricPrivateKey *same = privateKey;
     
     XCTAssertTrue([privateKey isEqual:same], @"");
     XCTAssertTrue([same isEqual:privateKey], @"");
@@ -56,7 +56,7 @@
 
 - (void)testIsEqual_whenEqual
 {
-    NACLAsymetricPrivateKey *copy = [keyPair.privateKey copy];
+    NACLAsymmetricPrivateKey *copy = [keyPair.privateKey copy];
     
     XCTAssertTrue([keyPair.privateKey isEqual:copy], @"");
     XCTAssertTrue([copy isEqual:keyPair.privateKey], @"");
@@ -78,7 +78,7 @@
 
 - (void)testIsEqualToPrivateKey_whenSame
 {
-    NACLAsymetricPrivateKey *same = keyPair.privateKey;
+    NACLAsymmetricPrivateKey *same = keyPair.privateKey;
     
     XCTAssertTrue([keyPair.privateKey isEqualToKey:same], @"");
     XCTAssertTrue([same isEqualToKey:keyPair.privateKey], @"");
@@ -86,7 +86,7 @@
 
 - (void)testIsEqualToPrivateKey_whenEqual
 {
-    NACLAsymetricPrivateKey *copy = [keyPair.privateKey copy];
+    NACLAsymmetricPrivateKey *copy = [keyPair.privateKey copy];
     
     XCTAssertTrue([keyPair.privateKey isEqualToKey:copy], @"");
     XCTAssertTrue([copy isEqualToKey:keyPair.privateKey], @"");
@@ -108,7 +108,7 @@
 
 - (void)testHash
 {
-    NACLAsymetricPrivateKey *copy = [keyPair.privateKey copy];
+    NACLAsymmetricPrivateKey *copy = [keyPair.privateKey copy];
     
     XCTAssertEqual(keyPair.privateKey.hash, copy.hash, @"");
 }
@@ -123,7 +123,7 @@
 - (void)testUnarchival
 {
     NSData *encodedprivateKey = [NSKeyedArchiver archivedDataWithRootObject:keyPair.privateKey];
-    NACLAsymetricPrivateKey *decodedprivateKey = [NSKeyedUnarchiver unarchiveObjectWithData:encodedprivateKey];
+    NACLAsymmetricPrivateKey *decodedprivateKey = [NSKeyedUnarchiver unarchiveObjectWithData:encodedprivateKey];
     
     XCTAssertTrue([keyPair.privateKey isEqualToKey:decodedprivateKey], @"");
 }

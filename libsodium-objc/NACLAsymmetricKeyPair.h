@@ -6,19 +6,19 @@
 //  Copyright (c) 2014 TabbedOut. All rights reserved.
 //
 
-#import "NACLAsymetricPublicKey.h"
-#import "NACLAsymetricPrivateKey.h"
+#import "NACLAsymmetricPublicKey.h"
+#import "NACLAsymmetricPrivateKey.h"
 
 /**
  *  A key pair that is to be used for public key cryptography operations.
  */
 @interface NACLAsymmetricKeyPair : NSObject <NSCopying, NSCoding>
-@property (strong, nonatomic, readonly) NACLAsymetricPublicKey *publicKey;
-@property (strong, nonatomic, readonly) NACLAsymetricPrivateKey *privateKey;
+@property (strong, nonatomic, readonly) NACLAsymmetricPublicKey *publicKey;
+@property (strong, nonatomic, readonly) NACLAsymmetricPrivateKey *privateKey;
 
 + (instancetype)keyPair;
 + (instancetype)keyPairWithSeed:(NSData *)seed;
 - (instancetype)initWithSeed:(NSData *)seed;
-- (BOOL)isEqualToAssymetricKeyPair:(NACLAsymmetricKeyPair *)keyPair;
+- (BOOL)isEqualToAsymmetricKeyPair:(NACLAsymmetricKeyPair *)keyPair;
 
 @end

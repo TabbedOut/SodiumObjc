@@ -8,6 +8,8 @@
 
 #import "NACLSigningPrivateKey.h"
 #import "NACL.h"
+#import "NSData+NACL.h"
+#import "NSString+NACL.h"
 
 @implementation NACLSigningPrivateKey
 
@@ -27,6 +29,26 @@
     // Rely on NACLSigningKeyPair to create this with correct data
     
     return nil;
+}
+
+- (NSData *)signedDataFromText:(NSString *)text
+{
+    return [text signedDataUsingPrivateKey:self];
+}
+
+- (NSData *)signedDataFromText:(NSString *)text error:(NSError *__autoreleasing *)outError
+{
+    return [text signedDataUsingPrivateKey:self error:outError];
+}
+
+- (NSData *)signedDataFromData:(NSData *)data
+{
+    return [data signedDataUsingPrivateKey:self];
+}
+
+- (NSData *)signedDataFromData:(NSData *)data error:(NSError *__autoreleasing *)outError
+{
+    return [data signedDataUsingPrivateKey:self error:outError];
 }
 
 @end

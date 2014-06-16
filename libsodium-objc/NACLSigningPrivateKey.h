@@ -10,4 +10,10 @@
 
 @interface NACLSigningPrivateKey : NACLKey
 
+- (NSData *)signedDataFromText:(NSString *)text;
+- (NSData *)signedDataFromText:(NSString *)text error:(NSError **)outError;
+
+- (NSData *)signedDataFromData:(NSData *)data;
+- (NSData *)signedDataFromData:(NSData *)data error:(NSError **)outError;
+
 @end

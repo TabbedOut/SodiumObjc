@@ -284,7 +284,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A7BF29ED1947630800BB35C5 /* Build configuration list for PBXNativeTarget "libsodium-objc" */;
 			buildPhases = (
-				97C5C0CE1950D675006C1511 /* Build libsodium */,
 				A7BF29C61947630800BB35C5 /* Sources */,
 				A7BF29C71947630800BB35C5 /* Frameworks */,
 				A7BF29C81947630800BB35C5 /* CopyFiles */,
@@ -352,23 +351,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		97C5C0CE1950D675006C1511 /* Build libsodium */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Build libsodium";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "git submodule update --init --recursive || exit 1\ncd libsodium-darwin-build || exit 1\nmake || exit 1";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A7BF29C61947630800BB35C5 /* Sources */ = {

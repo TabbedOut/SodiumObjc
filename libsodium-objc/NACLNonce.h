@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-OBJC_EXPORT const size_t NACLNonceByteCount;
-
 /**
  *  A nonce type.
  */
@@ -34,7 +32,7 @@ OBJC_EXPORT const size_t NACLNonceByteCount;
 
 /**
  *  Creates a nonce with the nonce data. The nonce data must be
- *  exactly `NACLNonceByteCount` bytes.
+ *  exactly `[NACLNonce nonceLength]` bytes.
  *  
  *  @param nonceData The data to use in the nonce. This must be contain EXACTLY
  *                   `NACLNonceByteCount` bytes.
@@ -42,6 +40,8 @@ OBJC_EXPORT const size_t NACLNonceByteCount;
  *          the correct byte count, or nil if it is not.
  */
 + (instancetype)nonceWithData:(NSData *)nonceData;
+
++ (NSUInteger)nonceLength;
 
 /**
  *  Initializes this nonce with random bytes. This is the default behavior.
@@ -60,7 +60,7 @@ OBJC_EXPORT const size_t NACLNonceByteCount;
 
 /**
  *  Initializes this nonce with the given nonce data. The nonce data must be
- *  exactly `NACLNonceByteCount` bytes.
+ *  exactly `[NACLNonce nonceLength]` bytes.
  *  
  *  @param nonceData The data to use in the nonce. This must be contain EXACTLY
  *                   `NACLNonceByteCount` bytes.

@@ -10,8 +10,6 @@
 #import "NACL.h"
 #import "sodium.h"
 
-const size_t NACLNonceByteCount = crypto_box_NONCEBYTES;
-
 @interface NACLNonce ()
 @property (strong, nonatomic, readwrite) NSData *data;
 @end
@@ -47,6 +45,11 @@ const size_t NACLNonceByteCount = crypto_box_NONCEBYTES;
     return nonce;
 }
 
++ (NSUInteger)nonceLength
+{
+    return crypto_box_NONCEBYTES;
+}
+
 - (instancetype)init
 {
     return [self initWithRandomBytes];
@@ -54,30 +57,32 @@ const size_t NACLNonceByteCount = crypto_box_NONCEBYTES;
 
 - (instancetype)initWithRandomBytes
 {
-	unsigned char noncebuf[NACLNonceByteCount];
-	randombytes_buf(noncebuf, NACLNonceByteCount);
+    NSUInteger nonceLength = [[self class] nonceLength];
+	unsigned char noncebuf[nonceLength];
+	randombytes_buf(noncebuf, nonceLength);
     
-    NSData *nonceData = [NSData dataWithBytes:noncebuf length:NACLNonceByteCount];
+    NSData *nonceData = [NSData dataWithBytes:noncebuf length:nonceLength];
 	
     return [self initWithData:nonceData];
 }
 
 - (instancetype)initWithTimestamp 
 {
-	unsigned char noncebuf[NACLNonceByteCount];
-	randombytes_buf(noncebuf, NACLNonceByteCount);
+    NSUInteger nonceLength = [NACLNonce nonceLength];
+	unsigned char noncebuf[nonceLength];
+	randombytes_buf(noncebuf, nonceLength);
     
 	time_t currTime = time(NULL);
-	memcpy(noncebuf, &currTime, MIN(sizeof(time_t), NACLNonceByteCount / 2));
+	memcpy(noncebuf, &currTime, MIN(sizeof(time_t), nonceLength / 2));
     
-    NSData *nonceData = [NSData dataWithBytes:noncebuf length:NACLNonceByteCount];
+    NSData *nonceData = [NSData dataWithBytes:noncebuf length:nonceLength];
     
     return [self initWithData:nonceData];
 }
 
 - (instancetype)initWithData:(NSData *)nonceData
 {
-    NSParameterAssert(nonceData.length == NACLNonceByteCount);
+    NSParameterAssert(nonceData.length == [[self class] nonceLength]);
     
     self = [super init];
     

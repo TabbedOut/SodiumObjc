@@ -17,7 +17,7 @@
 - (void)assertNonceIsValid:(NACLNonce *)nonce
 {
     XCTAssertNotNil(nonce, @"");
-    XCTAssertTrue([nonce.data length] == NACLNonceByteCount, @"");    
+    XCTAssertTrue([nonce.data length] == [NACLNonce nonceLength], @"");    
 }
 
 - (void)testInit
@@ -45,7 +45,7 @@
 {
     NSData *data = [@"i-am-a-nonce-i-am-a-nonce-i-am-a-nonce" dataUsingEncoding:NSUTF8StringEncoding];
     
-    NSRange range = {0, NACLNonceByteCount};
+    NSRange range = {0, [NACLNonce nonceLength]};
     data = [data subdataWithRange:range];
     
     NACLNonce *nonce = [[NACLNonce alloc] initWithData:data];
@@ -78,7 +78,7 @@
 {
     NSData *data = [@"i-am-a-nonce-i-am-a-nonce-i-am-a-nonce" dataUsingEncoding:NSUTF8StringEncoding];
     
-    NSRange range = {0, NACLNonceByteCount};
+    NSRange range = {0, [NACLNonce nonceLength]};
     data = [data subdataWithRange:range];
     
     NACLNonce *nonce = [NACLNonce nonceWithData:data];

@@ -20,7 +20,7 @@
 
 + (NSUInteger)seedLength
 {
-    return crypto_box_SEEDBYTES;
+    return 0;
 }
 
 - (instancetype)init
@@ -36,12 +36,7 @@
         unsigned char secretKey[crypto_box_SECRETKEYBYTES];
         unsigned char publicKey[crypto_box_PUBLICKEYBYTES];
         
-        if ([seed length] > 0) {
-            NSParameterAssert(seed.length == crypto_box_SEEDBYTES);
-            crypto_box_seed_keypair(publicKey, secretKey, seed.bytes);
-        } else {
-            crypto_box_keypair(publicKey, secretKey);
-        }
+        crypto_box_keypair(publicKey, secretKey);
         
         if (secretKey) {
             NSData *keyData = [NSData dataWithBytes:secretKey length:crypto_box_SECRETKEYBYTES];

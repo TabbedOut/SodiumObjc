@@ -30,8 +30,8 @@
 		970FF06E194FA03600DA441F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970FF06D194FA03600DA441F /* Security.framework */; };
 		9723BD8A194A1D8200CD021F /* NACLSymmetricPrivateKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 9723BD89194A1D8200CD021F /* NACLSymmetricPrivateKey.m */; };
 		9723BD90194A373B00CD021F /* NACLSymmetricPrivateKeyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9723BD8F194A373B00CD021F /* NACLSymmetricPrivateKeyTests.m */; };
-		97256A451950E90A00CA3F2A /* libsodium-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97256A441950E90A00CA3F2A /* libsodium-ios.a */; };
 		97256A491950E9F900CA3F2A /* libsodium-objc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BF29CA1947630800BB35C5 /* libsodium-objc.a */; };
+		97256A4D1950FA1300CA3F2A /* libsodium-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97256A4C1950FA1300CA3F2A /* libsodium-ios.a */; };
 		9743AA911949034900404D80 /* NACLAsymmetricKeyPairTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9743AA901949034900404D80 /* NACLAsymmetricKeyPairTests.m */; };
 		9743AA941949142700404D80 /* NACLNonce.m in Sources */ = {isa = PBXBuildFile; fileRef = 9743AA931949142700404D80 /* NACLNonce.m */; };
 		9743AA9819491CD800404D80 /* NACLNonceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9743AA9719491CD800404D80 /* NACLNonceTests.m */; };
@@ -105,6 +105,7 @@
 		9723BD8F194A373B00CD021F /* NACLSymmetricPrivateKeyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NACLSymmetricPrivateKeyTests.m; sourceTree = "<group>"; };
 		97256A3D1950E0C700CA3F2A /* libsodium-ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libsodium-ios.a"; path = "lib/libsodium/libsodium-ios.a"; sourceTree = "<group>"; };
 		97256A441950E90A00CA3F2A /* libsodium-ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libsodium-ios.a"; path = "libsodium-darwin-build/libsodium-ios.a"; sourceTree = "<group>"; };
+		97256A4C1950FA1300CA3F2A /* libsodium-ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libsodium-ios.a"; path = "lib/ios/libsodium-ios.a"; sourceTree = "<group>"; };
 		9743AA901949034900404D80 /* NACLAsymmetricKeyPairTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NACLAsymmetricKeyPairTests.m; sourceTree = "<group>"; };
 		9743AA921949142700404D80 /* NACLNonce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NACLNonce.h; sourceTree = "<group>"; };
 		9743AA931949142700404D80 /* NACLNonce.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NACLNonce.m; sourceTree = "<group>"; };
@@ -134,7 +135,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				97256A451950E90A00CA3F2A /* libsodium-ios.a in Frameworks */,
+				97256A4D1950FA1300CA3F2A /* libsodium-ios.a in Frameworks */,
 				A7BF29CE1947630800BB35C5 /* Foundation.framework in Frameworks */,
 				970FF06E194FA03600DA441F /* Security.framework in Frameworks */,
 			);
@@ -241,6 +242,7 @@
 		A7BF29CC1947630800BB35C5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				97256A4C1950FA1300CA3F2A /* libsodium-ios.a */,
 				97256A441950E90A00CA3F2A /* libsodium-ios.a */,
 				97256A3D1950E0C700CA3F2A /* libsodium-ios.a */,
 				97C5C0D21950DCCE006C1511 /* libsodium-ios.a */,
@@ -498,12 +500,12 @@
 				GCC_PREFIX_HEADER = "";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/libsodium-darwin-build",
+					"$(PROJECT_DIR)/lib/ios",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "sodium-objc";
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/libsodium-darwin-build/build/iPhoneOS-arm64/include";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/lib/ios/include";
 			};
 			name = Debug;
 		};
@@ -518,12 +520,12 @@
 				GCC_PREFIX_HEADER = "";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/libsodium-darwin-build",
+					"$(PROJECT_DIR)/lib/ios",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "sodium-objc";
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/libsodium-darwin-build/build/iPhoneOS-arm64/include";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/lib/ios/include";
 			};
 			name = Release;
 		};

@@ -107,4 +107,56 @@
     return nil;
 }
 
+/*
+ Returns a useful error for the given error code if it actually represents an
+ error. If not, this simply returns nil.
+ */
+- (NSError *)errorForKeychainErrorCode:(OSStatus)errorCode
+{
+    if (errorCode == noErr) {
+        return nil;
+    }
+    
+    NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
+    NSString *localizedDescription;
+    
+    switch (errorCode) {
+        case errSecAllocate:
+            localizedDescription = @"Failed to allocate memory.";
+            break;
+            
+        case errSecAuthFailed:
+            localizedDescription = @"The user name or passphrase you entered is not correct.";
+            break;
+            
+        case errSecDecode:
+            localizedDescription = @"Unable to decode the provided data.";
+            break;
+            
+        case errSecDuplicateItem:
+            localizedDescription = @"The specified item already exists in the keychain.";
+            break;
+            
+        case errSecInteractionNotAllowed:
+            localizedDescription = @"User interaction is not allowed.";
+            break;
+            
+        case errSecItemNotFound:
+            localizedDescription = @"The specified item could not be found in the keychain.";
+            break;
+            
+        default:
+            localizedDescription = @"An unexpected security error occurred";
+            break;
+    }
+    
+    userInfo[NSLocalizedDescriptionKey] = localizedDescription;
+    
+    NSError *error = [NSError errorWithDomain:NSOSStatusErrorDomain
+                                         code:errorCode
+                                     userInfo:userInfo];
+    
+    return error;
+}
+
 @end

@@ -11,4 +11,7 @@
 @interface NACLKeyPair (Subclass)
 @property (strong, nonatomic, readwrite) NACLKey *publicKey;
 @property (strong, nonatomic, readwrite) NACLKey *privateKey;
+
+- (NSError *)errorForKeychainErrorCode:(OSStatus)errorCode;
+
 @end

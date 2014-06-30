@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 TabbedOut. All rights reserved.
 //
 
+#import <sodium.h>
 #import <Security/Security.h>
 #import "NACLAsymmetricPrivateKey.h"
 #import "NACL.h"

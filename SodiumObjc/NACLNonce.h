@@ -35,12 +35,17 @@
  *  exactly `[NACLNonce nonceLength]` bytes.
  *  
  *  @param nonceData The data to use in the nonce. This must be contain EXACTLY
- *                   `NACLNonceByteCount` bytes.
+ *                   `[NACLNonce nonceLength]` bytes.
  *  @return An nonce that has been initialized with the given data if it is of
  *          the correct byte count, or nil if it is not.
  */
 + (instancetype)nonceWithData:(NSData *)nonceData;
 
+/**
+ *  The length of a nonce. All nonces are the same length.
+ *
+ *  @return The length of the nonce.
+ */
 + (NSUInteger)nonceLength;
 
 /**
@@ -63,7 +68,7 @@
  *  exactly `[NACLNonce nonceLength]` bytes.
  *  
  *  @param nonceData The data to use in the nonce. This must be contain EXACTLY
- *                   `NACLNonceByteCount` bytes.
+ *                   `[NACLNonce nonceLength]` bytes.
  *  @return An nonce that has been initialized with the given data if it is of
  *          the correct byte count, or nil if it is not.
  */

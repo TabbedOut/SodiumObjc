@@ -16,7 +16,7 @@
 
 /**
  *  Initializes the receiver with the supplied key data. The supplied key data
- *  must be exactly `NACLSecretKeyByteCount` bytes in length.
+ *  must be exactly `[NACLSymmetricPrivateKey keyLength]` bytes in length.
  *
  *  This is the designated initializer.
  *  

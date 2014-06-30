@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:libsodium-objc.xcodeproj">
+      location = "self:SodiumObjc.xcodeproj">
    </FileRef>
 </Workspace>

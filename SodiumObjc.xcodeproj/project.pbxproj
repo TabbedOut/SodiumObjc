@@ -1,0 +1,571 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		970FF06E194FA03600DA441F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 970FF06D194FA03600DA441F /* Security.framework */; };
+		97256A491950E9F900CA3F2A /* libSodiumObjc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BF29CA1947630800BB35C5 /* libSodiumObjc.a */; };
+		97256A4D1950FA1300CA3F2A /* libsodium-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97256A4C1950FA1300CA3F2A /* libsodium-ios.a */; };
+		972AC6531961EED1003C8B33 /* NACLKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 972AC64E1961EED1003C8B33 /* NACLKey.m */; };
+		972AC6541961EED1003C8B33 /* NACLKeyPair.m in Sources */ = {isa = PBXBuildFile; fileRef = 972AC6501961EED1003C8B33 /* NACLKeyPair.m */; };
+		972AC65B1961EFFD003C8B33 /* NACLAsymmetricKeyPair.m in Sources */ = {isa = PBXBuildFile; fileRef = 972AC6561961EFFD003C8B33 /* NACLAsymmetricKeyPair.m */; };
+		972AC65C1961EFFD003C8B33 /* NACLAsymmetricPrivateKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 972AC6581961EFFD003C8B33 /* NACLAsymmetricPrivateKey.m */; };
+		972AC65D1961EFFD003C8B33 /* NACLAsymmetricPublicKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 972AC65A1961EFFD003C8B33 /* NACLAsymmetricPublicKey.m */; };
+		972AC6601961F00A003C8B33 /* NACLSymmetricPrivateKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 972AC65F1961F00A003C8B33 /* NACLSymmetricPrivateKey.m */; };
+		972AC6671961F018003C8B33 /* NACLSigningKeyPair.m in Sources */ = {isa = PBXBuildFile; fileRef = 972AC6621961F018003C8B33 /* NACLSigningKeyPair.m */; };
+		972AC6681961F018003C8B33 /* NACLSigningPrivateKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 972AC6641961F018003C8B33 /* NACLSigningPrivateKey.m */; };
+		972AC6691961F018003C8B33 /* NACLSigningPublicKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 972AC6661961F018003C8B33 /* NACLSigningPublicKey.m */; };
+		972AC6721961F02F003C8B33 /* NACL.m in Sources */ = {isa = PBXBuildFile; fileRef = 972AC66B1961F02F003C8B33 /* NACL.m */; };
+		972AC6731961F02F003C8B33 /* NACLNonce.m in Sources */ = {isa = PBXBuildFile; fileRef = 972AC66D1961F02F003C8B33 /* NACLNonce.m */; };
+		972AC6741961F02F003C8B33 /* NSData+NACL.m in Sources */ = {isa = PBXBuildFile; fileRef = 972AC66F1961F02F003C8B33 /* NSData+NACL.m */; };
+		972AC6751961F02F003C8B33 /* NSString+NACL.m in Sources */ = {isa = PBXBuildFile; fileRef = 972AC6711961F02F003C8B33 /* NSString+NACL.m */; };
+		972AC67E1961F069003C8B33 /* NACLAsymmetricKeyPairTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 972AC6761961F069003C8B33 /* NACLAsymmetricKeyPairTests.m */; };
+		972AC67F1961F069003C8B33 /* NACLAsymmetricPrivateKeyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 972AC6771961F069003C8B33 /* NACLAsymmetricPrivateKeyTests.m */; };
+		972AC6801961F069003C8B33 /* NACLAsymmetricPublicKeyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 972AC6781961F069003C8B33 /* NACLAsymmetricPublicKeyTests.m */; };
+		972AC6811961F069003C8B33 /* NACLNonceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 972AC6791961F069003C8B33 /* NACLNonceTests.m */; };
+		972AC6821961F069003C8B33 /* NACLSigningKeyPairTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 972AC67A1961F069003C8B33 /* NACLSigningKeyPairTests.m */; };
+		972AC6831961F069003C8B33 /* NACLSymmetricPrivateKeyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 972AC67B1961F069003C8B33 /* NACLSymmetricPrivateKeyTests.m */; };
+		972AC6841961F069003C8B33 /* NSDataNACLTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 972AC67C1961F069003C8B33 /* NSDataNACLTests.m */; };
+		972AC6851961F069003C8B33 /* NSStringNACLTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 972AC67D1961F069003C8B33 /* NSStringNACLTests.m */; };
+		A7BF29CE1947630800BB35C5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BF29CD1947630800BB35C5 /* Foundation.framework */; };
+		A7BF29DC1947630800BB35C5 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BF29DB1947630800BB35C5 /* XCTest.framework */; };
+		A7BF29DD1947630800BB35C5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BF29CD1947630800BB35C5 /* Foundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A7BF29E01947630800BB35C5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7BF29C21947630800BB35C5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A7BF29C91947630800BB35C5;
+			remoteInfo = "libsodium-objc";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A7BF29C81947630800BB35C5 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		970FF06D194FA03600DA441F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		97256A4C1950FA1300CA3F2A /* libsodium-ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libsodium-ios.a"; path = "lib/ios/libsodium-ios.a"; sourceTree = "<group>"; };
+		972AC64D1961EED1003C8B33 /* NACLKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NACLKey.h; path = SodiumObjc/NACLKey.h; sourceTree = SOURCE_ROOT; };
+		972AC64E1961EED1003C8B33 /* NACLKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NACLKey.m; path = SodiumObjc/NACLKey.m; sourceTree = SOURCE_ROOT; };
+		972AC64F1961EED1003C8B33 /* NACLKeyPair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NACLKeyPair.h; path = SodiumObjc/NACLKeyPair.h; sourceTree = SOURCE_ROOT; };
+		972AC6501961EED1003C8B33 /* NACLKeyPair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NACLKeyPair.m; path = SodiumObjc/NACLKeyPair.m; sourceTree = SOURCE_ROOT; };
+		972AC6511961EED1003C8B33 /* NACLKeyPairSubclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NACLKeyPairSubclass.h; path = SodiumObjc/NACLKeyPairSubclass.h; sourceTree = SOURCE_ROOT; };
+		972AC6521961EED1003C8B33 /* NACLKeySubclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NACLKeySubclass.h; path = SodiumObjc/NACLKeySubclass.h; sourceTree = SOURCE_ROOT; };
+		972AC6551961EFFD003C8B33 /* NACLAsymmetricKeyPair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NACLAsymmetricKeyPair.h; path = SodiumObjc/NACLAsymmetricKeyPair.h; sourceTree = SOURCE_ROOT; };
+		972AC6561961EFFD003C8B33 /* NACLAsymmetricKeyPair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NACLAsymmetricKeyPair.m; path = SodiumObjc/NACLAsymmetricKeyPair.m; sourceTree = SOURCE_ROOT; };
+		972AC6571961EFFD003C8B33 /* NACLAsymmetricPrivateKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NACLAsymmetricPrivateKey.h; path = SodiumObjc/NACLAsymmetricPrivateKey.h; sourceTree = SOURCE_ROOT; };
+		972AC6581961EFFD003C8B33 /* NACLAsymmetricPrivateKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NACLAsymmetricPrivateKey.m; path = SodiumObjc/NACLAsymmetricPrivateKey.m; sourceTree = SOURCE_ROOT; };
+		972AC6591961EFFD003C8B33 /* NACLAsymmetricPublicKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NACLAsymmetricPublicKey.h; path = SodiumObjc/NACLAsymmetricPublicKey.h; sourceTree = SOURCE_ROOT; };
+		972AC65A1961EFFD003C8B33 /* NACLAsymmetricPublicKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NACLAsymmetricPublicKey.m; path = SodiumObjc/NACLAsymmetricPublicKey.m; sourceTree = SOURCE_ROOT; };
+		972AC65E1961F00A003C8B33 /* NACLSymmetricPrivateKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NACLSymmetricPrivateKey.h; path = SodiumObjc/NACLSymmetricPrivateKey.h; sourceTree = SOURCE_ROOT; };
+		972AC65F1961F00A003C8B33 /* NACLSymmetricPrivateKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NACLSymmetricPrivateKey.m; path = SodiumObjc/NACLSymmetricPrivateKey.m; sourceTree = SOURCE_ROOT; };
+		972AC6611961F018003C8B33 /* NACLSigningKeyPair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NACLSigningKeyPair.h; path = SodiumObjc/NACLSigningKeyPair.h; sourceTree = SOURCE_ROOT; };
+		972AC6621961F018003C8B33 /* NACLSigningKeyPair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NACLSigningKeyPair.m; path = SodiumObjc/NACLSigningKeyPair.m; sourceTree = SOURCE_ROOT; };
+		972AC6631961F018003C8B33 /* NACLSigningPrivateKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NACLSigningPrivateKey.h; path = SodiumObjc/NACLSigningPrivateKey.h; sourceTree = SOURCE_ROOT; };
+		972AC6641961F018003C8B33 /* NACLSigningPrivateKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NACLSigningPrivateKey.m; path = SodiumObjc/NACLSigningPrivateKey.m; sourceTree = SOURCE_ROOT; };
+		972AC6651961F018003C8B33 /* NACLSigningPublicKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NACLSigningPublicKey.h; path = SodiumObjc/NACLSigningPublicKey.h; sourceTree = SOURCE_ROOT; };
+		972AC6661961F018003C8B33 /* NACLSigningPublicKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NACLSigningPublicKey.m; path = SodiumObjc/NACLSigningPublicKey.m; sourceTree = SOURCE_ROOT; };
+		972AC66A1961F02F003C8B33 /* NACL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NACL.h; path = SodiumObjc/NACL.h; sourceTree = SOURCE_ROOT; };
+		972AC66B1961F02F003C8B33 /* NACL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NACL.m; path = SodiumObjc/NACL.m; sourceTree = SOURCE_ROOT; };
+		972AC66C1961F02F003C8B33 /* NACLNonce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NACLNonce.h; path = SodiumObjc/NACLNonce.h; sourceTree = SOURCE_ROOT; };
+		972AC66D1961F02F003C8B33 /* NACLNonce.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NACLNonce.m; path = SodiumObjc/NACLNonce.m; sourceTree = SOURCE_ROOT; };
+		972AC66E1961F02F003C8B33 /* NSData+NACL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+NACL.h"; path = "SodiumObjc/NSData+NACL.h"; sourceTree = SOURCE_ROOT; };
+		972AC66F1961F02F003C8B33 /* NSData+NACL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+NACL.m"; path = "SodiumObjc/NSData+NACL.m"; sourceTree = SOURCE_ROOT; };
+		972AC6701961F02F003C8B33 /* NSString+NACL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+NACL.h"; path = "SodiumObjc/NSString+NACL.h"; sourceTree = SOURCE_ROOT; };
+		972AC6711961F02F003C8B33 /* NSString+NACL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+NACL.m"; path = "SodiumObjc/NSString+NACL.m"; sourceTree = SOURCE_ROOT; };
+		972AC6761961F069003C8B33 /* NACLAsymmetricKeyPairTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NACLAsymmetricKeyPairTests.m; path = SodiumObjcTests/NACLAsymmetricKeyPairTests.m; sourceTree = SOURCE_ROOT; };
+		972AC6771961F069003C8B33 /* NACLAsymmetricPrivateKeyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NACLAsymmetricPrivateKeyTests.m; path = SodiumObjcTests/NACLAsymmetricPrivateKeyTests.m; sourceTree = SOURCE_ROOT; };
+		972AC6781961F069003C8B33 /* NACLAsymmetricPublicKeyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NACLAsymmetricPublicKeyTests.m; path = SodiumObjcTests/NACLAsymmetricPublicKeyTests.m; sourceTree = SOURCE_ROOT; };
+		972AC6791961F069003C8B33 /* NACLNonceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NACLNonceTests.m; path = SodiumObjcTests/NACLNonceTests.m; sourceTree = SOURCE_ROOT; };
+		972AC67A1961F069003C8B33 /* NACLSigningKeyPairTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NACLSigningKeyPairTests.m; path = SodiumObjcTests/NACLSigningKeyPairTests.m; sourceTree = SOURCE_ROOT; };
+		972AC67B1961F069003C8B33 /* NACLSymmetricPrivateKeyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NACLSymmetricPrivateKeyTests.m; path = SodiumObjcTests/NACLSymmetricPrivateKeyTests.m; sourceTree = SOURCE_ROOT; };
+		972AC67C1961F069003C8B33 /* NSDataNACLTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSDataNACLTests.m; path = SodiumObjcTests/NSDataNACLTests.m; sourceTree = SOURCE_ROOT; };
+		972AC67D1961F069003C8B33 /* NSStringNACLTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSStringNACLTests.m; path = SodiumObjcTests/NSStringNACLTests.m; sourceTree = SOURCE_ROOT; };
+		A7BF29CA1947630800BB35C5 /* libSodiumObjc.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSodiumObjc.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A7BF29CD1947630800BB35C5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A7BF29DA1947630800BB35C5 /* SodiumObjcTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SodiumObjcTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A7BF29DB1947630800BB35C5 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A7BF29C71947630800BB35C5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				97256A4D1950FA1300CA3F2A /* libsodium-ios.a in Frameworks */,
+				A7BF29CE1947630800BB35C5 /* Foundation.framework in Frameworks */,
+				970FF06E194FA03600DA441F /* Security.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A7BF29D71947630800BB35C5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				97256A491950E9F900CA3F2A /* libSodiumObjc.a in Frameworks */,
+				A7BF29DC1947630800BB35C5 /* XCTest.framework in Frameworks */,
+				A7BF29DD1947630800BB35C5 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		970FF04C194BB0BB00DA441F /* Public-Key Cryptography */ = {
+			isa = PBXGroup;
+			children = (
+				972AC6551961EFFD003C8B33 /* NACLAsymmetricKeyPair.h */,
+				972AC6561961EFFD003C8B33 /* NACLAsymmetricKeyPair.m */,
+				972AC6571961EFFD003C8B33 /* NACLAsymmetricPrivateKey.h */,
+				972AC6581961EFFD003C8B33 /* NACLAsymmetricPrivateKey.m */,
+				972AC6591961EFFD003C8B33 /* NACLAsymmetricPublicKey.h */,
+				972AC65A1961EFFD003C8B33 /* NACLAsymmetricPublicKey.m */,
+			);
+			name = "Public-Key Cryptography";
+			sourceTree = "<group>";
+		};
+		970FF04D194BB0CB00DA441F /* Private-Key Cryptography */ = {
+			isa = PBXGroup;
+			children = (
+				972AC65E1961F00A003C8B33 /* NACLSymmetricPrivateKey.h */,
+				972AC65F1961F00A003C8B33 /* NACLSymmetricPrivateKey.m */,
+			);
+			name = "Private-Key Cryptography";
+			sourceTree = "<group>";
+		};
+		970FF04E194BB0E300DA441F /* Signatures */ = {
+			isa = PBXGroup;
+			children = (
+				972AC6611961F018003C8B33 /* NACLSigningKeyPair.h */,
+				972AC6621961F018003C8B33 /* NACLSigningKeyPair.m */,
+				972AC6631961F018003C8B33 /* NACLSigningPrivateKey.h */,
+				972AC6641961F018003C8B33 /* NACLSigningPrivateKey.m */,
+				972AC6651961F018003C8B33 /* NACLSigningPublicKey.h */,
+				972AC6661961F018003C8B33 /* NACLSigningPublicKey.m */,
+			);
+			name = Signatures;
+			sourceTree = "<group>";
+		};
+		9759C705194AB0F00047F5B0 /* public */ = {
+			isa = PBXGroup;
+			children = (
+				970FF04C194BB0BB00DA441F /* Public-Key Cryptography */,
+				970FF04D194BB0CB00DA441F /* Private-Key Cryptography */,
+				970FF04E194BB0E300DA441F /* Signatures */,
+				972AC66A1961F02F003C8B33 /* NACL.h */,
+				972AC66B1961F02F003C8B33 /* NACL.m */,
+				972AC66C1961F02F003C8B33 /* NACLNonce.h */,
+				972AC66D1961F02F003C8B33 /* NACLNonce.m */,
+				972AC66E1961F02F003C8B33 /* NSData+NACL.h */,
+				972AC66F1961F02F003C8B33 /* NSData+NACL.m */,
+				972AC6701961F02F003C8B33 /* NSString+NACL.h */,
+				972AC6711961F02F003C8B33 /* NSString+NACL.m */,
+			);
+			name = public;
+			sourceTree = "<group>";
+		};
+		9759C706194AB0FB0047F5B0 /* private */ = {
+			isa = PBXGroup;
+			children = (
+				972AC64D1961EED1003C8B33 /* NACLKey.h */,
+				972AC64E1961EED1003C8B33 /* NACLKey.m */,
+				972AC6521961EED1003C8B33 /* NACLKeySubclass.h */,
+				972AC64F1961EED1003C8B33 /* NACLKeyPair.h */,
+				972AC6501961EED1003C8B33 /* NACLKeyPair.m */,
+				972AC6511961EED1003C8B33 /* NACLKeyPairSubclass.h */,
+			);
+			name = private;
+			sourceTree = "<group>";
+		};
+		A7BF29C11947630800BB35C5 = {
+			isa = PBXGroup;
+			children = (
+				A7BF29CF1947630800BB35C5 /* SodiumObjc */,
+				A7BF29E31947630800BB35C5 /* SodiumObjcTests */,
+				A7BF29CC1947630800BB35C5 /* Frameworks */,
+				A7BF29CB1947630800BB35C5 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A7BF29CB1947630800BB35C5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A7BF29CA1947630800BB35C5 /* libSodiumObjc.a */,
+				A7BF29DA1947630800BB35C5 /* SodiumObjcTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A7BF29CC1947630800BB35C5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				97256A4C1950FA1300CA3F2A /* libsodium-ios.a */,
+				970FF06D194FA03600DA441F /* Security.framework */,
+				A7BF29CD1947630800BB35C5 /* Foundation.framework */,
+				A7BF29DB1947630800BB35C5 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A7BF29CF1947630800BB35C5 /* SodiumObjc */ = {
+			isa = PBXGroup;
+			children = (
+				9759C706194AB0FB0047F5B0 /* private */,
+				9759C705194AB0F00047F5B0 /* public */,
+			);
+			name = SodiumObjc;
+			path = "libsodium-objc";
+			sourceTree = "<group>";
+		};
+		A7BF29E31947630800BB35C5 /* SodiumObjcTests */ = {
+			isa = PBXGroup;
+			children = (
+				972AC6761961F069003C8B33 /* NACLAsymmetricKeyPairTests.m */,
+				972AC6771961F069003C8B33 /* NACLAsymmetricPrivateKeyTests.m */,
+				972AC6781961F069003C8B33 /* NACLAsymmetricPublicKeyTests.m */,
+				972AC6791961F069003C8B33 /* NACLNonceTests.m */,
+				972AC67A1961F069003C8B33 /* NACLSigningKeyPairTests.m */,
+				972AC67B1961F069003C8B33 /* NACLSymmetricPrivateKeyTests.m */,
+				972AC67C1961F069003C8B33 /* NSDataNACLTests.m */,
+				972AC67D1961F069003C8B33 /* NSStringNACLTests.m */,
+			);
+			name = SodiumObjcTests;
+			path = "libsodium-objcTests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A7BF29C91947630800BB35C5 /* SodiumObjc */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A7BF29ED1947630800BB35C5 /* Build configuration list for PBXNativeTarget "SodiumObjc" */;
+			buildPhases = (
+				A7BF29C61947630800BB35C5 /* Sources */,
+				A7BF29C71947630800BB35C5 /* Frameworks */,
+				A7BF29C81947630800BB35C5 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SodiumObjc;
+			productName = "libsodium-objc";
+			productReference = A7BF29CA1947630800BB35C5 /* libSodiumObjc.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		A7BF29D91947630800BB35C5 /* SodiumObjcTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A7BF29F01947630800BB35C5 /* Build configuration list for PBXNativeTarget "SodiumObjcTests" */;
+			buildPhases = (
+				A7BF29D61947630800BB35C5 /* Sources */,
+				A7BF29D71947630800BB35C5 /* Frameworks */,
+				A7BF29D81947630800BB35C5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A7BF29E11947630800BB35C5 /* PBXTargetDependency */,
+			);
+			name = SodiumObjcTests;
+			productName = "libsodium-objcTests";
+			productReference = A7BF29DA1947630800BB35C5 /* SodiumObjcTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A7BF29C21947630800BB35C5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = TabbedOut;
+			};
+			buildConfigurationList = A7BF29C51947630800BB35C5 /* Build configuration list for PBXProject "SodiumObjc" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A7BF29C11947630800BB35C5;
+			productRefGroup = A7BF29CB1947630800BB35C5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A7BF29C91947630800BB35C5 /* SodiumObjc */,
+				A7BF29D91947630800BB35C5 /* SodiumObjcTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A7BF29D81947630800BB35C5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A7BF29C61947630800BB35C5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				972AC65B1961EFFD003C8B33 /* NACLAsymmetricKeyPair.m in Sources */,
+				972AC6681961F018003C8B33 /* NACLSigningPrivateKey.m in Sources */,
+				972AC6531961EED1003C8B33 /* NACLKey.m in Sources */,
+				972AC6691961F018003C8B33 /* NACLSigningPublicKey.m in Sources */,
+				972AC6751961F02F003C8B33 /* NSString+NACL.m in Sources */,
+				972AC65C1961EFFD003C8B33 /* NACLAsymmetricPrivateKey.m in Sources */,
+				972AC65D1961EFFD003C8B33 /* NACLAsymmetricPublicKey.m in Sources */,
+				972AC6601961F00A003C8B33 /* NACLSymmetricPrivateKey.m in Sources */,
+				972AC6671961F018003C8B33 /* NACLSigningKeyPair.m in Sources */,
+				972AC6741961F02F003C8B33 /* NSData+NACL.m in Sources */,
+				972AC6731961F02F003C8B33 /* NACLNonce.m in Sources */,
+				972AC6541961EED1003C8B33 /* NACLKeyPair.m in Sources */,
+				972AC6721961F02F003C8B33 /* NACL.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A7BF29D61947630800BB35C5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				972AC6801961F069003C8B33 /* NACLAsymmetricPublicKeyTests.m in Sources */,
+				972AC6811961F069003C8B33 /* NACLNonceTests.m in Sources */,
+				972AC6841961F069003C8B33 /* NSDataNACLTests.m in Sources */,
+				972AC6851961F069003C8B33 /* NSStringNACLTests.m in Sources */,
+				972AC6821961F069003C8B33 /* NACLSigningKeyPairTests.m in Sources */,
+				972AC6831961F069003C8B33 /* NACLSymmetricPrivateKeyTests.m in Sources */,
+				972AC67E1961F069003C8B33 /* NACLAsymmetricKeyPairTests.m in Sources */,
+				972AC67F1961F069003C8B33 /* NACLAsymmetricPrivateKeyTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A7BF29E11947630800BB35C5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A7BF29C91947630800BB35C5 /* SodiumObjc */;
+			targetProxy = A7BF29E01947630800BB35C5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		A7BF29EB1947630800BB35C5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LIBRARY_SEARCH_PATHS = "";
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "";
+			};
+			name = Debug;
+		};
+		A7BF29EC1947630800BB35C5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LIBRARY_SEARCH_PATHS = "";
+				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A7BF29EE1947630800BB35C5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				DSTROOT = /tmp/SodiumObjc.dst;
+				GCC_GENERATE_TEST_COVERAGE_FILES = NO;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib/ios",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/lib/ios/include";
+			};
+			name = Debug;
+		};
+		A7BF29EF1947630800BB35C5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				DSTROOT = /tmp/SodiumObjc.dst;
+				GCC_GENERATE_TEST_COVERAGE_FILES = NO;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib/ios",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/lib/ios/include";
+			};
+			name = Release;
+		};
+		A7BF29F11947630800BB35C5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					XCTest,
+					"-all_load",
+					"-ObjC",
+				);
+				PRODUCT_NAME = SodiumObjcTests;
+				USER_HEADER_SEARCH_PATHS = "$(inherited)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		A7BF29F21947630800BB35C5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				INFOPLIST_FILE = "";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					XCTest,
+					"-all_load",
+					"-ObjC",
+				);
+				PRODUCT_NAME = SodiumObjcTests;
+				USER_HEADER_SEARCH_PATHS = "$(inherited)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A7BF29C51947630800BB35C5 /* Build configuration list for PBXProject "SodiumObjc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A7BF29EB1947630800BB35C5 /* Debug */,
+				A7BF29EC1947630800BB35C5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A7BF29ED1947630800BB35C5 /* Build configuration list for PBXNativeTarget "SodiumObjc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A7BF29EE1947630800BB35C5 /* Debug */,
+				A7BF29EF1947630800BB35C5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A7BF29F01947630800BB35C5 /* Build configuration list for PBXNativeTarget "SodiumObjcTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A7BF29F11947630800BB35C5 /* Debug */,
+				A7BF29F21947630800BB35C5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A7BF29C21947630800BB35C5 /* Project object */;
+}

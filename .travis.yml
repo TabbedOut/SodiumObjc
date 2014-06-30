@@ -1,3 +1,4 @@
 language: objective-c
 xcode_project: SodiumObjc.xcodeproj
 xcode_scheme: SodiumObjc
+xcode_sdk: iphonesimulator

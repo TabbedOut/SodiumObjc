@@ -80,7 +80,7 @@ The steps that I use to do this are:
 
     git submodule update --init --recursive
     cd libsodium-darwin-build
-    make
+    make clean all
     cp libsodium-ios.a ../lib/ios/
     cp libsodium-osx.a ../lib/osx/
     cp -R build/iPhoneOS-arm64/include ../lib/ios/

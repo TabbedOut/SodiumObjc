@@ -1,3 +1,2 @@
 language: objective-c
-script:
-    - xctool -project SodiumObjc.xcodeproj -scheme SodiumObjc -sdk iphonesimulator test
+script: xcodebuild -project SodiumObjc.xcodeproj -scheme SodiumObjc -sdk iphonesimulator test

@@ -70,8 +70,18 @@ Both `NSString` and `NSData` have been augmented with signing methods via the
 
 ## Building
 
-- Download the latest [tarball release of NaCL](https://download.libsodium.org/libsodium/releases/LATEST.tar.gz)
-- Deflate to `$(SRCROOT)/lib/libsodium`
-- Run `./build_libsodium.sh path/to/deflated/nacl`
-- Copy headers from `path/to/deflated/src/include` to `$(SRCROOT)/lib/libsodium/includ`
+Building libsodium consists of the following steps:
 
+* Fetch the contents of the libsodium submodule
+* Building libsodium for all involved architectures
+* Copying the built archives and headers to the correct location
+
+The steps that I use to do this are:
+
+    git submodule update --init --recursive
+    cd libsodium-darwin-build
+    make
+    cp libsodium-ios.a ../lib/ios/
+    cp libsodium-osx.a ../lib/osx/
+    cp -R build/iPhoneOS-arm64/include ../lib/ios/
+    cp -R build/MacOSX-x86_64/include ../lib/osx/

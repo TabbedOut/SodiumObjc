@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 TabbedOut. All rights reserved.
 //
 
+#import <sodium.h>
 #import "NACLSigningPrivateKey.h"
 #import "NACL.h"
 #import "NSData+NACL.h"

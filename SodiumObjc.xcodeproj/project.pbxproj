@@ -97,6 +97,7 @@
 		972AC67B1961F069003C8B33 /* NACLSymmetricPrivateKeyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NACLSymmetricPrivateKeyTests.m; path = SodiumObjcTests/NACLSymmetricPrivateKeyTests.m; sourceTree = SOURCE_ROOT; };
 		972AC67C1961F069003C8B33 /* NSDataNACLTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSDataNACLTests.m; path = SodiumObjcTests/NSDataNACLTests.m; sourceTree = SOURCE_ROOT; };
 		972AC67D1961F069003C8B33 /* NSStringNACLTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSStringNACLTests.m; path = SodiumObjcTests/NSStringNACLTests.m; sourceTree = SOURCE_ROOT; };
+		972AC6C4196209AB003C8B33 /* SodiumObjc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SodiumObjc.h; path = SodiumObjc/SodiumObjc.h; sourceTree = SOURCE_ROOT; };
 		A7BF29CA1947630800BB35C5 /* libSodiumObjc.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSodiumObjc.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7BF29CD1947630800BB35C5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A7BF29DA1947630800BB35C5 /* SodiumObjcTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SodiumObjcTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -165,9 +166,6 @@
 		9759C705194AB0F00047F5B0 /* public */ = {
 			isa = PBXGroup;
 			children = (
-				970FF04C194BB0BB00DA441F /* Public-Key Cryptography */,
-				970FF04D194BB0CB00DA441F /* Private-Key Cryptography */,
-				970FF04E194BB0E300DA441F /* Signatures */,
 				972AC66A1961F02F003C8B33 /* NACL.h */,
 				972AC66B1961F02F003C8B33 /* NACL.m */,
 				972AC66C1961F02F003C8B33 /* NACLNonce.h */,
@@ -176,6 +174,9 @@
 				972AC66F1961F02F003C8B33 /* NSData+NACL.m */,
 				972AC6701961F02F003C8B33 /* NSString+NACL.h */,
 				972AC6711961F02F003C8B33 /* NSString+NACL.m */,
+				970FF04C194BB0BB00DA441F /* Public-Key Cryptography */,
+				970FF04D194BB0CB00DA441F /* Private-Key Cryptography */,
+				970FF04E194BB0E300DA441F /* Signatures */,
 			);
 			name = public;
 			sourceTree = "<group>";
@@ -226,6 +227,7 @@
 		A7BF29CF1947630800BB35C5 /* SodiumObjc */ = {
 			isa = PBXGroup;
 			children = (
+				972AC6C4196209AB003C8B33 /* SodiumObjc.h */,
 				9759C706194AB0FB0047F5B0 /* private */,
 				9759C705194AB0F00047F5B0 /* public */,
 			);

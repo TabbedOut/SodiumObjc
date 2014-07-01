@@ -2,6 +2,8 @@
 
 Objective-C bindings for [NaCL](http://nacl.cr.yp.to).
 
+[![Build Status](https://travis-ci.org/Tabbedout/SodiumObjc.svg)](https://travis-ci.org/Tabbedout/SodiumObjc)
+
 ## License
 
 [MIT License](https://tldrlegal.com/license/mit-license). See LICENSE for more information.

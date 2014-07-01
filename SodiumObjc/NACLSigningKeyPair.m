@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 TabbedOut. All rights reserved.
 //
 
+#import <sodium.h>
 #import "NACL.h"
 #import "NACLKeyPairSubclass.h"
 #import "NACLSigningKeyPair.h"

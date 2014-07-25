@@ -20,13 +20,14 @@
 
 + (instancetype)key
 {
-    NSAssert(NO, @"Rely on NACLAsymmetricKeyPair to create a NACLAsymmetricKey with correct data");
+    // Rely on NACLAsymmetricKeyPair to create a NACLAsymmetricKey with correct data
+    
     return nil;
 }
 
 + (instancetype)keyWithData:(NSData *)keyData
 {
-    NSAssert(NO, @"Rely on NACLAsymmetricKeyPair to create a NACLAsymmetricKey with correct data");
+    // Rely on NACLAsymmetricKeyPair to create a NACLAsymmetricKey with correct data
     return nil;
 }
 
@@ -37,7 +38,7 @@
 
 - (instancetype)init
 {
-    NSAssert(NO, @"Rely on NACLAsymmetricKeyPair to create a NACLAsymmetricKey with correct data");
+    // Rely on NACLAsymmetricKeyPair to create a NACLAsymmetricKey with correct data
     return nil;
 }
 

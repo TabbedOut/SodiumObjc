@@ -163,6 +163,21 @@
 			name = Signatures;
 			sourceTree = "<group>";
 		};
+		9727ED1F198300EA00177927 /* public */ = {
+			isa = PBXGroup;
+			children = (
+				972AC6761961F069003C8B33 /* NACLAsymmetricKeyPairTests.m */,
+				972AC6771961F069003C8B33 /* NACLAsymmetricPrivateKeyTests.m */,
+				972AC6781961F069003C8B33 /* NACLAsymmetricPublicKeyTests.m */,
+				972AC6791961F069003C8B33 /* NACLNonceTests.m */,
+				972AC67A1961F069003C8B33 /* NACLSigningKeyPairTests.m */,
+				972AC67B1961F069003C8B33 /* NACLSymmetricPrivateKeyTests.m */,
+				972AC67C1961F069003C8B33 /* NSDataNACLTests.m */,
+				972AC67D1961F069003C8B33 /* NSStringNACLTests.m */,
+			);
+			name = public;
+			sourceTree = "<group>";
+		};
 		9759C705194AB0F00047F5B0 /* public */ = {
 			isa = PBXGroup;
 			children = (
@@ -238,14 +253,7 @@
 		A7BF29E31947630800BB35C5 /* SodiumObjcTests */ = {
 			isa = PBXGroup;
 			children = (
-				972AC6761961F069003C8B33 /* NACLAsymmetricKeyPairTests.m */,
-				972AC6771961F069003C8B33 /* NACLAsymmetricPrivateKeyTests.m */,
-				972AC6781961F069003C8B33 /* NACLAsymmetricPublicKeyTests.m */,
-				972AC6791961F069003C8B33 /* NACLNonceTests.m */,
-				972AC67A1961F069003C8B33 /* NACLSigningKeyPairTests.m */,
-				972AC67B1961F069003C8B33 /* NACLSymmetricPrivateKeyTests.m */,
-				972AC67C1961F069003C8B33 /* NSDataNACLTests.m */,
-				972AC67D1961F069003C8B33 /* NSStringNACLTests.m */,
+				9727ED1F198300EA00177927 /* public */,
 			);
 			name = SodiumObjcTests;
 			path = "libsodium-objcTests";
@@ -426,7 +434,7 @@
 				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
-				USER_HEADER_SEARCH_PATHS = "";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/lib/ios/include";
 			};
 			name = Debug;
 		};
@@ -458,7 +466,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LIBRARY_SEARCH_PATHS = "";
 				SDKROOT = iphoneos;
-				USER_HEADER_SEARCH_PATHS = "";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/lib/ios/include";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -479,7 +487,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/lib/ios/include";
+				USER_HEADER_SEARCH_PATHS = "$(inherited)";
 			};
 			name = Debug;
 		};
@@ -499,7 +507,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/lib/ios/include";
+				USER_HEADER_SEARCH_PATHS = "$(inherited)";
 			};
 			name = Release;
 		};

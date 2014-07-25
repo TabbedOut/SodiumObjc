@@ -1,3 +1,6 @@
 [submodule "libsodium-darwin-build"]
 	path = libsodium-darwin-build
 	url = https://github.com/damiancarrillo/libsodium-darwin-build.git
+[submodule "XcodeCoverage"]
+	path = XcodeCoverage
+	url = https://github.com/damiancarrillo/XcodeCoverage

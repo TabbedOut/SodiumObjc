@@ -14,6 +14,8 @@
  *  A key pair that is to be used for public key cryptography operations.
  */
 @interface NACLAsymmetricKeyPair : NACLKeyPair
+@property (strong, nonatomic, readonly) NACLAsymmetricPublicKey *publicKey;
+@property (strong, nonatomic, readonly) NACLAsymmetricPrivateKey *privateKey;
 
 - (BOOL)isEqualToKeyPair:(NACLAsymmetricKeyPair *)keyPair;
 

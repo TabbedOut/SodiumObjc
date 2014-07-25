@@ -8,6 +8,9 @@
 
 #import "NACLKeyPair.h"
 
+static NSString *const NACLPrivateKeyCodingKey = @"NACLPrivateKeyCodingKey";
+static NSString *const NACLPublicKeyCodingKey = @"NACLPublicKeyCodingKey";
+
 @interface NACLKeyPair ()
 @property (strong, nonatomic, readwrite) NACLKey *publicKey;
 @property (strong, nonatomic, readwrite) NACLKey *privateKey;
@@ -34,6 +37,11 @@
     return 0;
 }
 
++ (BOOL)supportsSecureCoding
+{
+    return YES;
+}
+
 - (instancetype)initWithSeed:(NSData *)seed
 {
     NSAssert(NO, @"Implement -initWithSeed in %@", NSStringFromClass([self class]));
@@ -41,22 +49,22 @@
     return nil;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)coder
+- (instancetype)initWithCoder:(NSCoder *)decoder
 {
     self = [super init];
     
     if (self) {
-        self.privateKey = [[coder decodeObject] copy];
-        self.publicKey = [[coder decodeObject] copy];
+        _privateKey = [decoder decodeObjectOfClass:[NACLKey class] forKey:NACLPrivateKeyCodingKey];
+        _publicKey = [decoder decodeObjectOfClass:[NACLKey class] forKey:NACLPublicKeyCodingKey];
     }
     
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)coder
+- (void)encodeWithCoder:(NSCoder *)encoder
 {
-    [coder encodeObject:self.privateKey];
-    [coder encodeObject:self.publicKey];
+    [encoder encodeObject:self.privateKey forKey:NACLPrivateKeyCodingKey];
+    [encoder encodeObject:self.publicKey forKey:NACLPublicKeyCodingKey];
 }
 
 - (id)copyWithZone:(NSZone *)zone

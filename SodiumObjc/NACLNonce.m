@@ -10,6 +10,8 @@
 #import "NACL.h"
 #import "sodium.h"
 
+static NSString *const NACLDataCodingKey = @"NACLDataCodingKey";
+
 @interface NACLNonce ()
 @property (strong, nonatomic, readwrite) NSData *data;
 @end
@@ -48,6 +50,11 @@
 + (NSUInteger)nonceLength
 {
     return crypto_box_NONCEBYTES;
+}
+
++ (BOOL)supportsSecureCoding
+{
+    return YES;
 }
 
 - (instancetype)init
@@ -93,20 +100,20 @@
     return self;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)coder
+- (instancetype)initWithCoder:(NSCoder *)decoder
 {
     self = [super init];
     
     if (self) {
-        _data = [[coder decodeObject] copy];
+        _data = [decoder decodeObjectOfClass:[NSData data] forKey:NACLDataCodingKey];
     }
     
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)coder
+- (void)encodeWithCoder:(NSCoder *)encoder
 {
-    [coder encodeObject:_data];
+    [encoder encodeObject:_data forKey:NACLDataCodingKey];
 }
 
 - (id)copyWithZone:(NSZone *)zone

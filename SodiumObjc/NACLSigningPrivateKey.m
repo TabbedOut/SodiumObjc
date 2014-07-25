@@ -7,8 +7,8 @@
 //
 
 #import <sodium.h>
-#import "NACLSigningPrivateKey.h"
 #import "NACL.h"
+#import "NACLSigningPrivateKey.h"
 #import "NSData+NACL.h"
 #import "NSString+NACL.h"
 

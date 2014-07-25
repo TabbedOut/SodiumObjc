@@ -6,17 +6,14 @@
 //  Copyright (c) 2014 TabbedOut. All rights reserved.
 //
 
+#import "NACLKeyPair.h"
 #import "NACLSigningPublicKey.h"
 #import "NACLSigningPrivateKey.h"
-
-#import "NACLKeyPair.h"
 
 /**
  *  A key pair that is to be used in signing operations.
  */
 @interface NACLSigningKeyPair : NACLKeyPair
-@property (strong, nonatomic, readonly) NACLSigningPublicKey *publicKey;
-@property (strong, nonatomic, readonly) NACLSigningPrivateKey *privateKey;
 
 /**
  *  Indicates whether or not the receiver is equal to the given key pair. 

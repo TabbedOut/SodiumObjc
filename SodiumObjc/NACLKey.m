@@ -8,6 +8,8 @@
 
 #import "NACLKey.h"
 
+static NSString *const NACLDataCodingKey = @"NACLDataCodingKey";
+
 @interface NACLKey ()
 @property (copy, nonatomic, readwrite) NSData *data;
 @end
@@ -31,6 +33,11 @@
     return 0;
 }
 
++ (BOOL)supportsSecureCoding
+{
+    return YES;
+}
+
 - (instancetype)init
 {
     return [self initWithData:[self generateDefaultKeyData]];
@@ -47,12 +54,12 @@
     return self;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)coder
+- (instancetype)initWithCoder:(NSCoder *)decoder
 {
     self = [super init];
     
     if (self) {
-        _data = [[coder decodeObject] copy];
+        _data = [decoder decodeObjectOfClass:[NSData class] forKey:NACLDataCodingKey];
     }
     
     return self;
@@ -63,9 +70,9 @@
     return [[[self class] alloc] initWithData:_data];
 }
 
-- (void)encodeWithCoder:(NSCoder *)coder
+- (void)encodeWithCoder:(NSCoder *)encoder
 {
-    [coder encodeObject:_data];
+    [encoder encodeObject:_data forKey:NACLDataCodingKey];
 }
 
 - (BOOL)isEqual:(id)object

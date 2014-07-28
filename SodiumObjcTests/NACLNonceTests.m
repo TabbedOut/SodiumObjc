@@ -17,7 +17,7 @@
 - (void)assertNonceIsValid:(NACLNonce *)nonce
 {
     XCTAssertNotNil(nonce, @"");
-    XCTAssertTrue([nonce.data length] == [NACLNonce nonceLength], @"");    
+    XCTAssertTrue([nonce.data length] == [NACLNonce nonceLength], @"");
 }
 
 - (void)testInit
@@ -130,7 +130,7 @@
     XCTAssertFalse([nonceA isEqual:nil], @"");    
 }
 
-- (void)testisEqualToNonce_whenSame
+- (void)testIsEqualToNonce_whenSame
 {
     NACLNonce *nonce = [NACLNonce nonce];
     NACLNonce *same = nonce;
@@ -139,7 +139,7 @@
     XCTAssertTrue([same isEqualToNonce:nonce], @"");
 }
 
-- (void)testisEqualToNonce_whenEqual
+- (void)testIsEqualToNonce_whenEqual
 {
     NACLNonce *nonce = [NACLNonce nonce];
     NACLNonce *copy = [nonce copy];
@@ -148,13 +148,20 @@
     XCTAssertTrue([copy isEqualToNonce:nonce], @"");
 }
 
-- (void)testisEqualToNonce_whenNotEqual
+- (void)testIsEqualToNonce_whenNotEqual
 {
     NACLNonce *nonceA = [NACLNonce nonce];
     NACLNonce *nonceB = [NACLNonce nonce];
     
     XCTAssertFalse([nonceA isEqualToNonce:nonceB], @"");
     XCTAssertFalse([nonceB isEqualToNonce:nonceA], @"");
+}
+
+- (void)testIsEqual_withDifferentClass
+{
+    NACLNonce *nonce = [NACLNonce nonce];
+    
+    XCTAssertFalse([nonce isEqual:@"something"], @"");
 }
 
 - (void)testisEqualToNonce_withNil
@@ -187,6 +194,18 @@
     NACLNonce *decodednonce = [NSKeyedUnarchiver unarchiveObjectWithData:encodednonce];
     
     XCTAssertTrue([nonce isEqualToNonce:decodednonce], @"");
+}
+
+- (void)testSupportsSecureCoding
+{
+    XCTAssertTrue([NACLNonce supportsSecureCoding], @"");
+}
+
+- (void)testDescription
+{
+    NACLNonce *nonce = [NACLNonce nonce];
+    
+    XCTAssertTrue([[nonce description] length] > 0, @"");
 }
 
 @end

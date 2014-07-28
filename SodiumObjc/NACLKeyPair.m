@@ -32,7 +32,7 @@ static NSString *const NACLPublicKeyCodingKey = @"NACLPublicKeyCodingKey";
 
 + (NSUInteger)seedLength
 {
-    NSAssert(NO, @"Implement -seedLength in %@", NSStringFromClass([self class]));
+    // Implement seedLength in a subclass
 
     return 0;
 }
@@ -44,7 +44,7 @@ static NSString *const NACLPublicKeyCodingKey = @"NACLPublicKeyCodingKey";
 
 - (instancetype)initWithSeed:(NSData *)seed
 {
-    NSAssert(NO, @"Implement -initWithSeed in %@", NSStringFromClass([self class]));
+    // Implement initWithSeed in a subclass
     
     return nil;
 }

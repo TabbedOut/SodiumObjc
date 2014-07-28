@@ -107,6 +107,20 @@
     XCTAssertFalse([keyPairB isEqual:keyPairA], @"");
 }
 
+- (void)testIsEqual_withNil
+{
+    NACLAsymmetricKeyPair *keyPairA = [NACLAsymmetricKeyPair keyPair];
+
+    XCTAssertFalse([keyPairA isEqual:nil], @"");
+}
+
+- (void)testIsEqual_withDifferentClass
+{
+    NACLAsymmetricKeyPair *keyPairA = [NACLAsymmetricKeyPair keyPair];
+    
+    XCTAssertFalse([keyPairA isEqual:@"something"], @"");
+}
+
 - (void)testIsEqualToKeyPair_whenEqual
 {
     NACLAsymmetricKeyPair *keyPairA = [NACLAsymmetricKeyPair keyPair];
@@ -157,6 +171,12 @@
     NACLAsymmetricKeyPair *decodedKeyPair = [NSKeyedUnarchiver unarchiveObjectWithData:encodedKeyPair];
     
     XCTAssertTrue([keyPair isEqualToKeyPair:decodedKeyPair], @"");
+}
+
+- (void)testDescription
+{
+    NACLAsymmetricKeyPair *keyPair = [NACLAsymmetricKeyPair keyPair];
+    XCTAssertTrue([[keyPair description] length] > 0, @"");
 }
 
 @end

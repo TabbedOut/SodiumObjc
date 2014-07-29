@@ -58,4 +58,22 @@
     return [super isEqualToKeyPair:keyPair];
 }
 
+- (instancetype)initWithCoder:(NSCoder *)decoder
+{
+    self = [super init];
+    
+    if (self) {
+        self.privateKey = [decoder decodeObjectOfClass:[NACLAsymmetricPrivateKey class] forKey:NACLKeyPairPrivateKeyCodingKey];
+        self.publicKey = [decoder decodeObjectOfClass:[NACLAsymmetricPublicKey class] forKey:NACLKeyPairPublicKeyCodingKey];
+    }
+    
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
+    [encoder encodeObject:self.privateKey forKey:NACLKeyPairPrivateKeyCodingKey];
+    [encoder encodeObject:self.publicKey forKey:NACLKeyPairPublicKeyCodingKey];
+}
+
 @end

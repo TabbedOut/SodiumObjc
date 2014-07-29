@@ -8,8 +8,8 @@
 
 #import "NACLKeyPair.h"
 
-static NSString *const NACLPrivateKeyCodingKey = @"NACLPrivateKeyCodingKey";
-static NSString *const NACLPublicKeyCodingKey = @"NACLPublicKeyCodingKey";
+NSString *const NACLKeyPairPrivateKeyCodingKey = @"NACLKeyPairPrivateKeyCodingKey";
+NSString *const NACLKeyPairPublicKeyCodingKey = @"NACLKeyPairPublicKeyCodingKey";
 
 @interface NACLKeyPair ()
 @property (strong, nonatomic, readwrite) NACLKey *publicKey;
@@ -54,8 +54,8 @@ static NSString *const NACLPublicKeyCodingKey = @"NACLPublicKeyCodingKey";
     self = [super init];
     
     if (self) {
-        _privateKey = [decoder decodeObjectOfClass:[NACLKey class] forKey:NACLPrivateKeyCodingKey];
-        _publicKey = [decoder decodeObjectOfClass:[NACLKey class] forKey:NACLPublicKeyCodingKey];
+        _privateKey = [decoder decodeObjectOfClass:[NACLKey class] forKey:NACLKeyPairPrivateKeyCodingKey];
+        _publicKey = [decoder decodeObjectOfClass:[NACLKey class] forKey:NACLKeyPairPublicKeyCodingKey];
     }
     
     return self;
@@ -63,8 +63,8 @@ static NSString *const NACLPublicKeyCodingKey = @"NACLPublicKeyCodingKey";
 
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
-    [encoder encodeObject:self.privateKey forKey:NACLPrivateKeyCodingKey];
-    [encoder encodeObject:self.publicKey forKey:NACLPublicKeyCodingKey];
+    [encoder encodeObject:self.privateKey forKey:NACLKeyPairPrivateKeyCodingKey];
+    [encoder encodeObject:self.publicKey forKey:NACLKeyPairPublicKeyCodingKey];
 }
 
 - (id)copyWithZone:(NSZone *)zone

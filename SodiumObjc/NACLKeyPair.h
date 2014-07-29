@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "NACLKey.h"
 
-@interface NACLKeyPair : NSObject <NSCopying, NSCoding>
+@interface NACLKeyPair : NSObject <NSCopying, NSSecureCoding>
 @property (strong, nonatomic, readonly) NACLKey *publicKey;
 @property (strong, nonatomic, readonly) NACLKey *privateKey;
 

@@ -6,8 +6,15 @@
 //  Copyright (c) 2014 TabbedOut. All rights reserved.
 //
 
+#import <sodium.h>
 #import <XCTest/XCTest.h>
 #import "NACLAsymmetricKeyPair.h"
+
+@interface NACLAsymmetricPublicKey (Testing)
+
+- (NSData *)generateDefaultKeyData;
+
+@end
 
 @interface NACLAsymmetricPublicKeyTests : XCTestCase
 
@@ -34,6 +41,45 @@
     XCTAssertNotNil(publicKey, @"");
     XCTAssertNotNil(publicKey.data, @"");
     XCTAssertTrue(publicKey.data.length > 0, @"");
+}
+
+- (void)testKey_expectNil
+{
+    // nil is expected because you should rely on NACLAsymmetricKeyPair to generate a public key
+    
+    NACLAsymmetricPublicKey *key = [NACLAsymmetricPublicKey key];
+    
+    XCTAssertNil(key, @"");
+}
+
+- (void)testKeyWithData_expectNil
+{
+    // nil is expected because you should rely on NACLAsymmetricKeyPair to generate a public key
+    
+    NACLAsymmetricPublicKey *key = [NACLAsymmetricPublicKey keyWithData:[NSData data]];
+    
+    XCTAssertNil(key, @"");
+}
+
+- (void)testInitWithData_expectNil
+{
+    // nil is expected because you should rely on NACLAsymmetricKeyPair to generate a public key
+
+    NACLAsymmetricPublicKey *key = [[NACLAsymmetricPublicKey alloc] init];
+    
+    XCTAssertNil(key, @"");
+}
+
+- (void)testGenerateDefaultKeyData_expectNil
+{
+    // nil is expected because you should rely on NACLAsymmetricKeyPair to generate a public key
+    
+    XCTAssertNil([keyPair.publicKey generateDefaultKeyData], @"");
+}
+
+- (void)testKeyLength
+{
+    XCTAssertEqual([NACLAsymmetricPublicKey keyLength], crypto_box_PUBLICKEYBYTES, @"");
 }
 
 - (void)testCopy

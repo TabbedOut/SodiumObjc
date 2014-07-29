@@ -1,2 +1,5 @@
 language: objective-c
-script: xcodebuild -project SodiumObjc.xcodeproj -scheme SodiumObjc -sdk iphonesimulator test
+before_install:
+  - brew update
+  - brew install xctool
+script xctool test

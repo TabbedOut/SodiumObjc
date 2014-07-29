@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NACLKey : NSObject <NSCopying, NSCoding>
+@interface NACLKey : NSObject <NSCopying, NSSecureCoding>
 
 /**
  *  The data that represents this key.

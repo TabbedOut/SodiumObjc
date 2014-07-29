@@ -6,8 +6,15 @@
 //  Copyright (c) 2014 TabbedOut. All rights reserved.
 //
 
+#import <sodium.h>
 #import <XCTest/XCTest.h>
 #import "NACLAsymmetricKeyPair.h"
+
+@interface NACLAsymmetricPrivateKey (Testing)
+
+- (NSData *)generateDefaultKeyData;
+
+@end
 
 @interface NACLAsymmetricPrivateKeyTests : XCTestCase
 
@@ -126,6 +133,39 @@
     NACLAsymmetricPrivateKey *decodedprivateKey = [NSKeyedUnarchiver unarchiveObjectWithData:encodedprivateKey];
     
     XCTAssertTrue([keyPair.privateKey isEqualToKey:decodedprivateKey], @"");
+}
+
+- (void)testKey_expectNil
+{
+    // Nil is expected because NACLAsymmetricKeyPair is leverated to create the private key
+    
+    XCTAssertNil([NACLAsymmetricPrivateKey key], @"");
+}
+
+- (void)testKeyWithData_expectNil
+{
+    // Nil is expected because NACLAsymmetricKeyPair is leverated to create the private key
+    
+    XCTAssertNil([NACLAsymmetricPrivateKey keyWithData:[NSData data]], @"");
+}
+
+- (void)testInit_expectNil
+{
+    // Nil is expected because NACLAsymmetricKeyPair is leverated to create the private key
+    
+    XCTAssertNil([[NACLAsymmetricPrivateKey alloc] init], @"");
+}
+
+- (void)testKeyLength
+{
+    // Ensure the implementation doesn't diverge
+    
+    XCTAssertEqual([NACLAsymmetricPrivateKey keyLength], crypto_box_SECRETKEYBYTES, @"");
+}
+
+- (void)testGenerateKeyData_expectNil
+{
+    XCTAssertNil([keyPair.privateKey generateDefaultKeyData], @"");
 }
 
 @end

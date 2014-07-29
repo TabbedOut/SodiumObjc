@@ -11,7 +11,7 @@
 /**
  *  A nonce type.
  */
-@interface NACLNonce : NSObject <NSCopying, NSCoding>
+@interface NACLNonce : NSObject <NSCopying, NSSecureCoding>
 @property (strong, nonatomic, readonly) NSData *data;
 
 + (instancetype)nonce;

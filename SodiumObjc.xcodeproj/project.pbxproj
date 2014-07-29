@@ -359,7 +359,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "${SRCROOT}/XcodeCoverage/exportenv.sh";
+			shellScript = "if [ -e ${SRCROOT}/XcodeCoverage/exportenv.sh ]\nthen\n    ${SRCROOT}/XcodeCoverage/exportenv.sh\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 

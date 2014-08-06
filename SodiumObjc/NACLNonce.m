@@ -105,7 +105,7 @@ static NSString *const NACLDataCodingKey = @"NACLDataCodingKey";
     self = [super init];
     
     if (self) {
-        _data = [decoder decodeObjectOfClass:[NSData data] forKey:NACLDataCodingKey];
+        _data = [decoder decodeObjectOfClass:[NSData class] forKey:NACLDataCodingKey];
     }
     
     return self;

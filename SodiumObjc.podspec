@@ -5,10 +5,10 @@ Pod::Spec.new do |s|
   s.description      = <<-DESC
                        SodiumObjc is a wrapper for NaCl, providing Obj-C methods for it.
                        DESC
-  s.homepage         = "https://github.com/r-arias/SodiumObjc"
+  s.homepage         = "https://github.com/Tabbedout/SodiumObjc"
   s.license          = 'MIT'
-  s.author           = { "iltercengiz" => "ilter@cengiz.im" }
-  s.source           = { :git => "https://github.com/r-arias/SodiumObjc.git", :tag => s.version.to_s }
+  s.author           = { "Damian Carrillo" => "damiancarrillo@gmail.com" }
+  s.source           = { :git => "https://github.com/Tabbedout/SodiumObjc.git", :tag => s.version.to_s }
   
   s.platform     = :ios, '7.0'
   s.requires_arc = true

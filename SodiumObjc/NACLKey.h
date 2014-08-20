@@ -40,8 +40,8 @@
 /**
  *  Initializes the receiver with the supplied key data.
  *  
- *  @param keyData The key data that this secret key should represent.
- *  @return An initialized secret key.
+ *  @param keyData The key data that this private key should represent.
+ *  @return An initialized private key.
  */
 - (instancetype)initWithData:(NSData *)keyData;
 

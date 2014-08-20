@@ -34,18 +34,18 @@
     self = [super init];
     
     if (self) {
-        unsigned char secretKey[crypto_sign_SECRETKEYBYTES];
+        unsigned char privateKey[crypto_sign_SECRETKEYBYTES];
         unsigned char publicKey[crypto_sign_PUBLICKEYBYTES];
         
         if ([seed length] > 0) {
             NSParameterAssert(seed.length == crypto_sign_SEEDBYTES);
-            crypto_sign_seed_keypair(publicKey, secretKey, seed.bytes);
+            crypto_sign_seed_keypair(publicKey, privateKey, seed.bytes);
         } else {
-            crypto_sign_keypair(publicKey, secretKey);
+            crypto_sign_keypair(publicKey, privateKey);
         }
         
-        if (secretKey) {
-            NSData *keyData = [NSData dataWithBytes:secretKey length:crypto_sign_SECRETKEYBYTES];
+        if (privateKey) {
+            NSData *keyData = [NSData dataWithBytes:privateKey length:crypto_sign_SECRETKEYBYTES];
             self.privateKey = [NACLSigningPrivateKey keyWithData:keyData];
         }
         

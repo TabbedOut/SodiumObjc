@@ -19,7 +19,7 @@
 
 /**
  *  Indicates whether or not the receiver is equal to the given key pair. 
- *  Equality is determined by `publicKeyData` and `secretKeyData` being 
+ *  Equality is determined by `publicKeyData` and `privateKeyData` being 
  *  equal for both the receiver and the given key pair.
  *  
  *  @param keyPair The key pair to test for equalitys.

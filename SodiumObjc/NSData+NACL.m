@@ -235,7 +235,7 @@
     return verifiedText;
 }
 
-#pragma mark Secret-Key Cryptography
+#pragma mark Private-Key Cryptography
 
 - (NSData *)encryptedDataUsingPrivateKey:(NACLSymmetricPrivateKey *)privateKey nonce:(NACLNonce *)nonce
 {

@@ -11,7 +11,7 @@
 OBJC_EXPORT NSString *const NACLErrorDomain;
 
 typedef NS_ENUM(NSUInteger, NACLErrorCode) {
-    NACLErrorInvalidSecretKeyLengthCode = 1,
+    NACLErrorInvalidPrivateKeyLengthCode = 1,
     NACLErrorInvalidPublicKeyLengthCode,
     NACLErrorInvalidNonceLengthCode,
     NACLErrorInvalidMessageLengthCode,

@@ -19,7 +19,7 @@
     NACLAsymmetricKeyPair *sendersKeyPair;
     NACLAsymmetricKeyPair *receiversKeyPair;
     NACLSigningKeyPair *signingKeyPair;
-    NACLSymmetricPrivateKey *secretKey;
+    NACLSymmetricPrivateKey *privateKey;
     NACLNonce *nonce;
 }
 
@@ -31,7 +31,7 @@
     sendersKeyPair = [NACLAsymmetricKeyPair keyPair];
     receiversKeyPair = [NACLAsymmetricKeyPair keyPair];
     signingKeyPair = [NACLSigningKeyPair keyPair];
-    secretKey = [NACLSymmetricPrivateKey key];
+    privateKey = [NACLSymmetricPrivateKey key];
     nonce = [NACLNonce nonce];
 }
 
@@ -39,13 +39,13 @@
 {
     sendersKeyPair = nil;
     receiversKeyPair = nil;
-    secretKey = nil;
+    privateKey = nil;
     nonce = nil;
     
     [super tearDown];
 }
 
-- (void)testEncryptedDataWithPublicKeySecretKeyNonce
+- (void)testEncryptedDataWithPublicKeyPrivateKeyNonce
 {
     NSData *encryptedData = [plainText encryptedDataUsingPublicKey:sendersKeyPair.publicKey 
                                                         privateKey:receiversKeyPair.privateKey 
@@ -54,7 +54,7 @@
     XCTAssert(encryptedData.length > 0, @"");
 }
 
-- (void)testEncryptedDataWithPublicKeySecretKeyNonceError
+- (void)testEncryptedDataWithPublicKeyPrivateKeyNonceError
 {
     NSError *error = nil;
     NSData *encryptedData = [plainText encryptedDataUsingPublicKey:sendersKeyPair.publicKey 
@@ -64,7 +64,7 @@
     XCTAssert(encryptedData.length > 0, @"");
 }
 
-- (void)testSignedDataUsingSecretKeyNonce
+- (void)testSignedDataUsingPrivateKeyNonce
 {
     NSError *error = nil;
     NSData *signedData = [plainText signedDataUsingPrivateKey:signingKeyPair.privateKey error:&error];
@@ -72,17 +72,17 @@
     XCTAssertTrue(signedData.length > 0, @"");
 }
 
-- (void)testEncryptedDataWithSecretKeyNonce
+- (void)testEncryptedDataWithPrivateKeyNonce
 {
-    NSData *encryptedData = [plainText encryptedDataUsingSecretKey:secretKey nonce:nonce];
+    NSData *encryptedData = [plainText encryptedDataUsingPrivateKey:privateKey nonce:nonce];
     
     XCTAssert(encryptedData.length > 0, @"");
 }
 
-- (void)testEncryptedDataWithSecretKeyNonceError
+- (void)testEncryptedDataWithPrivateKeyNonceError
 {
     NSError *error = nil;
-    NSData *encryptedData = [plainText encryptedDataUsingSecretKey:secretKey nonce:nonce error:&error];
+    NSData *encryptedData = [plainText encryptedDataUsingPrivateKey:privateKey nonce:nonce error:&error];
     
     XCTAssert(encryptedData.length > 0, @"");
 }

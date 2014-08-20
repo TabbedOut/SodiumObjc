@@ -16,7 +16,7 @@
 /**
  *  Creates a signing key pair.
  *  
- *  @return A key pair, whose public key and secret key are initialized with 
+ *  @return A key pair, whose public key and private key are initialized with 
  *          appropriate values.
  */
 + (instancetype)keyPair;
@@ -27,7 +27,7 @@
  *  @param seed The seed data that is used to generate the keys. The seed you 
  *              supply may be `nil`, and if it is, this creation method devolves
  *              into `+ keyPair`.
- *  @return A created key pair object, whose public key and secret key are
+ *  @return A created key pair object, whose public key and private key are
  *          initialized with appropriate values.
  */
 + (instancetype)keyPairWithSeed:(NSData *)seed;

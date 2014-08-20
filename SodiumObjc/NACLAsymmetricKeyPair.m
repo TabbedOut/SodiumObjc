@@ -34,13 +34,13 @@
     self = [super init];
     
     if (self) {
-        unsigned char secretKey[crypto_box_SECRETKEYBYTES];
+        unsigned char privateKey[crypto_box_SECRETKEYBYTES];
         unsigned char publicKey[crypto_box_PUBLICKEYBYTES];
         
-        crypto_box_keypair(publicKey, secretKey);
+        crypto_box_keypair(publicKey, privateKey);
         
-        if (secretKey) {
-            NSData *keyData = [NSData dataWithBytes:secretKey length:crypto_box_SECRETKEYBYTES];
+        if (privateKey) {
+            NSData *keyData = [NSData dataWithBytes:privateKey length:crypto_box_SECRETKEYBYTES];
             self.privateKey = [[NACLAsymmetricPrivateKey alloc] initWithData:keyData];
         }
         

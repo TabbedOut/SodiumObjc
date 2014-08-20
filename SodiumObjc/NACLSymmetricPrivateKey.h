@@ -10,7 +10,7 @@
 #import "NACLKey.h"
 
 /**
- *  A secret key type that is to be used in secret key operations.
+ *  A private key type that is to be used in private key operations.
  */
 @interface NACLSymmetricPrivateKey : NACLKey
 
@@ -20,8 +20,8 @@
  *
  *  This is the designated initializer.
  *  
- *  @param keyData The key data that this secret key should represent.
- *  @return An initialized secret key.
+ *  @param keyData The key data that this private key should represent.
+ *  @return An initialized private key.
  */
 - (instancetype)initWithData:(NSData *)keyData;
 

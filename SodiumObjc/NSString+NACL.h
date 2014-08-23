@@ -50,31 +50,6 @@
                                   nonce:(NACLNonce *)nonce 
                                   error:(NSError **)outError;
 
-#pragma mark Signatures
-
-/**
- *  Signs the receiver (which is an NSData object) using the private key in the
- *  signer's supplied `keyPair`.
- *  
- *  @param keyPair  The signer's key pair.
- *  
- *  @return A signed data object.
- */
-- (NSData *)signedDataUsingPrivateKey:(NACLSigningPrivateKey *)privateKey;
-
-/**
- *  Signs the receiver (which is an NSData object) using the private key in the 
- *  signer's supplied `keyPair`, and passes back an error to the call site if 
- *  one occurs.
- *  
- *  @param keyPair  The signer's key pair.
- *  @param outError A pointer to an error that the call site will receive.
- *  
- *  @return A signed data object.
- */
-- (NSData *)signedDataUsingPrivateKey:(NACLSigningPrivateKey *)privateKey 
-                                error:(NSError **)outError;
-
 #pragma mark Private-Key Cryptography
 
 /**
@@ -103,5 +78,30 @@
 - (NSData *)encryptedDataUsingPrivateKey:(NACLSymmetricPrivateKey *)privateKey 
                                    nonce:(NACLNonce *)nonce
                                    error:(NSError **)outError;
+
+#pragma mark Signing and Verification
+
+/**
+ *  Signs the receiver (which is an NSData object) using the private key in the
+ *  signer's supplied `keyPair`.
+ *
+ *  @param keyPair  The signer's key pair.
+ *
+ *  @return A signed data object.
+ */
+- (NSData *)signedDataUsingPrivateKey:(NACLSigningPrivateKey *)privateKey;
+
+/**
+ *  Signs the receiver (which is an NSData object) using the private key in the
+ *  signer's supplied `keyPair`, and passes back an error to the call site if
+ *  one occurs.
+ *
+ *  @param keyPair  The signer's key pair.
+ *  @param outError A pointer to an error that the call site will receive.
+ *
+ *  @return A signed data object.
+ */
+- (NSData *)signedDataUsingPrivateKey:(NACLSigningPrivateKey *)privateKey
+                                error:(NSError **)outError;
 
 @end

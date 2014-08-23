@@ -248,8 +248,11 @@
                                         userInfo:nil];
         }
 	} else {
-        encryptedData = [NSData dataWithBytes:encryptedDataBuffer + crypto_secretbox_BOXZEROBYTES
-                                    length:paddedMessage.length - crypto_secretbox_BOXZEROBYTES];
+        NSMutableData *encryptedDataPlusNonce = [NSMutableData data];
+        [encryptedDataPlusNonce appendBytes:encryptedDataBuffer + crypto_secretbox_BOXZEROBYTES
+                                     length:paddedMessage.length - crypto_secretbox_BOXZEROBYTES];
+        [encryptedDataPlusNonce appendData:nonce.data];
+        encryptedData = [encryptedDataPlusNonce copy];
 	}
     
     free(encryptedDataBuffer);
@@ -259,25 +262,47 @@
 
 #pragma mark Private-Key Decryption
 
+- (NSData *)decryptedDataUsingPrivateKey:(NACLSymmetricPrivateKey *)privateKey
+{
+    return [self decryptedDataUsingPrivateKey:privateKey nonce:nil error:nil];
+}
+
+- (NSData *)decryptedDataUsingPrivateKey:(NACLSymmetricPrivateKey *)privateKey
+                                   error:(NSError **)outError
+{
+    return [self decryptedDataUsingPrivateKey:privateKey nonce:nil error:outError];
+}
+
 - (NSData *)decryptedDataUsingPrivateKey:(NACLSymmetricPrivateKey *)privateKey nonce:(NACLNonce *)nonce
 {
     return [self decryptedDataUsingPrivateKey:privateKey nonce:nonce error:nil];
 }
 
 - (NSData *)decryptedDataUsingPrivateKey:(NACLSymmetricPrivateKey *)privateKey 
-                                 nonce:(NACLNonce *)nonce 
-                                 error:(NSError *__autoreleasing *)outError
+                                   nonce:(NACLNonce *)nonce
+                                   error:(NSError *__autoreleasing *)outError
 {
     NSParameterAssert(privateKey);
     NSParameterAssert(nonce);
     
 	[NACL initializeNACL];
     
+    NSUInteger packedNonceLength = 0;
+    
+    if (!nonce) {
+        NSRange nonceDataRange = {self.length - [NACLNonce nonceLength], [NACLNonce nonceLength]};
+        NSData *nonceData = [self subdataWithRange:nonceDataRange];
+        nonce = [NACLNonce nonceWithData:nonceData];
+        packedNonceLength = [NACLNonce nonceLength];
+    }
+    
     NSData *decryptedData = nil;
     
-    NSMutableData *paddedEncryptedData = [NSMutableData dataWithCapacity:self.length + crypto_secretbox_BOXZEROBYTES];
+    NSMutableData *paddedEncryptedData = [NSMutableData dataWithCapacity:self.length + crypto_secretbox_BOXZEROBYTES - packedNonceLength];
     [paddedEncryptedData appendData:[NSMutableData dataWithLength:crypto_secretbox_BOXZEROBYTES]];
-    [paddedEncryptedData appendData:self];
+    
+    NSRange encryptedDataRange = {0, self.length - packedNonceLength};
+    [paddedEncryptedData appendData:[self subdataWithRange:encryptedDataRange]];
     
     unsigned char message[paddedEncryptedData.length];
     

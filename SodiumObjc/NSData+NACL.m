@@ -13,7 +13,13 @@
 
 @implementation NSData (NACL)
 
-#pragma mark Public-Key Cryptography
+- (NSData *)dataWithoutNonce
+{
+    NSRange encryptedDataRange = {0, self.length - [NACLNonce nonceLength]};
+    return [self subdataWithRange:encryptedDataRange];
+}
+
+#pragma mark - Public-Key Encryption
 
 - (NSData *)encryptedDataUsingPublicKey:(NACLAsymmetricPublicKey *)publicKey 
                              privateKey:(NACLAsymmetricPrivateKey *)privateKey 
@@ -33,8 +39,6 @@
     NSParameterAssert(nonce);
  
 	[NACL initializeNACL];
-    
-    NSData *encryptedData = nil;
     
     NSMutableData *paddedMessage = [NSMutableData dataWithCapacity:crypto_box_ZEROBYTES + self.length];
     [paddedMessage appendData:[NSMutableData dataWithLength:crypto_box_ZEROBYTES]];
@@ -59,6 +63,8 @@
                             publicKey.data.bytes, 
                             privateKey.data.bytes);
     
+    NSData *encryptedData = nil;
+    
 	if (result != 0) {
         if (outError) {
             *outError = [NSError errorWithDomain:NACLErrorDomain 
@@ -66,13 +72,31 @@
                                         userInfo:nil];
         }
 	} else {
-        encryptedData = [NSData dataWithBytes:encryptedDataBuffer + crypto_box_BOXZEROBYTES 
-                                    length:paddedMessage.length - crypto_box_BOXZEROBYTES];
+        NSMutableData *encryptedDataPlusNonce = [NSMutableData data];
+        [encryptedDataPlusNonce appendBytes:encryptedDataBuffer + crypto_box_BOXZEROBYTES
+                                     length:paddedMessage.length - crypto_box_BOXZEROBYTES];
+        [encryptedDataPlusNonce appendData:nonce.data];
+        encryptedData = [encryptedDataPlusNonce copy];
 	}
 	
 	free(encryptedDataBuffer);
     
     return encryptedData;
+}
+
+#pragma mark Public-Key Decryption
+
+- (NSData *)decryptedDataUsingPublicKey:(NACLAsymmetricPublicKey *)publicKey
+                             privateKey:(NACLAsymmetricPrivateKey *)privateKey
+{
+    return [self decryptedDataUsingPublicKey:publicKey privateKey:privateKey nonce:nil error:nil];
+}
+
+- (NSData *)decryptedDataUsingPublicKey:(NACLAsymmetricPublicKey *)publicKey
+                             privateKey:(NACLAsymmetricPrivateKey *)privateKey
+                                  error:(NSError *__autoreleasing *)outError
+{
+    return [self decryptedDataUsingPublicKey:publicKey privateKey:privateKey nonce:nil error:outError];
 }
 
 - (NSData *)decryptedDataUsingPublicKey:(NACLAsymmetricPublicKey *)publicKey 
@@ -89,15 +113,25 @@
 {
     NSParameterAssert(publicKey);
     NSParameterAssert(privateKey);
-    NSParameterAssert(nonce);
     
 	[NACL initializeNACL];
     
+    NSUInteger packedNonceLength = 0;
+    
+    if (!nonce) {
+        NSRange nonceDataRange = {self.length - [NACLNonce nonceLength], [NACLNonce nonceLength]};
+        NSData *nonceData = [self subdataWithRange:nonceDataRange];
+        nonce = [NACLNonce nonceWithData:nonceData];
+        packedNonceLength = [NACLNonce nonceLength];
+    }
+    
     NSData *decryptedData = nil;
     
-    NSMutableData *paddedEncryptedData = [NSMutableData dataWithCapacity:self.length + crypto_box_BOXZEROBYTES];
+    NSMutableData *paddedEncryptedData = [NSMutableData dataWithCapacity:self.length + crypto_box_BOXZEROBYTES - packedNonceLength];
     [paddedEncryptedData appendData:[NSMutableData dataWithLength:crypto_box_BOXZEROBYTES]];
-    [paddedEncryptedData appendData:self];
+    
+    NSRange encryptedDataRange = {0, self.length - packedNonceLength};
+    [paddedEncryptedData appendData:[self subdataWithRange:encryptedDataRange]];
     
     unsigned char message[paddedEncryptedData.length];
     
@@ -122,6 +156,19 @@
     }
     
 	return decryptedData;
+}
+
+- (NSString *)decryptedTextUsingPublicKey:(NACLAsymmetricPublicKey *)publicKey
+                               privateKey:(NACLAsymmetricPrivateKey *)privateKey
+{
+    return [self decryptedTextUsingPublicKey:publicKey privateKey:privateKey nonce:nil error:nil];
+}
+
+- (NSString *)decryptedTextUsingPublicKey:(NACLAsymmetricPublicKey *)publicKey
+                               privateKey:(NACLAsymmetricPrivateKey *)privateKey
+                                    error:(NSError *__autoreleasing *)outError
+{
+    return [self decryptedTextUsingPublicKey:publicKey privateKey:privateKey nonce:nil error:outError];
 }
 
 - (NSString *)decryptedTextUsingPublicKey:(NACLAsymmetricPublicKey *)publicKey 
@@ -153,89 +200,7 @@
     return decryptedText;
 }
 
-#pragma mark Signatures
-
-- (NSData *)signedDataUsingPrivateKey:(NACLSigningPrivateKey *)privateKey
-{
-    return [self signedDataUsingPrivateKey:privateKey error:nil];
-}
-
-- (NSData *)signedDataUsingPrivateKey:(NACLSigningPrivateKey *)privateKey error:(NSError *__autoreleasing *)outError
-{
-    NSParameterAssert(privateKey);
-
-    NSData *signedData = nil;
-    
-    unsigned char signedMessage[self.length + crypto_sign_BYTES];
-    unsigned long long signedMessageLength = 0;
-    
-    int result = crypto_sign(signedMessage, 
-                             &signedMessageLength, 
-                             self.bytes, 
-                             self.length, 
-                             privateKey.data.bytes);
-    
-    if (result != 0) {
-        if (outError) {
-            *outError = [NSError errorWithDomain:NACLErrorDomain 
-                                            code:NACLErrorFailureCode 
-                                        userInfo:nil];
-        }
-    } else {
-        signedData = [NSData dataWithBytes:signedMessage length:(NSUInteger) signedMessageLength];
-    }
-    
-    return signedData;
-}
-
-- (NSData *)verifiedDataUsingPublicKey:(NACLSigningPublicKey *)publicKey
-{
-    return [self verifiedDataUsingPublicKey:publicKey error:nil];
-}
-
-- (NSData *)verifiedDataUsingPublicKey:(NACLSigningPublicKey *)publicKey error:(NSError *__autoreleasing *)outError
-{
-    NSParameterAssert(publicKey);
-    
-    NSData *messageData = nil;
-    
-    unsigned char message[self.length];
-    unsigned long long messageLength;
-    
-    int result = crypto_sign_open(message, 
-                                  &messageLength, 
-                                  self.bytes, 
-                                  self.length, 
-                                  publicKey.data.bytes);
-    
-    if (result != 0) {
-        if (outError) {
-            *outError = [NSError errorWithDomain:NACLErrorDomain 
-                                            code:NACLErrorFailureCode 
-                                        userInfo:nil];
-        }
-    } else {
-        messageData = [NSData dataWithBytes:message length:(NSUInteger) messageLength];
-    }
-    
-    return messageData;
-}
-
-- (NSString *)verifiedTextUsingPublicKey:(NACLSigningPublicKey *)publicKey
-{
-    return [self verifiedTextUsingPublicKey:publicKey error:nil];
-}
-
-- (NSString *)verifiedTextUsingPublicKey:(NACLSigningPublicKey *)publicKey 
-                                   error:(NSError **)outError
-{
-    NSData *verifiedData = [self verifiedDataUsingPublicKey:publicKey error:outError];
-    NSString *verifiedText = [[NSString alloc] initWithData:verifiedData encoding:NSUTF8StringEncoding];
-    
-    return verifiedText;
-}
-
-#pragma mark Private-Key Cryptography
+#pragma mark - Private-Key Encryption
 
 - (NSData *)encryptedDataUsingPrivateKey:(NACLSymmetricPrivateKey *)privateKey nonce:(NACLNonce *)nonce
 {
@@ -291,6 +256,8 @@
 
     return encryptedData;
 }
+
+#pragma mark Private-Key Decryption
 
 - (NSData *)decryptedDataUsingPrivateKey:(NACLSymmetricPrivateKey *)privateKey nonce:(NACLNonce *)nonce
 {
@@ -360,6 +327,90 @@
     }
     
     return decryptedText;
+}
+
+#pragma mark - Signing
+
+- (NSData *)signedDataUsingPrivateKey:(NACLSigningPrivateKey *)privateKey
+{
+    return [self signedDataUsingPrivateKey:privateKey error:nil];
+}
+
+- (NSData *)signedDataUsingPrivateKey:(NACLSigningPrivateKey *)privateKey error:(NSError *__autoreleasing *)outError
+{
+    NSParameterAssert(privateKey);
+    
+    NSData *signedData = nil;
+    
+    unsigned char signedMessage[self.length + crypto_sign_BYTES];
+    unsigned long long signedMessageLength = 0;
+    
+    int result = crypto_sign(signedMessage,
+                             &signedMessageLength,
+                             self.bytes,
+                             self.length,
+                             privateKey.data.bytes);
+    
+    if (result != 0) {
+        if (outError) {
+            *outError = [NSError errorWithDomain:NACLErrorDomain
+                                            code:NACLErrorFailureCode
+                                        userInfo:nil];
+        }
+    } else {
+        signedData = [NSData dataWithBytes:signedMessage length:(NSUInteger) signedMessageLength];
+    }
+    
+    return signedData;
+}
+
+#pragma mark Verification
+
+- (NSData *)verifiedDataUsingPublicKey:(NACLSigningPublicKey *)publicKey
+{
+    return [self verifiedDataUsingPublicKey:publicKey error:nil];
+}
+
+- (NSData *)verifiedDataUsingPublicKey:(NACLSigningPublicKey *)publicKey error:(NSError *__autoreleasing *)outError
+{
+    NSParameterAssert(publicKey);
+    
+    NSData *messageData = nil;
+    
+    unsigned char message[self.length];
+    unsigned long long messageLength;
+    
+    int result = crypto_sign_open(message,
+                                  &messageLength,
+                                  self.bytes,
+                                  self.length,
+                                  publicKey.data.bytes);
+    
+    if (result != 0) {
+        if (outError) {
+            *outError = [NSError errorWithDomain:NACLErrorDomain
+                                            code:NACLErrorFailureCode
+                                        userInfo:nil];
+        }
+    } else {
+        messageData = [NSData dataWithBytes:message length:(NSUInteger) messageLength];
+    }
+    
+    return messageData;
+}
+
+- (NSString *)verifiedTextUsingPublicKey:(NACLSigningPublicKey *)publicKey
+{
+    return [self verifiedTextUsingPublicKey:publicKey error:nil];
+}
+
+- (NSString *)verifiedTextUsingPublicKey:(NACLSigningPublicKey *)publicKey
+                                   error:(NSError **)outError
+{
+    NSData *verifiedData = [self verifiedDataUsingPublicKey:publicKey error:outError];
+    NSString *verifiedText = [[NSString alloc] initWithData:verifiedData encoding:NSUTF8StringEncoding];
+    
+    return verifiedText;
 }
 
 @end

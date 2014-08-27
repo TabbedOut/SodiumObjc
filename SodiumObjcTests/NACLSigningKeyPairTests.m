@@ -158,5 +158,4 @@
     XCTAssertTrue([keyPair isEqualToKeyPair:decodedKeyPair], @"");
 }
 
-
 @end

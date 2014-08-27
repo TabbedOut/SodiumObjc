@@ -32,6 +32,8 @@
 		972AC6841961F069003C8B33 /* NSDataNACLTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 972AC67C1961F069003C8B33 /* NSDataNACLTests.m */; };
 		972AC6851961F069003C8B33 /* NSStringNACLTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 972AC67D1961F069003C8B33 /* NSStringNACLTests.m */; };
 		9751FC261986D01100B173E3 /* NACLKeyPairTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9751FC251986D01100B173E3 /* NACLKeyPairTests.m */; };
+		9792906819AE7195004CC539 /* NACLSigningPrivateKeyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9792906719AE7195004CC539 /* NACLSigningPrivateKeyTests.m */; };
+		9792906A19AE75C1004CC539 /* NACLSigningPublicKeyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9792906919AE75C1004CC539 /* NACLSigningPublicKeyTests.m */; };
 		A7BF29CE1947630800BB35C5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BF29CD1947630800BB35C5 /* Foundation.framework */; };
 		A7BF29DC1947630800BB35C5 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BF29DB1947630800BB35C5 /* XCTest.framework */; };
 		A7BF29DD1947630800BB35C5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BF29CD1947630800BB35C5 /* Foundation.framework */; };
@@ -100,6 +102,8 @@
 		972AC67D1961F069003C8B33 /* NSStringNACLTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSStringNACLTests.m; path = SodiumObjcTests/NSStringNACLTests.m; sourceTree = SOURCE_ROOT; };
 		972AC6C4196209AB003C8B33 /* SodiumObjc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SodiumObjc.h; path = SodiumObjc/SodiumObjc.h; sourceTree = SOURCE_ROOT; };
 		9751FC251986D01100B173E3 /* NACLKeyPairTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NACLKeyPairTests.m; path = SodiumObjcTests/NACLKeyPairTests.m; sourceTree = SOURCE_ROOT; };
+		9792906719AE7195004CC539 /* NACLSigningPrivateKeyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NACLSigningPrivateKeyTests.m; path = SodiumObjcTests/NACLSigningPrivateKeyTests.m; sourceTree = SOURCE_ROOT; };
+		9792906919AE75C1004CC539 /* NACLSigningPublicKeyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NACLSigningPublicKeyTests.m; path = SodiumObjcTests/NACLSigningPublicKeyTests.m; sourceTree = SOURCE_ROOT; };
 		A7BF29CA1947630800BB35C5 /* libSodiumObjc.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSodiumObjc.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7BF29CD1947630800BB35C5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A7BF29DA1947630800BB35C5 /* SodiumObjcTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SodiumObjcTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -173,6 +177,8 @@
 				972AC6781961F069003C8B33 /* NACLAsymmetricPublicKeyTests.m */,
 				972AC6791961F069003C8B33 /* NACLNonceTests.m */,
 				972AC67A1961F069003C8B33 /* NACLSigningKeyPairTests.m */,
+				9792906719AE7195004CC539 /* NACLSigningPrivateKeyTests.m */,
+				9792906919AE75C1004CC539 /* NACLSigningPublicKeyTests.m */,
 				972AC67B1961F069003C8B33 /* NACLSymmetricPrivateKeyTests.m */,
 				972AC67C1961F069003C8B33 /* NSDataNACLTests.m */,
 				972AC67D1961F069003C8B33 /* NSStringNACLTests.m */,
@@ -397,6 +403,8 @@
 				972AC6831961F069003C8B33 /* NACLSymmetricPrivateKeyTests.m in Sources */,
 				972AC67E1961F069003C8B33 /* NACLAsymmetricKeyPairTests.m in Sources */,
 				972AC67F1961F069003C8B33 /* NACLAsymmetricPrivateKeyTests.m in Sources */,
+				9792906819AE7195004CC539 /* NACLSigningPrivateKeyTests.m in Sources */,
+				9792906A19AE75C1004CC539 /* NACLSigningPublicKeyTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

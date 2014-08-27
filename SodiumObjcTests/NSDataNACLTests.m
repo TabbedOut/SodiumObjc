@@ -73,7 +73,6 @@
     XCTAssertNil(error, @"");
 }
 
-
 - (void)testDecryptedDataWithPublicKeyPrivateKeyNonce_expectSuccess
 {
     NSData *encryptedData = [[message encryptedDataUsingPublicKey:sendersKeyPair.publicKey
@@ -292,6 +291,32 @@
     
     XCTAssertEqualObjects(decryptedText, plainText, @"");
     XCTAssertNil(error, @"");
+}
+
+- (void)testDecryptedDataUsingPrivateKey_expectMatch
+{
+    NSData *encryptedData = [message encryptedDataUsingPrivateKey:privateKey nonce:nonce];
+    NSData *decryptedData = [encryptedData decryptedDataUsingPrivateKey:privateKey];
+    
+    XCTAssertNotNil(decryptedData, @"");
+    
+    NSString *decryptedMessage = [[NSString alloc] initWithData:decryptedData encoding:NSUTF8StringEncoding];
+    
+    XCTAssertEqualObjects(decryptedMessage, plainText, @"");
+}
+
+- (void)testDecryptedDataUsingPrivateKeyError_expectMatch
+{
+    NSError *error = nil;
+    NSData *encryptedData = [message encryptedDataUsingPrivateKey:privateKey nonce:nonce];
+    NSData *decryptedData = [encryptedData decryptedDataUsingPrivateKey:privateKey error:&error];
+    
+    XCTAssertNotNil(decryptedData, @"");
+    XCTAssertNil(error, @"");
+    
+    NSString *decryptedMessage = [[NSString alloc] initWithData:decryptedData encoding:NSUTF8StringEncoding];
+    
+    XCTAssertEqualObjects(decryptedMessage, plainText, @"");
 }
 
 #pragma mark Utility

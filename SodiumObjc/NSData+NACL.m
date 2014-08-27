@@ -15,7 +15,7 @@
 
 - (NSData *)dataWithoutNonce
 {
-    NSRange encryptedDataRange = {0, self.length - [NACLNonce nonceLength]};
+    NSRange encryptedDataRange = {[NACLNonce nonceLength], self.length - [NACLNonce nonceLength]};
     return [self subdataWithRange:encryptedDataRange];
 }
 
@@ -73,9 +73,9 @@
         }
 	} else {
         NSMutableData *encryptedDataPlusNonce = [NSMutableData data];
+        [encryptedDataPlusNonce appendData:nonce.data];
         [encryptedDataPlusNonce appendBytes:encryptedDataBuffer + crypto_box_BOXZEROBYTES
                                      length:paddedMessage.length - crypto_box_BOXZEROBYTES];
-        [encryptedDataPlusNonce appendData:nonce.data];
         encryptedData = [encryptedDataPlusNonce copy];
 	}
 	
@@ -119,7 +119,7 @@
     NSUInteger packedNonceLength = 0;
     
     if (!nonce) {
-        NSRange nonceDataRange = {self.length - [NACLNonce nonceLength], [NACLNonce nonceLength]};
+        NSRange nonceDataRange = {0, [NACLNonce nonceLength]};
         NSData *nonceData = [self subdataWithRange:nonceDataRange];
         nonce = [NACLNonce nonceWithData:nonceData];
         packedNonceLength = [NACLNonce nonceLength];
@@ -130,7 +130,7 @@
     NSMutableData *paddedEncryptedData = [NSMutableData dataWithCapacity:self.length + crypto_box_BOXZEROBYTES - packedNonceLength];
     [paddedEncryptedData appendData:[NSMutableData dataWithLength:crypto_box_BOXZEROBYTES]];
     
-    NSRange encryptedDataRange = {0, self.length - packedNonceLength};
+    NSRange encryptedDataRange = {packedNonceLength, self.length - packedNonceLength};
     [paddedEncryptedData appendData:[self subdataWithRange:encryptedDataRange]];
     
     unsigned char message[paddedEncryptedData.length];
@@ -249,9 +249,9 @@
         }
 	} else {
         NSMutableData *encryptedDataPlusNonce = [NSMutableData data];
+        [encryptedDataPlusNonce appendData:nonce.data];
         [encryptedDataPlusNonce appendBytes:encryptedDataBuffer + crypto_secretbox_BOXZEROBYTES
                                      length:paddedMessage.length - crypto_secretbox_BOXZEROBYTES];
-        [encryptedDataPlusNonce appendData:nonce.data];
         encryptedData = [encryptedDataPlusNonce copy];
 	}
     
@@ -290,7 +290,7 @@
     NSUInteger packedNonceLength = 0;
     
     if (!nonce) {
-        NSRange nonceDataRange = {self.length - [NACLNonce nonceLength], [NACLNonce nonceLength]};
+        NSRange nonceDataRange = {0, [NACLNonce nonceLength]};
         NSData *nonceData = [self subdataWithRange:nonceDataRange];
         nonce = [NACLNonce nonceWithData:nonceData];
         packedNonceLength = [NACLNonce nonceLength];
@@ -301,7 +301,7 @@
     NSMutableData *paddedEncryptedData = [NSMutableData dataWithCapacity:self.length + crypto_secretbox_BOXZEROBYTES - packedNonceLength];
     [paddedEncryptedData appendData:[NSMutableData dataWithLength:crypto_secretbox_BOXZEROBYTES]];
     
-    NSRange encryptedDataRange = {0, self.length - packedNonceLength};
+    NSRange encryptedDataRange = {packedNonceLength, self.length - packedNonceLength};
     [paddedEncryptedData appendData:[self subdataWithRange:encryptedDataRange]];
     
     unsigned char message[paddedEncryptedData.length];

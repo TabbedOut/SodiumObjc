@@ -31,9 +31,28 @@ methods via the `NSString+Nacl` and `NSData+NACL` categories.
 #### Decryption
 
     plainText = [encryptedData decryptedTextUsingPublicKey:receiversKeyPair.publicKey
-                                                privateKey:sendersKeyPair.privateKey
-                                                     nonce:nonce];
-### Secret-Key Cryptography
+                                                privateKey:sendersKeyPair.privateKey];
+
+#### Compatibility
+
+The methods that perform public-key encryption pack the nonce data at the end of the
+encrypted data object. The methods that perform public-key decryption without an
+explicit nonce argument expect nonce data to be packed at the end of the receiver.
+The methods that perform public-key decryption with an explicit nonce argument expect
+nonce data to not be packed at the end of the receiver. This behavior is provided as a
+convenience so you don't have to maintain the nonce. Keep in mind that if you consume
+encrypted data on another platform (or any library other than SodiumObjc), you should
+remove the nonce.
+
+    NSData *encryptedData;
+    encryptedData = [[plainText encryptedDataUsingPublicKey:sendersKeyPair.publicKey
+                                                 privateKey:receiversKeyPair.privateKey
+                                                      nonce:nonce] dataWithoutNonce];
+
+    NSMutableURLRequest *request = ...
+    request.HTTPBody = encryptedData;
+
+### Private-Key Cryptography
 
 Both `NSString` and `NSData` have been augmented with secret-key encryption/decryption
 methods via the `NSString+Nacl` and `NSData+NACL` categories, as well.
@@ -50,6 +69,24 @@ methods via the `NSString+Nacl` and `NSData+NACL` categories, as well.
 #### Decryption
 
     plainText = [encryptedData decryptedDataUsingPrivateKey:privateKey nonce:nonce];
+
+#### Compatibility
+
+The methods that perform private-key encryption also pack the nonce data at the end of
+the encrypted data object. The methods that perform private-key decryption without an
+explicit nonce argument expect nonce data to be packed at the end of the receiver.
+The methods that perform private-key decryption with an explicit nonce argument expect
+nonce data to not be packed at the end of the receiver. This behavior is provided as a
+convenience so you don't have to maintain the nonce. Keep in mind that if you consume
+encrypted data on another platform (or any library other than SodiumObjc), you should
+remove the nonce.
+
+    NSData *encryptedData;
+    encryptedData = [[plainText encryptedDataUsingPrivateKey:privateKey
+                                                       nonce:nonce] dataWithoutNonce];
+
+    NSMutableURLRequest *request = ...
+    request.HTTPBody = encryptedData;
 
 ### Signatures
 

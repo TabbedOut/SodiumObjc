@@ -40,6 +40,12 @@
     NACLSigningKeyPair *keyPair = [[NACLSigningKeyPair alloc] initWithSeed:seed];
     
     [self assertSigningKeyPairIsValid:keyPair];
+    
+    // Note how the first `seedLength` bytes are the seed
+    
+    NSData *packedSeed = [keyPair.privateKey.data subdataWithRange:seedRange];
+    
+    XCTAssertEqualObjects(seed, packedSeed, @"");
 }
 
 - (void)testInitWithSeed_withNilSeed
@@ -157,6 +163,5 @@
     
     XCTAssertTrue([keyPair isEqualToKeyPair:decodedKeyPair], @"");
 }
-
 
 @end

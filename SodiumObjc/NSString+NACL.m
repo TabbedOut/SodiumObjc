@@ -38,7 +38,7 @@
 
 - (NSData *)signedDataUsingPrivateKey:(NACLSigningPrivateKey *)privateKey
 {
-    return [self signedDataUsingPrivateKey:privateKey];
+    return [self signedDataUsingPrivateKey:privateKey error:nil];
 }
 
 - (NSData *)signedDataUsingPrivateKey:(NACLSigningPrivateKey *)privateKey error:(NSError **)outError

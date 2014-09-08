@@ -31,6 +31,18 @@
 		972AC6831961F069003C8B33 /* NACLSymmetricPrivateKeyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 972AC67B1961F069003C8B33 /* NACLSymmetricPrivateKeyTests.m */; };
 		972AC6841961F069003C8B33 /* NSDataNACLTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 972AC67C1961F069003C8B33 /* NSDataNACLTests.m */; };
 		972AC6851961F069003C8B33 /* NSStringNACLTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 972AC67D1961F069003C8B33 /* NSStringNACLTests.m */; };
+		97502BFE19BE714400177168 /* SodiumObjc.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 972AC6C4196209AB003C8B33 /* SodiumObjc.h */; };
+		97502BFF19BE715500177168 /* NACL.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 972AC66A1961F02F003C8B33 /* NACL.h */; };
+		97502C0019BE715500177168 /* NACLNonce.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 972AC66C1961F02F003C8B33 /* NACLNonce.h */; };
+		97502C0119BE715500177168 /* NSData+NACL.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 972AC66E1961F02F003C8B33 /* NSData+NACL.h */; };
+		97502C0219BE715500177168 /* NSString+NACL.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 972AC6701961F02F003C8B33 /* NSString+NACL.h */; };
+		97502C0319BE715500177168 /* NACLAsymmetricKeyPair.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 972AC6551961EFFD003C8B33 /* NACLAsymmetricKeyPair.h */; };
+		97502C0419BE715500177168 /* NACLAsymmetricPrivateKey.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 972AC6571961EFFD003C8B33 /* NACLAsymmetricPrivateKey.h */; };
+		97502C0519BE715500177168 /* NACLAsymmetricPublicKey.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 972AC6591961EFFD003C8B33 /* NACLAsymmetricPublicKey.h */; };
+		97502C0619BE715500177168 /* NACLSymmetricPrivateKey.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 972AC65E1961F00A003C8B33 /* NACLSymmetricPrivateKey.h */; };
+		97502C0719BE715500177168 /* NACLSigningKeyPair.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 972AC6611961F018003C8B33 /* NACLSigningKeyPair.h */; };
+		97502C0819BE715500177168 /* NACLSigningPrivateKey.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 972AC6631961F018003C8B33 /* NACLSigningPrivateKey.h */; };
+		97502C0919BE715500177168 /* NACLSigningPublicKey.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 972AC6651961F018003C8B33 /* NACLSigningPublicKey.h */; };
 		9751FC261986D01100B173E3 /* NACLKeyPairTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9751FC251986D01100B173E3 /* NACLKeyPairTests.m */; };
 		9792906819AE7195004CC539 /* NACLSigningPrivateKeyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9792906719AE7195004CC539 /* NACLSigningPrivateKeyTests.m */; };
 		9792906A19AE75C1004CC539 /* NACLSigningPublicKeyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9792906919AE75C1004CC539 /* NACLSigningPublicKeyTests.m */; };
@@ -56,6 +68,18 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				97502BFF19BE715500177168 /* NACL.h in CopyFiles */,
+				97502C0019BE715500177168 /* NACLNonce.h in CopyFiles */,
+				97502C0119BE715500177168 /* NSData+NACL.h in CopyFiles */,
+				97502C0219BE715500177168 /* NSString+NACL.h in CopyFiles */,
+				97502C0319BE715500177168 /* NACLAsymmetricKeyPair.h in CopyFiles */,
+				97502C0419BE715500177168 /* NACLAsymmetricPrivateKey.h in CopyFiles */,
+				97502C0519BE715500177168 /* NACLAsymmetricPublicKey.h in CopyFiles */,
+				97502C0619BE715500177168 /* NACLSymmetricPrivateKey.h in CopyFiles */,
+				97502C0719BE715500177168 /* NACLSigningKeyPair.h in CopyFiles */,
+				97502C0819BE715500177168 /* NACLSigningPrivateKey.h in CopyFiles */,
+				97502C0919BE715500177168 /* NACLSigningPublicKey.h in CopyFiles */,
+				97502BFE19BE714400177168 /* SodiumObjc.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

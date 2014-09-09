@@ -44,6 +44,8 @@
 		97502C0819BE715500177168 /* NACLSigningPrivateKey.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 972AC6631961F018003C8B33 /* NACLSigningPrivateKey.h */; };
 		97502C0919BE715500177168 /* NACLSigningPublicKey.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 972AC6651961F018003C8B33 /* NACLSigningPublicKey.h */; };
 		9751FC261986D01100B173E3 /* NACLKeyPairTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9751FC251986D01100B173E3 /* NACLKeyPairTests.m */; };
+		977AE06819BF573000DD45CA /* NACLKey.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 972AC64D1961EED1003C8B33 /* NACLKey.h */; };
+		977AE06919BF573000DD45CA /* NACLKeyPair.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 972AC64F1961EED1003C8B33 /* NACLKeyPair.h */; };
 		9792906819AE7195004CC539 /* NACLSigningPrivateKeyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9792906719AE7195004CC539 /* NACLSigningPrivateKeyTests.m */; };
 		9792906A19AE75C1004CC539 /* NACLSigningPublicKeyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9792906919AE75C1004CC539 /* NACLSigningPublicKeyTests.m */; };
 		A7BF29CE1947630800BB35C5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BF29CD1947630800BB35C5 /* Foundation.framework */; };
@@ -68,6 +70,8 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				977AE06819BF573000DD45CA /* NACLKey.h in CopyFiles */,
+				977AE06919BF573000DD45CA /* NACLKeyPair.h in CopyFiles */,
 				97502BFF19BE715500177168 /* NACL.h in CopyFiles */,
 				97502C0019BE715500177168 /* NACLNonce.h in CopyFiles */,
 				97502C0119BE715500177168 /* NSData+NACL.h in CopyFiles */,

@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "NACLKey.h"
+#import <SodiumObjc/NACLKey.h>
 
 /**
  *  A private key type that is to be used in private key operations.

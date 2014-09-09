@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 TabbedOut. All rights reserved.
 //
 
-#import "NACLAsymmetricPublicKey.h"
-#import "NACLAsymmetricPrivateKey.h"
-#import "NACLKeyPair.h"
+#import <SodiumObjc/NACLAsymmetricPublicKey.h>
+#import <SodiumObjc/NACLAsymmetricPrivateKey.h>
+#import <SodiumObjc/NACLKeyPair.h>
 
 /**
  *  A key pair that is to be used for public key cryptography operations.

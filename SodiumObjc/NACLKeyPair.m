@@ -6,7 +6,7 @@
 //
 //
 
-#import "NACLKeyPair.h"
+#import <SodiumObjc/NACLKeyPair.h>
 
 NSString *const NACLKeyPairPrivateKeyCodingKey = @"NACLKeyPairPrivateKeyCodingKey";
 NSString *const NACLKeyPairPublicKeyCodingKey = @"NACLKeyPairPublicKeyCodingKey";

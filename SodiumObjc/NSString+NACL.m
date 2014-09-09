@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 TabbedOut. All rights reserved.
 //
 
-#import "NSString+NACL.h"
-#import "NSData+NACL.h"
+#import <SodiumObjc/NSString+NACL.h>
+#import <SodiumObjc/NSData+NACL.h>
 
 @implementation NSString (NACL)
 

@@ -7,8 +7,8 @@
 //
 
 #import <sodium.h>
-#import "NACL.h"
-#import "NACLAsymmetricPublicKey.h"
+#import <SodiumObjc/NACL.h>
+#import <SodiumObjc/NACLAsymmetricPublicKey.h>
 
 @implementation NACLAsymmetricPublicKey
 

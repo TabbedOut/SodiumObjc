@@ -8,9 +8,9 @@
 
 #import <sodium.h>
 #import <Security/Security.h>
-#import "NACLAsymmetricPrivateKey.h"
-#import "NACL.h"
-#import "NACLKeySubclass.h"
+#import <SodiumObjc/NACLAsymmetricPrivateKey.h>
+#import <SodiumObjc/NACL.h>
+#import <SodiumObjc/NACLKeySubclass.h>
 
 @implementation NACLAsymmetricPrivateKey
 

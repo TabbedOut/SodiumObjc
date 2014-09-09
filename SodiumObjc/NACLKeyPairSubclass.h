@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 TabbedOut. All rights reserved.
 //
 
-#import "NACLKeyPair.h"
+#import <SodiumObjc/NACLKeyPair.h>
 
 OBJC_EXPORT NSString *const NACLKeyPairPrivateKeyCodingKey;
 OBJC_EXPORT NSString *const NACLKeyPairPublicKeyCodingKey;

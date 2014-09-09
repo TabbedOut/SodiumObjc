@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "NACLAsymmetricKeyPair.h"
-#import "NACLNonce.h"
-#import "NACLSymmetricPrivateKey.h"
-#import "NACLSigningKeyPair.h"
+#import <SodiumObjc/NACLAsymmetricKeyPair.h>
+#import <SodiumObjc/NACLNonce.h>
+#import <SodiumObjc/NACLSymmetricPrivateKey.h>
+#import <SodiumObjc/NACLSigningKeyPair.h>
 
 /**
  *  NACL augmentations to NSData.

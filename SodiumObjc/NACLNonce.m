@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 TabbedOut. All rights reserved.
 //
 
-#import "NACLNonce.h"
-#import "NACL.h"
-#import "sodium.h"
+#import <SodiumObjc/NACL.h>
+#import <SodiumObjc/NACLNonce.h>
+#import <sodium.h>
 
 static NSString *const NACLDataCodingKey = @"NACLDataCodingKey";
 

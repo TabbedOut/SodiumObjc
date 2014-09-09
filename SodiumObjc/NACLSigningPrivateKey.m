@@ -7,10 +7,10 @@
 //
 
 #import <sodium.h>
-#import "NACL.h"
-#import "NACLSigningPrivateKey.h"
-#import "NSData+NACL.h"
-#import "NSString+NACL.h"
+#import <SodiumObjc/NACL.h>
+#import <SodiumObjc/NACLSigningPrivateKey.h>
+#import <SodiumObjc/NSData+NACL.h>
+#import <SodiumObjc/NSString+NACL.h>
 
 @implementation NACLSigningPrivateKey
 

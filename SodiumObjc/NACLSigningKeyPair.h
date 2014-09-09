@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 TabbedOut. All rights reserved.
 //
 
-#import "NACLKeyPair.h"
-#import "NACLSigningPublicKey.h"
-#import "NACLSigningPrivateKey.h"
+#import <SodiumObjc/NACLKeyPair.h>
+#import <SodiumObjc/NACLSigningPublicKey.h>
+#import <SodiumObjc/NACLSigningPrivateKey.h>
 
 /**
  *  A key pair that is to be used in signing operations.

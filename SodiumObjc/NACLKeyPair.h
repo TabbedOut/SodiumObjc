@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "NACLKey.h"
+#import <SodiumObjc/NACLKey.h>
 
 @interface NACLKeyPair : NSObject <NSCopying, NSSecureCoding>
 @property (strong, nonatomic, readonly) NACLKey *publicKey;

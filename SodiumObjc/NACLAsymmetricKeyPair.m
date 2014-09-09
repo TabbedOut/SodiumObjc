@@ -7,9 +7,9 @@
 //
 
 #import <sodium.h>
-#import "NACLAsymmetricKeyPair.h"
-#import "NACL.h"
-#import "NACLKeyPairSubclass.h"
+#import <SodiumObjc/NACLAsymmetricKeyPair.h>
+#import <SodiumObjc/NACL.h>
+#import <SodiumObjc/NACLKeyPairSubclass.h>
 
 @implementation NACLAsymmetricKeyPair
 

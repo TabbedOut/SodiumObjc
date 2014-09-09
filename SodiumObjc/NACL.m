@@ -7,7 +7,7 @@
 //
 
 #import <sodium.h>
-#import "NACL.h"
+#import <SodiumObjc/NACL.h>
 
 NSString *const NACLErrorDomain = @"NACLErrorDomain";
 

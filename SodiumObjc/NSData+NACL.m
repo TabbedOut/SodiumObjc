@@ -7,9 +7,9 @@
 //
 
 #import <sodium.h>
-#import "NSData+NACL.h"
-#import "NACL.h"
-#import "NACLNonce.h"
+#import <SodiumObjc/NSData+NACL.h>
+#import <SodiumObjc/NACL.h>
+#import <SodiumObjc/NACLNonce.h>
 
 @implementation NSData (NACL)
 

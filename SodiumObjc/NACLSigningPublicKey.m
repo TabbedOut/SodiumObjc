@@ -52,4 +52,9 @@
     return [data verifiedDataUsingPublicKey:self error:outError];
 }
 
++ (NSUInteger)signatureLength
+{
+    return crypto_sign_BYTES;
+}
+
 @end

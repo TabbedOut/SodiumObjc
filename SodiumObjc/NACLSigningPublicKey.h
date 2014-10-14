@@ -16,4 +16,6 @@
 - (NSData *)verifiedDataFromSignedData:(NSData *)data;
 - (NSData *)verifiedDataFromSignedData:(NSData *)data error:(NSError **)outError;
 
++ (NSUInteger)signatureLength;
+
 @end

@@ -12,6 +12,8 @@
 #import <SodiumObjc/NACLSigningKeyPair.h>
 
 @implementation NACLSigningKeyPair
+@dynamic publicKey;
+@dynamic privateKey;
 
 + (void)initialize 
 {

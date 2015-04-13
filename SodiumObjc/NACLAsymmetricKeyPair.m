@@ -12,6 +12,8 @@
 #import <SodiumObjc/NACLKeyPairSubclass.h>
 
 @implementation NACLAsymmetricKeyPair
+@dynamic publicKey;
+@dynamic privateKey;
 
 + (void)initialize 
 {

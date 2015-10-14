@@ -41,15 +41,11 @@
         
         crypto_box_keypair(publicKey, privateKey);
         
-        if (privateKey) {
-            NSData *keyData = [NSData dataWithBytes:privateKey length:crypto_box_SECRETKEYBYTES];
-            self.privateKey = [[NACLAsymmetricPrivateKey alloc] initWithData:keyData];
-        }
+        NSData *privateKeyData = [NSData dataWithBytes:privateKey length:crypto_box_SECRETKEYBYTES];
+        self.privateKey = [[NACLAsymmetricPrivateKey alloc] initWithData:privateKeyData];
         
-        if (publicKey) {
-            NSData *keyData = [NSData dataWithBytes:publicKey length:crypto_box_PUBLICKEYBYTES];
-            self.publicKey = [[NACLAsymmetricPublicKey alloc] initWithData:keyData];
-        }
+        NSData *publicKeyData = [NSData dataWithBytes:publicKey length:crypto_box_PUBLICKEYBYTES];
+        self.publicKey = [[NACLAsymmetricPublicKey alloc] initWithData:publicKeyData];
     }
     
     return self;

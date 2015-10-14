@@ -46,15 +46,11 @@
             crypto_sign_keypair(publicKey, privateKey);
         }
         
-        if (privateKey) {
-            NSData *keyData = [NSData dataWithBytes:privateKey length:crypto_sign_SECRETKEYBYTES];
-            self.privateKey = [NACLSigningPrivateKey keyWithData:keyData];
-        }
+        NSData *privateKeyData = [NSData dataWithBytes:privateKey length:crypto_sign_SECRETKEYBYTES];
+        self.privateKey = [NACLSigningPrivateKey keyWithData:privateKeyData];
         
-        if (publicKey) {
-            NSData *keyData = [NSData dataWithBytes:publicKey length:crypto_sign_PUBLICKEYBYTES];
-            self.publicKey = [NACLSigningPublicKey keyWithData:keyData];
-        }
+        NSData *publicKeyData = [NSData dataWithBytes:publicKey length:crypto_sign_PUBLICKEYBYTES];
+        self.publicKey = [NACLSigningPublicKey keyWithData:publicKeyData];
     }
     
     return self;

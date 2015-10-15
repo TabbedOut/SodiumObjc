@@ -32,7 +32,7 @@
  *  Encrypts and authenticates the receiver (an `NSData` object) using the 
  *  receiving party's public key, the sending party's private key, and a nonce.
  *
- *  Nonce data is packed into the end of the returned data object.
+ *  Nonce data is packed at the beginning of the returned data object.
  *  
  *  @param publicKey  The receiving party's public key.
  *  @param privateKey The sending party's private key.
@@ -49,7 +49,7 @@
  *  receiving party's public key, the sending party's private key, a nonce,
  *  and passes back an error to the call site if one occurs.
  *
- *  Nonce data is packed into the end of the returned data object.
+ *  Nonce data is packed at the beginning of the returned data object.
  *  
  *  @param publicKey  The receiving party's public key.
  *  @param privateKey The sending party's private key.
@@ -70,7 +70,7 @@
  *  NSData object) using the sending party's public key and the receiving party's
  *  private key.
  *
- *  Nonce data is expected to be packed into the end of receiver.
+ *  Nonce data is expected to be packed at the beginning of receiver.
  *
  *  @param publicKey  The sending party's public key.
  *  @param privateKey The receiving party's private key.
@@ -85,7 +85,7 @@
  *  NSData object) using the sending party's public key, the receiving party's
  *  private key, and passes back an error to the call site if one occurs.
  *
- *  Nonce data is expected to be packed into the end of receiver.
+ *  Nonce data is expected to be packed at the beginning of receiver.
  *
  *  @param publicKey  The sending party's public key.
  *  @param privateKey The receiving party's private key.
@@ -95,43 +95,43 @@
  */
 - (NSData *)decryptedDataUsingPublicKey:(NACLAsymmetricPublicKey *)publicKey
                              privateKey:(NACLAsymmetricPrivateKey *)privateKey
-                                  error:(NSError *__autoreleasing *)outError;
+                                  error:(NSError **)outError;
 
 /**
  *  Verifies and decrypts the reciever (which is assumed to be an encrypted 
  *  NSData object) using the sending party's public key, the receiving party's
  *  private key, and a nonce.
  *
- *  Nonce data is expected to not be packed into the end of receiver.
- *  
  *  @param publicKey  The sending party's public key.
  *  @param privateKey The receiving party's private key.
- *  @param nonce      A nonce.
+ *  @param nonce      If *nonce is nil it will be initialized during decryption.
+ *                    If *nonce isn't nil it will be used for decryption. In this case
+ *                    nonce data is expected to not be packed at the beginning of receiver.
  *  
  *  @return A decrypted data object.
  */
 - (NSData *)decryptedDataUsingPublicKey:(NACLAsymmetricPublicKey *)publicKey 
                              privateKey:(NACLAsymmetricPrivateKey *)privateKey
-                                  nonce:(NACLNonce *)nonce;
+                                  nonce:(NACLNonce **)nonce;
 
 /**
  *  Verifies and decrypts the reciever (which is assumed to be an encrypted 
  *  NSData object) using the sending party's public key, the receiving party's
  *  private key, a nonce, and passes back an error to the call site if one
  *  occurs.
- *
- *  Nonce data is expected to not be packed into the end of receiver.
  *  
  *  @param publicKey  The sending party's public key.
  *  @param privateKey The receiving party's private key.
- *  @param nonce      A nonce.
+ *  @param nonce      If *nonce is nil it will be initialized during decryption.
+ *                    If *nonce isn't nil it will be used for decryption. In this case
+ *                    nonce data is expected to not be packed at the beginning of receiver.
  *  @param outError   A pointer to an error that the call site will receive.
  *
  *  @return A decrypted data object.
  */
 - (NSData *)decryptedDataUsingPublicKey:(NACLAsymmetricPublicKey *)publicKey
                              privateKey:(NACLAsymmetricPrivateKey *)privateKey
-                                  nonce:(NACLNonce *)nonce
+                                  nonce:(NACLNonce **)nonce
                                   error:(NSError **)outError;
 
 /**
@@ -139,7 +139,7 @@
  *  NSData object) as plain text using the sending party's public key and the
  *  receiving party's private key.
  *
- *  Nonce data is expected to be packed into the end of receiver.
+ *  Nonce data is expected to be packed at the beginning of receiver.
  *
  *  @param publicKey  The sending party's public key.
  *  @param privateKey The receiving party's private key.
@@ -155,7 +155,7 @@
  *  receiving party's private key, and passes back an error to the call
  *  site if one occurs.
  *
- *  Nonce data is expected to be packed into the end of receiver.
+ *  Nonce data is expected to be packed at the beginning of receiver.
  *
  *  @param publicKey  The sending party's public key.
  *  @param privateKey The receiving party's private key.
@@ -171,37 +171,37 @@
  *  Verifies and decrypts the reciever (which is assumed to be an encrypted 
  *  NSData object) as plain text using the sending party's public key, the 
  *  receiving party's private key, and a nonce.
- *
- *  Nonce data is expected to not be packed into the end of receiver.
  *  
  *  @param publicKey  The sending party's public key.
  *  @param privateKey The receiving party's private key.
- *  @param nonce      A nonce.
+ *  @param nonce      If *nonce is nil it will be initialized during decryption.
+ *                    If *nonce isn't nil it will be used for decryption. In this case
+ *                    nonce data is expected to not be packed at the beginning of receiver.
  *  
  *  @return A decrypted plain text representation of the data.
  */
 - (NSString *)decryptedTextUsingPublicKey:(NACLAsymmetricPublicKey *)publicKey
                                privateKey:(NACLAsymmetricPrivateKey *)privateKey
-                                    nonce:(NACLNonce *)nonce;
+                                    nonce:(NACLNonce **)nonce;
 
 /**
  *  Verifies and decrypts the reciever (which is assumed to be an encrypted 
  *  NSData object) as plain text using the sending party's public key, the 
  *  receiving party's private key, a nonce, and passes back an error to the call
  *  site if one occurs.
- *
- *  Nonce data is expected to not be packed into the end of receiver.
  *  
  *  @param publicKey  The sending party's public key.
  *  @param privateKey The receiving party's private key.
- *  @param nonce      A nonce.
+ *  @param nonce      If *nonce is nil it will be initialized during decryption.
+ *                    If *nonce isn't nil it will be used for decryption. In this case
+ *                    nonce data is expected to not be packed at the beginning of receiver.
  *  @param outError   A pointer to an error that the call site will receive.
  *
  *  @return A decrypted data object.
  */
 - (NSString *)decryptedTextUsingPublicKey:(NACLAsymmetricPublicKey *)publicKey
                                privateKey:(NACLAsymmetricPrivateKey *)privateKey
-                                    nonce:(NACLNonce *)nonce
+                                    nonce:(NACLNonce **)nonce
                                     error:(NSError **)outError;
 
 #pragma mark - Private-Key Encryption
@@ -210,7 +210,7 @@
  *  Encrypts and authenticates the receiver (an `NSData` object) using the 
  *  a private key and a nonce.
  *
- *  Nonce data is packed into the end of the returned data object.
+ *  Nonce data is packed at the beginning of the returned data object.
  *  
  *  @param privateKey The private key.
  *  @param nonce      A nonce.
@@ -225,7 +225,7 @@
  *  a private key, a nonce, and passes back an error to the call site if one
  *  occurs.
  *
- *  Nonce data is packed into the end of the returned data object.
+ *  Nonce data is packed at the beginning of the returned data object.
  *  
  *  @param privateKey The private key.
  *  @param nonce      The nonce.
@@ -243,7 +243,7 @@
  *  Verifies and decrypts the reciever (which is assumed to be an encrypted
  *  NSData object) using a private key.
  *
- *  Nonce data is expected to not be packed into the end of receiver.
+ *  Nonce data is expected to be packed at the beginning of receiver.
  *
  *  @param privateKey The private key.
  *
@@ -256,7 +256,7 @@
  *  NSData object) using a private key, a nonce, and passes back an error to the
  *  call site if one occurs.
  *
- *  Nonce data is expected to not be packed into the end of receiver.
+ *  Nonce data is expected to be packed at the beginning of receiver.
  *
  *  @param privateKey The private key.
  *  @param outError   A pointer to an error that the call site will receive.
@@ -269,63 +269,63 @@
 /**
  *  Verifies and decrypts the reciever (which is assumed to be an encrypted 
  *  NSData object) using a private key and a nonce.
- *
- *  Nonce data is expected to not be packed into the end of receiver.
  *  
  *  @param privateKey The private key.
- *  @param nonce      A nonce.
+ *  @param nonce      If *nonce is nil it will be initialized during decryption.
+ *                    If *nonce isn't nil it will be used for decryption. In this case
+ *                    nonce data is expected to not be packed at the beginning of receiver.
  *  
  *  @return A decrypted data object.
  */
 - (NSData *)decryptedDataUsingPrivateKey:(NACLSymmetricPrivateKey *)privateKey 
-                                   nonce:(NACLNonce *)nonce;
+                                   nonce:(NACLNonce **)nonce;
 
 /**
  *  Verifies and decrypts the reciever (which is assumed to be an encrypted 
  *  NSData object) using a private key, a nonce, and passes back an error to the
  *  call site if one occurs.
- *
- *  Nonce data is expected to not be packed into the end of receiver.
  *  
  *  @param privateKey The private key.
- *  @param nonce      A nonce.
+ *  @param nonce      If *nonce is nil it will be initialized during decryption.
+ *                    If *nonce isn't nil it will be used for decryption. In this case
+ *                    nonce data is expected to not be packed at the beginning of receiver.
  *  @param outError   A pointer to an error that the call site will receive.
  *  
  *  @return A decrypted data object.
  */
 - (NSData *)decryptedDataUsingPrivateKey:(NACLSymmetricPrivateKey *)privateKey 
-                                   nonce:(NACLNonce *)nonce
+                                   nonce:(NACLNonce **)nonce
                                    error:(NSError **)outError;
 
 /**
  *  Verifies and decrypts the reciever (which is assumed to be an encrypted 
  *  NSData object) as plain text using a private key and a nonce.
- *
- *  Nonce data is expected to not be packed into the end of receiver.
  *  
  *  @param privateKey The private key.
- *  @param nonce      A nonce.
+ *  @param nonce      If *nonce is nil it will be initialized during decryption.
+ *                    If *nonce isn't nil it will be used for decryption. In this case
+ *                    nonce data is expected to not be packed at the beginning of receiver.
  *  
  *  @return A decrypted data object.
  */
 - (NSString *)decryptedTextUsingPrivateKey:(NACLSymmetricPrivateKey *)privateKey 
-                                     nonce:(NACLNonce *)nonce;
+                                     nonce:(NACLNonce **)nonce;
 
 /**
  *  Verifies and decrypts the reciever (which is assumed to be an encrypted 
  *  NSData object) as plain text using a private key, a nonce, and passes back
  *  an error to the call site if one occurs.
- *
- *  Nonce data is expected to not be packed into the end of receiver.
  *  
  *  @param privateKey The private key.
- *  @param nonce      A nonce.
+ *  @param nonce      If *nonce is nil it will be initialized during decryption.
+ *                    If *nonce isn't nil it will be used for decryption. In this case
+ *                    nonce data is expected to not be packed at the beginning of receiver.
  *  @param outError   A pointer to an error that the call site will receive.
  *  
  *  @return A decrypted data object.
  */
 - (NSString *)decryptedTextUsingPrivateKey:(NACLSymmetricPrivateKey *)privateKey 
-                                     nonce:(NACLNonce *)nonce
+                                     nonce:(NACLNonce **)nonce
                                      error:(NSError **)outError;
 
 #pragma mark - Signing

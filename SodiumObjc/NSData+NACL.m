@@ -32,7 +32,7 @@
 - (NSData *)encryptedDataUsingPublicKey:(NACLAsymmetricPublicKey *)publicKey
                              privateKey:(NACLAsymmetricPrivateKey *)privateKey
                                   nonce:(NACLNonce *)nonce
-                                  error:(NSError *__autoreleasing *)outError
+                                  error:(NSError **)outError
 {
     NSParameterAssert(publicKey);
     NSParameterAssert(privateKey);
@@ -94,22 +94,22 @@
 
 - (NSData *)decryptedDataUsingPublicKey:(NACLAsymmetricPublicKey *)publicKey
                              privateKey:(NACLAsymmetricPrivateKey *)privateKey
-                                  error:(NSError *__autoreleasing *)outError
+                                  error:(NSError **)outError
 {
     return [self decryptedDataUsingPublicKey:publicKey privateKey:privateKey nonce:nil error:outError];
 }
 
 - (NSData *)decryptedDataUsingPublicKey:(NACLAsymmetricPublicKey *)publicKey
                              privateKey:(NACLAsymmetricPrivateKey *)privateKey
-                                  nonce:(NACLNonce *)nonce
+                                  nonce:(NACLNonce **)nonce
 {
     return [self decryptedDataUsingPublicKey:publicKey privateKey:privateKey nonce:nonce error:nil];
 }
 
 - (NSData *)decryptedDataUsingPublicKey:(NACLAsymmetricPublicKey *)publicKey
                              privateKey:(NACLAsymmetricPrivateKey *)privateKey
-                                  nonce:(NACLNonce *)nonce
-                                  error:(NSError *__autoreleasing *)outError
+                                  nonce:(NACLNonce **)nonce
+                                  error:(NSError **)outError
 {
     NSParameterAssert(publicKey);
     NSParameterAssert(privateKey);
@@ -117,11 +117,14 @@
     [NACL initializeNACL];
 
     NSUInteger packedNonceLength = 0;
-
-    if (!nonce) {
+    
+    NACLNonce *validNonce = nil;
+    if (nonce != NULL && *nonce != nil) {
+        validNonce = *nonce;
+    } else {
         NSRange nonceDataRange = {0, [NACLNonce nonceLength]};
         NSData *nonceData = [self subdataWithRange:nonceDataRange];
-        nonce = [NACLNonce nonceWithData:nonceData];
+        validNonce = [NACLNonce nonceWithData:nonceData];
         packedNonceLength = [NACLNonce nonceLength];
     }
 
@@ -138,7 +141,7 @@
     int result = crypto_box_open(message,
                                  paddedEncryptedData.bytes,
                                  paddedEncryptedData.length,
-                                 nonce.data.bytes,
+                                 validNonce.data.bytes,
                                  publicKey.data.bytes,
                                  privateKey.data.bytes);
 
@@ -151,6 +154,9 @@
 
         return nil;
     } else {
+        if (nonce != NULL) {
+            *nonce = validNonce;
+        }
         decryptedData = [NSData dataWithBytes:message + crypto_box_ZEROBYTES
                                        length:paddedEncryptedData.length - crypto_box_ZEROBYTES];
     }
@@ -166,14 +172,14 @@
 
 - (NSString *)decryptedTextUsingPublicKey:(NACLAsymmetricPublicKey *)publicKey
                                privateKey:(NACLAsymmetricPrivateKey *)privateKey
-                                    error:(NSError *__autoreleasing *)outError
+                                    error:(NSError **)outError
 {
     return [self decryptedTextUsingPublicKey:publicKey privateKey:privateKey nonce:nil error:outError];
 }
 
 - (NSString *)decryptedTextUsingPublicKey:(NACLAsymmetricPublicKey *)publicKey
                                privateKey:(NACLAsymmetricPrivateKey *)privateKey
-                                    nonce:(NACLNonce *)nonce
+                                    nonce:(NACLNonce **)nonce
 {
     NSString *decryptedText = nil;
     NSData *decryptedData = [self decryptedDataUsingPublicKey:publicKey privateKey:privateKey nonce:nonce];
@@ -187,8 +193,8 @@
 
 - (NSString *)decryptedTextUsingPublicKey:(NACLAsymmetricPublicKey *)publicKey
                                privateKey:(NACLAsymmetricPrivateKey *)privateKey
-                                    nonce:(NACLNonce *)nonce
-                                    error:(NSError *__autoreleasing *)outError
+                                    nonce:(NACLNonce **)nonce
+                                    error:(NSError **)outError
 {
     NSString *decryptedText = nil;
     NSData *decryptedData = [self decryptedDataUsingPublicKey:publicKey privateKey:privateKey nonce:nonce error:outError];
@@ -273,14 +279,14 @@
     return [self decryptedDataUsingPrivateKey:privateKey nonce:nil error:outError];
 }
 
-- (NSData *)decryptedDataUsingPrivateKey:(NACLSymmetricPrivateKey *)privateKey nonce:(NACLNonce *)nonce
+- (NSData *)decryptedDataUsingPrivateKey:(NACLSymmetricPrivateKey *)privateKey nonce:(NACLNonce **)nonce
 {
     return [self decryptedDataUsingPrivateKey:privateKey nonce:nonce error:nil];
 }
 
 - (NSData *)decryptedDataUsingPrivateKey:(NACLSymmetricPrivateKey *)privateKey
-                                   nonce:(NACLNonce *)nonce
-                                   error:(NSError *__autoreleasing *)outError
+                                   nonce:(NACLNonce **)nonce
+                                   error:(NSError **)outError
 {
     NSParameterAssert(privateKey);
 
@@ -288,10 +294,13 @@
 
     NSUInteger packedNonceLength = 0;
 
-    if (!nonce) {
+    NACLNonce *validNonce = nil;
+    if (nonce != NULL && *nonce != nil) {
+        validNonce = *nonce;
+    } else {
         NSRange nonceDataRange = {0, [NACLNonce nonceLength]};
         NSData *nonceData = [self subdataWithRange:nonceDataRange];
-        nonce = [NACLNonce nonceWithData:nonceData];
+        validNonce = [NACLNonce nonceWithData:nonceData];
         packedNonceLength = [NACLNonce nonceLength];
     }
 
@@ -308,7 +317,7 @@
     int result = crypto_secretbox_open(message,
                                        paddedEncryptedData.bytes,
                                        paddedEncryptedData.length,
-                                       nonce.data.bytes,
+                                       validNonce.data.bytes,
                                        privateKey.data.bytes);
 
     if (result != 0) {
@@ -320,6 +329,10 @@
 
         return nil;
     } else {
+        if (nonce != NULL) {
+            *nonce = validNonce;
+        }
+        
         decryptedData = [NSData dataWithBytes:message + crypto_secretbox_ZEROBYTES
                                        length:paddedEncryptedData.length - crypto_secretbox_ZEROBYTES];
     }
@@ -327,7 +340,7 @@
     return decryptedData;
 }
 
-- (NSString *)decryptedTextUsingPrivateKey:(NACLSymmetricPrivateKey *)privateKey nonce:(NACLNonce *)nonce
+- (NSString *)decryptedTextUsingPrivateKey:(NACLSymmetricPrivateKey *)privateKey nonce:(NACLNonce **)nonce
 {
     NSString *decryptedText = nil;
     NSData *decryptedData = [self decryptedDataUsingPrivateKey:privateKey nonce:nonce];
@@ -340,8 +353,8 @@
 }
 
 - (NSString *)decryptedTextUsingPrivateKey:(NACLSymmetricPrivateKey *)privateKey
-                                   nonce:(NACLNonce *)nonce
-                                   error:(NSError *__autoreleasing *)outError
+                                   nonce:(NACLNonce **)nonce
+                                   error:(NSError **)outError
 {
     NSString *decryptedText = nil;
     NSData *decryptedData = [self decryptedDataUsingPrivateKey:privateKey nonce:nonce error:outError];

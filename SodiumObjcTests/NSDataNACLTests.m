@@ -66,22 +66,80 @@
     
     NSData *encryptedData = [message encryptedDataUsingPublicKey:sendersKeyPair.publicKey 
                                                       privateKey:receiversKeyPair.privateKey
-                                                           nonce:nonce 
+                                                           nonce:nonce
                                                            error:&error];
     
     XCTAssertNotNil(encryptedData, @"");
     XCTAssertNil(error, @"");
 }
 
-- (void)testDecryptedDataWithPublicKeyPrivateKeyNonce_expectSuccess
+- (void)testDecryptedDataWithPublicKeyPrivateKeyWithoutNonce_expectSuccess
 {
     NSData *encryptedData = [[message encryptedDataUsingPublicKey:sendersKeyPair.publicKey
                                                        privateKey:receiversKeyPair.privateKey
                                                             nonce:nonce] dataWithoutNonce];
     
+    NACLNonce *aNonce = nonce;
     NSData *decryptedData = [encryptedData decryptedDataUsingPublicKey:receiversKeyPair.publicKey 
                                                             privateKey:sendersKeyPair.privateKey
-                                                                 nonce:nonce];
+                                                                 nonce:&aNonce];
+    
+    XCTAssertNotNil(decryptedData, @"");
+    
+    NSString *decryptedMessage = [[NSString alloc] initWithData:decryptedData encoding:NSUTF8StringEncoding];
+    
+    XCTAssertEqualObjects(decryptedMessage, plainText, @"");
+}
+
+- (void)testDecryptedDataWithPublicKeyPrivateKeyWithoutNonceError_expectMatch
+{
+    NSError *error = nil;
+    
+    NSData *encryptedData = [[message encryptedDataUsingPublicKey:sendersKeyPair.publicKey
+                                                       privateKey:receiversKeyPair.privateKey
+                                                            nonce:nonce] dataWithoutNonce];
+    
+    NACLNonce *aNonce = nonce;
+    NSData *decryptedData = [encryptedData decryptedDataUsingPublicKey:receiversKeyPair.publicKey 
+                                                            privateKey:sendersKeyPair.privateKey
+                                                                 nonce:&aNonce
+                                                                 error:&error];
+    
+    XCTAssertNotNil(decryptedData, @"");
+    
+    NSString *decryptedMessage = [[NSString alloc] initWithData:decryptedData encoding:NSUTF8StringEncoding];
+    
+    XCTAssertEqualObjects(decryptedMessage, plainText, @"");
+}
+
+- (void)testDecryptedDataWithPublicKeyPrivateKeyNonce_expectMatch
+{
+    NSData *encryptedData = [message encryptedDataUsingPublicKey:sendersKeyPair.publicKey
+                                                      privateKey:receiversKeyPair.privateKey
+                                                           nonce:nonce];
+    
+    NACLNonce *aNonce = nil;
+    NSData *decryptedData = [encryptedData decryptedDataUsingPublicKey:receiversKeyPair.publicKey
+                                                            privateKey:sendersKeyPair.privateKey
+                                                                 nonce:&aNonce];
+    
+    
+    XCTAssertNotNil(decryptedData, @"");
+    XCTAssertEqualObjects(aNonce, nonce);
+    
+    NSString *decryptedMessage = [[NSString alloc] initWithData:decryptedData encoding:NSUTF8StringEncoding];
+    
+    XCTAssertEqualObjects(decryptedMessage, plainText, @"");
+}
+
+- (void)testDecryptedDataWithPublicKeyPrivateKey_expectMatch
+{
+    NSData *encryptedData = [message encryptedDataUsingPublicKey:sendersKeyPair.publicKey
+                                                      privateKey:receiversKeyPair.privateKey
+                                                           nonce:nonce];
+    
+    NSData *decryptedData = [encryptedData decryptedDataUsingPublicKey:receiversKeyPair.publicKey
+                                                            privateKey:sendersKeyPair.privateKey];
     
     XCTAssertNotNil(decryptedData, @"");
     
@@ -94,35 +152,25 @@
 {
     NSError *error = nil;
     
-    NSData *encryptedData = [[message encryptedDataUsingPublicKey:sendersKeyPair.publicKey
-                                                       privateKey:receiversKeyPair.privateKey
-                                                            nonce:nonce] dataWithoutNonce];
-    NSData *decryptedData = [encryptedData decryptedDataUsingPublicKey:receiversKeyPair.publicKey 
+    NSData *encryptedData = [message encryptedDataUsingPublicKey:sendersKeyPair.publicKey
+                                                      privateKey:receiversKeyPair.privateKey
+                                                           nonce:nonce];
+    
+    NACLNonce *aNonce = nil;
+    NSData *decryptedData = [encryptedData decryptedDataUsingPublicKey:receiversKeyPair.publicKey
                                                             privateKey:sendersKeyPair.privateKey
-                                                                 nonce:nonce
+                                                                 nonce:&aNonce
                                                                  error:&error];
     
     XCTAssertNotNil(decryptedData, @"");
+    XCTAssertNil(error);
+    XCTAssertEqualObjects(aNonce, nonce);
     
     NSString *decryptedMessage = [[NSString alloc] initWithData:decryptedData encoding:NSUTF8StringEncoding];
     
     XCTAssertEqualObjects(decryptedMessage, plainText, @"");
 }
 
-- (void)testDecryptedDataWithPublicKeyPrivateKey_expectMatch
-{
-    NSData *encryptedData = [message encryptedDataUsingPublicKey:sendersKeyPair.publicKey
-                                                      privateKey:receiversKeyPair.privateKey
-                                                           nonce:nonce];
-    NSData *decryptedData = [encryptedData decryptedDataUsingPublicKey:receiversKeyPair.publicKey
-                                                            privateKey:sendersKeyPair.privateKey];
-    
-    XCTAssertNotNil(decryptedData, @"");
-    
-    NSString *decryptedMessage = [[NSString alloc] initWithData:decryptedData encoding:NSUTF8StringEncoding];
-    
-    XCTAssertEqualObjects(decryptedMessage, plainText, @"");
-}
 
 - (void)testDecryptedDataWithPublicKeyPrivateKeyError_expectMatch
 {
@@ -143,33 +191,51 @@
     XCTAssertEqualObjects(decryptedMessage, plainText, @"");
 }
 
-
-- (void)testDecryptedTextWithKeyPairNonce_expectMatch
+- (void)testDecryptedTextWithKeyPairWithoutNonce_expectMatch
 {
     NSData *encryptedData = [[message encryptedDataUsingPublicKey:sendersKeyPair.publicKey
                                                        privateKey:receiversKeyPair.privateKey
                                                             nonce:nonce] dataWithoutNonce];
+    
+    NACLNonce *aNonce = nonce;
     NSString *decryptedText = [encryptedData decryptedTextUsingPublicKey:receiversKeyPair.publicKey
                                                               privateKey:sendersKeyPair.privateKey
-                                                                   nonce:nonce];
+                                                                   nonce:&aNonce];
     
     XCTAssertEqualObjects(decryptedText, plainText, @"");
 }
 
-- (void)testDecryptedTextWithKeyPairNonceError_expectMatch
+- (void)testDecryptedTextWithKeyPairWithoutNonceError_expectMatch
 {
     NSError *error = nil;
     
     NSData *encryptedData = [[message encryptedDataUsingPublicKey:sendersKeyPair.publicKey
                                                        privateKey:receiversKeyPair.privateKey
                                                             nonce:nonce] dataWithoutNonce];
+    
+    NACLNonce *aNonce = nonce;
     NSString *decryptedText = [encryptedData decryptedTextUsingPublicKey:receiversKeyPair.publicKey 
                                                               privateKey:sendersKeyPair.privateKey
-                                                                   nonce:nonce
+                                                                   nonce:&aNonce
                                                                    error:&error];
     
     XCTAssertEqualObjects(decryptedText, plainText, @"");
     XCTAssertNil(error, @"");
+}
+
+- (void)testDecryptedTextWithKeyPairNonce_expectMatch
+{
+    NSData *encryptedData = [message encryptedDataUsingPublicKey:sendersKeyPair.publicKey
+                                                      privateKey:receiversKeyPair.privateKey
+                                                           nonce:nonce];
+    
+    NACLNonce *aNonce = nil;
+    NSString *decryptedText = [encryptedData decryptedTextUsingPublicKey:receiversKeyPair.publicKey
+                                                              privateKey:sendersKeyPair.privateKey
+                                                                   nonce:&aNonce];
+    
+    XCTAssertEqualObjects(decryptedText, plainText, @"");
+    XCTAssertEqualObjects(aNonce, nonce);
 }
 
 - (void)testDecryptedTextWithKeyPair_expectMatch
@@ -182,6 +248,26 @@
     
     XCTAssertEqualObjects(decryptedText, plainText, @"");
 }
+
+- (void)testDecryptedTextWithKeyPairNonceError_expectMatch
+{
+    NSError *error = nil;
+    
+    NSData *encryptedData = [message encryptedDataUsingPublicKey:sendersKeyPair.publicKey
+                                                      privateKey:receiversKeyPair.privateKey
+                                                           nonce:nonce];
+    
+    NACLNonce *aNonce = nil;
+    NSString *decryptedText = [encryptedData decryptedTextUsingPublicKey:receiversKeyPair.publicKey
+                                                              privateKey:sendersKeyPair.privateKey
+                                                                   nonce:&aNonce
+                                                                   error:&error];
+    
+    XCTAssertEqualObjects(decryptedText, plainText, @"");
+    XCTAssertNil(error, @"");
+    XCTAssertEqualObjects(aNonce, nonce);
+}
+
 
 - (void)testDecryptedTextWithKeyPairError_expectMatch
 {
@@ -248,10 +334,12 @@
     XCTAssertNil(error, @"");
 }
 
-- (void)testDecryptedDataWithPrivateKeyNonce_expectMatch
+- (void)testDecryptedDataWithPrivateKeyWithoutNonce_expectMatch
 {
     NSData *encryptedData = [[message encryptedDataUsingPrivateKey:privateKey nonce:nonce] dataWithoutNonce];
-    NSData *decryptedData = [encryptedData decryptedDataUsingPrivateKey:privateKey nonce:nonce];
+    
+    NACLNonce *aNonce = nonce;
+    NSData *decryptedData = [encryptedData decryptedDataUsingPrivateKey:privateKey nonce:&aNonce];
     
     XCTAssertNotNil(decryptedData, @"");
     
@@ -260,12 +348,14 @@
     XCTAssertEqualObjects(decryptedMessage, plainText, @"");
 }
 
-- (void)testDecryptedDataWithPrivateKeyNonceError_expectMatch
+- (void)testDecryptedDataWithPrivateKeyWithoutNonceError_expectMatch
 {
     NSError *error = nil;
     
     NSData *encryptedData = [[message encryptedDataUsingPrivateKey:privateKey nonce:nonce error:&error] dataWithoutNonce];
-    NSData *decryptedData = [encryptedData decryptedDataUsingPrivateKey:privateKey nonce:nonce error:&error];
+    
+    NACLNonce *aNonce = nonce;
+    NSData *decryptedData = [encryptedData decryptedDataUsingPrivateKey:privateKey nonce:&aNonce error:&error];
     
     XCTAssertNotNil(decryptedData, @"");
     
@@ -274,23 +364,42 @@
     XCTAssertEqualObjects(decryptedMessage, plainText, @"");
 }
 
-- (void)testDecryptedTextWithPrivateKeyNonce_expectMatch
+- (void)testDecryptedTextWithPrivateKeyWithoutNonce_expectMatch
 {
     NSData *encryptedData = [[message encryptedDataUsingPrivateKey:privateKey nonce:nonce] dataWithoutNonce];
-    NSString *decryptedText = [encryptedData decryptedTextUsingPrivateKey:privateKey nonce:nonce];
+    
+    NACLNonce *aNonce = nonce;
+    NSString *decryptedText = [encryptedData decryptedTextUsingPrivateKey:privateKey nonce:&aNonce];
     
     XCTAssertEqualObjects(decryptedText, plainText, @"");
 }
 
-- (void)testDecryptedTextWithPrivateKeyNonceError_expectMatch
+- (void)testDecryptedTextWithPrivateKeyWithoutNonceError_expectMatch
 {
     NSError *error = nil;
     
     NSData *encryptedData = [[message encryptedDataUsingPrivateKey:privateKey nonce:nonce] dataWithoutNonce];
-    NSString *decryptedText = [encryptedData decryptedTextUsingPrivateKey:privateKey nonce:nonce error:&error];
+    
+    NACLNonce *aNonce = nonce;
+    NSString *decryptedText = [encryptedData decryptedTextUsingPrivateKey:privateKey nonce:&aNonce error:&error];
     
     XCTAssertEqualObjects(decryptedText, plainText, @"");
     XCTAssertNil(error, @"");
+}
+
+- (void)testDecryptedDataUsingPrivateKeyNonce_expectMatch
+{
+    NSData *encryptedData = [message encryptedDataUsingPrivateKey:privateKey nonce:nonce];
+    
+    NACLNonce *aNonce = nil;
+    NSData *decryptedData = [encryptedData decryptedDataUsingPrivateKey:privateKey nonce:&aNonce];
+    
+    XCTAssertNotNil(decryptedData, @"");
+    XCTAssertEqualObjects(aNonce, nonce);
+    
+    NSString *decryptedMessage = [[NSString alloc] initWithData:decryptedData encoding:NSUTF8StringEncoding];
+    
+    XCTAssertEqualObjects(decryptedMessage, plainText, @"");
 }
 
 - (void)testDecryptedDataUsingPrivateKey_expectMatch
@@ -299,6 +408,23 @@
     NSData *decryptedData = [encryptedData decryptedDataUsingPrivateKey:privateKey];
     
     XCTAssertNotNil(decryptedData, @"");
+    
+    NSString *decryptedMessage = [[NSString alloc] initWithData:decryptedData encoding:NSUTF8StringEncoding];
+    
+    XCTAssertEqualObjects(decryptedMessage, plainText, @"");
+}
+
+- (void)testDecryptedDataUsingPrivateKeyNonceError_expectMatch
+{
+    NSError *error = nil;
+    NSData *encryptedData = [message encryptedDataUsingPrivateKey:privateKey nonce:nonce];
+    
+    NACLNonce *aNonce = nil;
+    NSData *decryptedData = [encryptedData decryptedDataUsingPrivateKey:privateKey nonce:&aNonce error:&error];
+    
+    XCTAssertNotNil(decryptedData, @"");
+    XCTAssertNil(error, @"");
+    XCTAssertEqualObjects(aNonce, nonce);
     
     NSString *decryptedMessage = [[NSString alloc] initWithData:decryptedData encoding:NSUTF8StringEncoding];
     
@@ -347,9 +473,10 @@
     encryptedData = [encryptedData dataWithoutNonce];
 
     NSError *error = nil;
+    NACLNonce *aNonce = nonce;
     NSString *text = [encryptedData decryptedTextUsingPublicKey:sendersKeyPair.publicKey
                                                      privateKey:receiversKeyPair.privateKey
-                                                          nonce:nonce
+                                                          nonce:&aNonce
                                                           error:&error];
     
     XCTAssertNotNil(text, @"");
@@ -362,7 +489,8 @@
     encryptedData = [encryptedData dataWithoutNonce];
     
     NSError *error = nil;
-    NSString *text = [encryptedData decryptedTextUsingPrivateKey:privateKey nonce:nonce];
+    NACLNonce *aNonce = nonce;
+    NSString *text = [encryptedData decryptedTextUsingPrivateKey:privateKey nonce:&aNonce];
     
     XCTAssertNotNil(text, @"");
     XCTAssertNil(error, @"");
